@@ -5,7 +5,8 @@ import Detail from "./pages/Detail";
 import Order from "./pages/Order";
 import Search from "./pages/Search";
 import './index.css';
-import Navigation from "./components/Navigation";
+import Navigation from "./components/Navigation/Navigation";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/order" element={<Order />} />
         <Route path="/search" element={<Search />} />
       </Routes>
+    <Footer/>
     </>
   );
 }

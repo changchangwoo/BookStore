@@ -1,4 +1,3 @@
-// `jsx` import 제거
 import { css } from "@emotion/react";
 
 function Navigation() {
@@ -28,6 +27,11 @@ function Navigation() {
     font-size: 15px;
     font-weight: 600;
     border-radius: 8px;
+    transition: all 0.5s;
+
+    &:hover{
+      scale: 1.1;
+    }
   `;
 
   const darkModeButton = css`
@@ -41,9 +45,21 @@ function Navigation() {
     margin-left: 10px;
   `;
 
+  const menuButton = css`
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px #e1e1e1;
+  `;
+
   const leftContainer = css`
     flex: 0.5;
-    float: left;
+    display: flex;
+    justify-content: left;
   `;
 
   const rightContainer = css`
@@ -57,6 +73,9 @@ function Navigation() {
       <div css={navContainer}>
         <div css={leftContainer}>
           <div css={navButton}>대충 로고</div>
+          <div css={menuButton}>
+            <span class="material-symbols-outlined">menu</span>
+          </div>
         </div>
         <div css={rightContainer}>
           <div css={navButton}>로그인</div>

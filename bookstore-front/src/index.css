@@ -12,6 +12,9 @@ html, body, #root {
     height: 100%;
     display: inline;
     margin-top: 60px;
-
 }
 
+input {
+    font-family: 'pretendard', sans-serif;
+    outline: none;
+}
