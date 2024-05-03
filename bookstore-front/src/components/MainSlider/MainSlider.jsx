@@ -1,91 +1,86 @@
-import { css } from "@emotion/react";
 import sliderImage1 from "../../assets/imgs/mainSlider_1.png";
+import sliderImage2 from "../../assets/imgs/mainSlider_2.png";
+import sliderImage3 from "../../assets/imgs/mainSlider_3.png";
+import sliderImage4 from "../../assets/imgs/mainSlider_4.png";
 
-const mainSliderContainer = css`
-  width: 100%;
-  height: 350px;
-  border-bottom: 1px solid #e1e1e1;
-  display: flex;
-  background-color: white;
-`;
-
-const leftContainer = css`
-  display: flex;
-  justify-content: right;
-  align-items: center;
-  flex: 0.1;
-`;
-
-const imageContainer = css`
-  flex: 0.8;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const rightContainer = css`
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  flex: 0.1;
-`;
-
-const imageBox = css`
-  width: 535px;
-  height: 344px;
-`;
-
-const sliderDescript1 = css`
-  flex: 0.6;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  h1 {
-    font-size: 24px;
-    margin: 0px;
-    margin-top: 5px;
-    font-weight: 850;
-  }
-  h2 {
-    font-size: 20px;
-    margin: 0px;
-    font-weight: 400;
-  }
-`;
-
-const iconStyle = {
-  fontSize: 50,
-  height: 50,
-};
+import {
+  mainSliderContainer,
+  imageContainer,
+  imageBox,
+  sliderDescript,
+  sliderControllerContainer,
+  iconSize,
+} from "./MainSlider.styles";
+import { useCallback, useEffect, useState } from "react";
 
 function MainSlider() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const totalSlides = 4; // 슬라이드의 총 개수
+
+  useEffect(() => {
+    const slideInterval = setInterval(() => {
+      nextSlide();
+    }, 5000);
+
+    return () => clearInterval(slideInterval);
+  }, [currentSlide]);
+
+  const nextSlide = useCallback(() => {
+    setCurrentSlide((prev) => (prev + 1) % totalSlides); 
+  }, []);
+
+  const prevSlide = useCallback(() => {
+    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+  }, []);
+
   return (
     <>
-      <div css={mainSliderContainer}>
-        <div css={leftContainer}>
-          <span
-            class="material-symbols-outlined"
-            style={{ ...iconStyle }}
-          >
-            chevron_left
-          </span>
-        </div>
+      <div
+        css={mainSliderContainer(currentSlide)}
+        style={{
+          transform: `translateX(-${currentSlide * 100}vw)`,
+        }}
+      >
         <div css={imageContainer}>
           <img src={sliderImage1} css={imageBox} />
-          <div css={sliderDescript1}>
+          <div css={sliderDescript(currentSlide)}>
             <h2>잠이 안 오는 늦은 새벽에는</h2>
             <h1>감성 에세이 한 편 어떠세요?</h1>
           </div>
         </div>
-
-        <div css={rightContainer}>
-          <span
-            class="material-symbols-outlined"
-            style={{ ...iconStyle }}
-          >
-            chevron_right
-          </span>
+        <div css={imageContainer}>
+          <div css={sliderDescript(currentSlide)}>
+            <h2>어느 순간 까마득히 잊어버렸던</h2>
+            <h1>우주 여행을 떠나요</h1>
+          </div>
+          <img src={sliderImage2} css={imageBox} />
         </div>
+        <div css={imageContainer}>
+          <img src={sliderImage3} css={imageBox} />
+          <div css={sliderDescript(currentSlide)}>
+            <h2>일상에서 일상을 벗어나는</h2>
+            <h1>새로운 경험의 창구</h1>
+          </div>
+        </div>
+        <div css={imageContainer}>
+          <div css={sliderDescript(currentSlide)}>
+            <h2>오늘의 새로운 친구들은</h2>
+            <h1>어떤 이야기들을 준비했을까요?</h1>
+          </div>
+          <img src={sliderImage4} css={imageBox} />
+        </div>
+      </div>
+      <div css={sliderControllerContainer}>
+        <span class="material-symbols-outlined">
+          <span css={iconSize} onClick={prevSlide}>
+            arrow_back_ios
+          </span>
+        </span>
+        <span class="material-symbols-outlined">
+          <span css={iconSize} onClick={nextSlide}>
+            arrow_forward_ios
+          </span>
+        </span>
       </div>
     </>
   );

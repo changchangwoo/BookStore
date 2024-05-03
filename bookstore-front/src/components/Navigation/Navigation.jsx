@@ -4,7 +4,6 @@ function Navigation() {
   const navContainer = css`
     width: 100vw;
     height: 60px;
-    border-bottom: 1px solid #e1e1e1;
     position: fixed;
     display: flex;
     justify-content: center;
@@ -14,6 +13,8 @@ function Navigation() {
     padding-left: 20px;
     padding-right: 40px;
     box-sizing: border-box;
+    z-index: 998;
+    background-color: white;
   `;
 
   const navButton = css`

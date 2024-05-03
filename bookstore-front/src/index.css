@@ -12,9 +12,13 @@ html, body, #root {
     height: 100%;
     display: inline;
     margin-top: 60px;
+    overflow-x: hidden
 }
 
 input {
     font-family: 'pretendard', sans-serif;
     outline: none;
+    border-radius: 8px;
+    border: 1px solid #e1e1e1;
+
 }

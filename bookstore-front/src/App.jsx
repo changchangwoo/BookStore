@@ -7,10 +7,12 @@ import Search from "./pages/Search";
 import './index.css';
 import Navigation from "./components/Navigation/Navigation";
 import Footer from "./components/Footer/Footer";
+import Modal from "./components/Modal/Modal";
 
 function App() {
   return (
     <>
+    <Modal />
     <Navigation />
       <Routes>
         <Route path="/" element={<Main />} />
