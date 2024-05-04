@@ -8,18 +8,20 @@ import {
   imageContainer,
   imageBox,
   sliderDescript,
-  sliderControllerContainer,
-  iconSize,
-} from "./MainSlider.styles";
+} from "./MainSlider.styles.jsx";
 import { useCallback, useEffect, useState } from "react";
 
 function MainSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const totalSlides = 4; // 슬라이드의 총 개수
+  const totalSlides = 5;
 
   useEffect(() => {
     const slideInterval = setInterval(() => {
+      if(currentSlide === 4) {
+        setCurrentSlide(0)
+      } else {
       nextSlide();
+      }
     }, 5000);
 
     return () => clearInterval(slideInterval);
@@ -27,21 +29,12 @@ function MainSlider() {
 
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % totalSlides); 
-  }, []);
-
-  const prevSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
-  }, []);
+  }, [currentSlide]);
 
   return (
     <>
-      <div
-        css={mainSliderContainer(currentSlide)}
-        style={{
-          transform: `translateX(-${currentSlide * 100}vw)`,
-        }}
-      >
-        <div css={imageContainer}>
+      <div css={mainSliderContainer(currentSlide)}>
+      <div css={imageContainer}>
           <img src={sliderImage1} css={imageBox} />
           <div css={sliderDescript(currentSlide)}>
             <h2>잠이 안 오는 늦은 새벽에는</h2>
@@ -69,8 +62,15 @@ function MainSlider() {
           </div>
           <img src={sliderImage4} css={imageBox} />
         </div>
+        <div css={imageContainer}>
+          <img src={sliderImage1} css={imageBox} />
+          <div css={sliderDescript(currentSlide)}>
+            <h2>잠이 안 오는 늦은 새벽에는</h2>
+            <h1>감성 에세이 한 편 어떠세요?</h1>
+          </div>
+        </div>
       </div>
-      <div css={sliderControllerContainer}>
+      {/* <div css={sliderControllerContainer}>
         <span class="material-symbols-outlined">
           <span css={iconSize} onClick={prevSlide}>
             arrow_back_ios
@@ -81,7 +81,8 @@ function MainSlider() {
             arrow_forward_ios
           </span>
         </span>
-      </div>
+        
+      </div> */}
     </>
   );
 }

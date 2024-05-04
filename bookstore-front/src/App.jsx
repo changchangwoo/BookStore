@@ -8,11 +8,12 @@ import './index.css';
 import Navigation from "./components/Navigation/Navigation";
 import Footer from "./components/Footer/Footer";
 import Modal from "./components/Modal/Modal";
+import ModalController from "./components/Modal/ModalController";
 
 function App() {
   return (
     <>
-    <Modal />
+    <ModalController />
     <Navigation />
       <Routes>
         <Route path="/" element={<Main />} />

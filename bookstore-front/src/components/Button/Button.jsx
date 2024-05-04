@@ -12,6 +12,10 @@ const buttonContainer = css`
     background-color: #79D7F3;
     border-radius: 8px;
     font-weight: 600;
+    transition: all 0.5s;
+    &:hover {
+        background-color: #0882F3;
+    }
 `
 
 function Button (props) {

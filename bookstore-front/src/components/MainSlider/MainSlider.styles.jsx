@@ -1,13 +1,14 @@
 import { css } from "@emotion/react";
 
 export const mainSliderContainer = (currentSlide) => css`
-  width: 400vw;
+  width: 500vw;
   height: 350px;
   border-bottom: 1px solid #e1e1e1;
   display: flex;
   position: relative;
   background-color: ${currentSlide % 2 === 0 ? 'white' : '#3F3D55'};
-  transition: all 1s ease ;
+  transform: translateX(-${currentSlide * 100}vw);
+  transition: ${currentSlide===0 ? 'none' : 'all 1s ease'};
 `;
 
 export const imageContainer = css`
