@@ -19,13 +19,12 @@ export const ModalBox = css`
   background-color: white;
   border-radius: 8px;
   display: flex;
-  padding: 35px 20px 45px 20px;
+  padding: 35px 20px 35px 20px;
   box-sizing: border-box;
   flex-direction: column;
   align-items: center;
   h1 {
     font-size: 20px;
-    margin-bottom: 20px;
     text-align: center;
   }
 `;
@@ -45,8 +44,21 @@ margin-top: 20px;
     font-size: 13px;
     margin-bottom: 30px;
 `
+
+export const registerCheck = css`
+margin-top: 10px;
+    font-size: 13px;
+`
+
+export const passwordCheck = css`
+margin-top: 10px;
+margin-bottom: 20px;
+    font-size: 13px;
+`
 export const register = css`
     font-size: 13px;
     color: #8F8D8D;
     margin-top: 10px;
+    &:hover {
+color:#2f2f2f    }
 `

@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import {navContainer,navButton,darkModeButton,menuButton,leftContainer,rightContainer
 } from "./Navigation.styles"
 import { useCallback } from "react";
-import { openModal } from "../../reduce/modalSlice";
+import { openModal } from "../../reduces/modalSlice";
 function Navigation() {
   const dispatch = useDispatch();
   const handleOpenLogin = useCallback(() => {

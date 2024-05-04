@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from "react-redux"
 import Modal from "./Modal"
 import ModalLogin from "./ModalLogin"
 import { useEffect, useRef } from "react"
-import { closeModal } from "../../reduce/modalSlice";
+import { closeModal } from "../../reduces/modalSlice";
+import ModalRegister from "./ModalRegister";
 
 function ModalController() {
     const dispatch = useDispatch();
@@ -33,6 +34,10 @@ function ModalController() {
             {
                 modalType === "login" &&
                 <ModalLogin />
+            }
+            {
+                modalType === "register" &&
+                <ModalRegister />
             }
         </Modal>
 }

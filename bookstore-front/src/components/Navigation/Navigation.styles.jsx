@@ -28,11 +28,11 @@ align-items: center;
 font-size: 15px;
 font-weight: 600;
 border-radius: 8px;
-transition: all 0.5s;
+transition: all 0.2s;
 
-&:hover{
-  scale: 1.1;
-}
+&:hover {
+        background-color: #0882F3;
+    }
 `;
 
 export const darkModeButton = css`
