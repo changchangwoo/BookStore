@@ -24,6 +24,7 @@ export const ModalBox = css`
   flex-direction: column;
   align-items: center;
   h1 {
+    margin-top: 10px;
     font-size: 20px;
     text-align: center;
   }

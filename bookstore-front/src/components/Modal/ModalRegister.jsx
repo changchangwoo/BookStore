@@ -12,7 +12,7 @@ function ModalRegister() {
       <input css={inputID} placeholder="PASSWORD CHECK"></input>
 
       <div css={passwordCheck}>비밀번호 확인이 일치하지 않습니다</div>
-      <Button title="시작하기" />
+      <Button title="시작하기" width="150px" />
     </>
   );
 }

@@ -1,8 +1,9 @@
 import SearchEngine from "../components/SearchContainer/SearchContainer";
 import MainSlider from "../components/MainSlider/MainSlider";
-import ContentSection from "../components/ContentSection/ContentSection";
-import LargeCard from "../components/Card/LargCard";
+import ContentSection from "../components/Section/ContentSection";
+import LargeCard from "../components/Card/LargeCard";
 import SmallCard from "../components/Card/SmallCard";
+import DivisionSection from "../components/Section/DivisionSection";
 
 function Main() {
   return (
@@ -25,10 +26,11 @@ function Main() {
         <SmallCard />
         <SmallCard />
       </ContentSection>
-      <ContentSection title="내가 방금 본 책" backgroundColor="rgba(0,0,0,0)">
+      <DivisionSection titleLeft="내가 방금 본 책" titleRight="방금 본 책과 비슷한 책" 
+      backgroundColor="rgba(0,0,0,0)">
         <LargeCard />
         <LargeCard />
-      </ContentSection>
+      </DivisionSection>
     </>
   );
 }
