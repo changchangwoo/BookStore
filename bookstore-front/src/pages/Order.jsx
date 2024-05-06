@@ -1,10 +1,13 @@
+import OrderContents from "../components/Order/OrderContents";
+import CartSection from "../components/Section/CartSection";
 function Order() {
-
   return (
     <>
-    <h1>주문페이지입니당</h1>
+      <CartSection title="주문 목록">
+        <OrderContents/>
+      </CartSection>
     </>
-  )
+  );
 }
 
-export default Order
+export default Order;

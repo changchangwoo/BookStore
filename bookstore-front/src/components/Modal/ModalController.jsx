@@ -7,8 +7,10 @@ import ModalRegister from "./ModalRegister";
 
 function ModalController() {
     const dispatch = useDispatch();
-    const isModal = useSelector((state) => state.modal.isOpen)
-    const modalType = useSelector((state) => state.modal.modalType)
+    const { isOpen, modalType } = useSelector((state) => ({
+        isOpen: state.modal.isOpen,
+        modalType: state.modal.modalType
+      }));
     const modalRef = useRef(null)
 
     useEffect(()=>{
@@ -26,10 +28,10 @@ function ModalController() {
             document.removeEventListener('mousedown', handleClickOutside);
           };
 
-    }, [isModal])
+    }, [isOpen])
     return (
         <>
-        {isModal &&
+        {isOpen &&
         <Modal ref={modalRef}>
             {
                 modalType === "login" &&

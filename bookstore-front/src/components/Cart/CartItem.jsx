@@ -6,6 +6,8 @@ import {
   qunaitityBox,
   calculButton,
   price,
+  title,
+  sub_title
 } from "./Cart_styles";
 
 import { useCallback, useMemo, useState } from "react";
@@ -30,8 +32,8 @@ function CartItem() {
           css={cartImg}
         ></img>
         <div css={titleBox}>
-          <h1>제철 행복</h1>
-          <h2>김신지</h2>
+          <div css={title}>제철 행복</div>
+          <div css={sub_title}>김신지</div>
           <div css={qunaitityBox}>
             <span css={calculButton} onClick={downCount}>
               {" "}

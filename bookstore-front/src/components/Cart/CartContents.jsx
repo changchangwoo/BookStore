@@ -1,6 +1,9 @@
+import { css } from "@emotion/react";
 import Button from "../Button/Button";
-import { cartDisplay, cartContainer, topBox, allCheck, cartList, cartCheck } from "./Cart_styles";
+import { cartDisplay, cartContainer, topBox, allCheck, cartList, cartCheck, selectedBox, confirmBox, itemPrice, totalPrice } from "./Cart_styles";
 import CartItem from "./CartItem";
+import ItemCheck from "./ItemCheck";
+
 
 function CartContents() {
   return (
@@ -17,13 +20,9 @@ function CartContents() {
           <ul css={cartList}>
             <CartItem/>
             <CartItem/>
-            <CartItem/>
-            <CartItem/>
-            <CartItem/>
-            <CartItem/>
           </ul>
         </div>
-        <div css={cartCheck}></div>
+        <ItemCheck/>
       </div>
     </>
   );

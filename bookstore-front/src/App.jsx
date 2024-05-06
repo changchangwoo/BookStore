@@ -7,8 +7,8 @@ import Search from "./pages/Search";
 import './index.css';
 import Navigation from "./components/Navigation/Navigation";
 import Footer from "./components/Footer/Footer";
-import Modal from "./components/Modal/Modal";
 import ModalController from "./components/Modal/ModalController";
+import Delivery from "./pages/Delivery";
 
 function App() {
   return (
@@ -21,8 +21,8 @@ function App() {
         <Route path="/detail" element={<Detail />} />
         <Route path="/order" element={<Order />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/delivery" element={<Delivery />} />
       </Routes>
-    <Footer/>
     </>
   );
 }

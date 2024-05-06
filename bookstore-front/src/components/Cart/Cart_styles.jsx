@@ -31,11 +31,13 @@ export const topBox = css`
 `;
 export const cartCheck = css`
   width: 315px;
-  height: 460px;
+  height: 470px;
   background-color: white;
   border-radius: 8px;
   border: 1px solid #e1e1e1;
   margin-left: 20px;
+  padding: 20px;
+  box-sizing: border-box;
 `;
 
 export const allCheck = css`
@@ -81,18 +83,20 @@ export const cartImg = css`
 
 export const titleBox = css`
   flex: 1;
-  h1 {
-    margin: 0;
-    font-weight: bold;
-    font-size: 20px;
-  }
-  h2 {
-    margin: 0;
-    margin-top: 5px;
-    font-weight: 400;
-    font-size: 16px;
-    color: grey;
-  }
+`;
+
+export const title = css`
+  margin: 0;
+  font-weight: bold;
+  font-size: 16px;
+`;
+
+export const sub_title = css`
+  margin: 0;
+  margin-top: 5px;
+  font-weight: 400;
+  font-size: 14px;
+  color: grey;
 `;
 
 export const qunaitityBox = css`
@@ -113,9 +117,38 @@ export const calculButton = css`
 
 export const price = css`
   flex: 1;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
   display: flex;
   align-items: center;
   justify-content: right;
 `;
+
+
+export const selectedBox = css`
+  width: 100%;
+  height: 200px;
+  border-bottom: 1px solid #e1e1e1;
+`
+export const confirmBox = css`
+width: 100%;
+display: flex;
+align-items: center;
+flex-direction: column;
+padding: 20px;
+box-sizing: border-box;
+  
+`
+
+export const itemPrice = (color) => css`
+  color : ${color};
+  font-size: 16px;
+  margin-bottom: 10px;
+`
+
+export const totalPrice = css`
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 20px;
+`
