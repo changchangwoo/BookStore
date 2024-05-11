@@ -3,8 +3,10 @@ import {navContainer,navButton,darkModeButton,menuButton,leftContainer,rightCont
 } from "./Navigation.styles"
 import { useCallback } from "react";
 import { openModal } from "../../reduces/modalSlice";
+import { useNavigate } from "react-router-dom";
 function Navigation() {
   const dispatch = useDispatch();
+  const navigator = useNavigate();
   const handleOpenLogin = useCallback(() => {
     dispatch(
       openModal({
@@ -12,12 +14,16 @@ function Navigation() {
       })
     )
   })
+
+  const handleGoHome = useCallback(()=>{
+    navigator('/');
+  })
   return (
 
     <>
       <div css={navContainer}>
         <div css={leftContainer}>
-          <div css={navButton}>로고</div>
+          <div css={navButton} onClick={handleGoHome}>로고</div>
           <div css={menuButton}>
             <span class="material-symbols-outlined">menu</span>
           </div>

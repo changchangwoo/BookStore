@@ -18,7 +18,7 @@ const buttonContainer = (width, marginRight, color) => css`
     }
 `
 
-function Button (props) {
+function Button (props, active) {
     return(
         <>
         <div css={buttonContainer(props.width, props.marginRight, props.color)}>

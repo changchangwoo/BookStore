@@ -9,7 +9,7 @@ const order = async (req, res) => {
   const conn = await maraidb.createConnection({
     host: "127.0.0.1",
     user: "root",
-    password: "1234",
+    password: "1234!",
     database: "bookstore",
     dateStrings: true,
   });

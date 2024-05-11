@@ -24,6 +24,19 @@ const join = (req, res) => {
   });
 };
 
+const check = (req, res) => {
+  const { email } = req.body;
+  let sql = `SELECT * FROM users WHERE email =? `;
+  conn.query(sql, email, (err, results) => {
+    if(err) {
+      console.log(err);
+      return res.status(StatusCodes.BAD_REQUEST).end();    
+    }
+    if(results.length >= 1) return res.status(StatusCodes.BAD_REQUEST).end();
+    return res.status(StatusCodes.OK).end();
+  })
+}
+
 const login = (req, res) => {
   const { email, password } = req.body;
   let sql = `SELECT * FROM users WHERE email = ?`;
@@ -45,7 +58,7 @@ const login = (req, res) => {
         process.env.PRIVATE_KEY,
         {
           expiresIn: "5000m",
-          issuer: "songa",
+          issuer: "changwooLee",
         }
       );
       res.cookie("token", token, {
@@ -92,4 +105,4 @@ const passwordReset = (req, res) => {
     }
   });
 };
-module.exports = { join, login, passwordResetRequest, passwordReset };
+module.exports = { join, login, passwordResetRequest, passwordReset, check};

@@ -31,35 +31,38 @@ export const ModalBox = css`
 `;
 
 export const inputID = css`
-    width: 215px;
-    height: 30px;
-    margin-top: 10px;
-    font-size: 14px;
-    padding: 10px;
-    box-sizing: border-box;
-    text-align: center;
-`
+  width: 215px;
+  height: 30px;
+  margin-top: 10px;
+  font-size: 14px;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+`;
 
 export const loginCheck = css`
-margin-top: 20px;
-    font-size: 13px;
-    margin-bottom: 30px;
-`
+  margin-top: 20px;
+  font-size: 13px;
+  margin-bottom: 30px;
+`;
 
-export const registerCheck = css`
-margin-top: 10px;
-    font-size: 13px;
-`
+export const registerCheck = (color) => css`
+  margin-top: 10px;
+  font-size: 13px;
+  color: ${color};
+`;
 
-export const passwordCheck = css`
-margin-top: 10px;
-margin-bottom: 20px;
-    font-size: 13px;
-`
+export const passwordCheck = (color) => css`
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  color: ${color};
+`;
 export const register = css`
-    font-size: 13px;
-    color: #8F8D8D;
-    margin-top: 10px;
-    &:hover {
-color:#2f2f2f    }
-`
+  font-size: 13px;
+  color: #8f8d8d;
+  margin-top: 10px;
+  &:hover {
+    color: #2f2f2f;
+  }
+`;
