@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import {navContainer,navButton,darkModeButton,menuButton,leftContainer,rightContainer
 } from "./Navigation.styles"
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { openModal } from "../../reduces/modalSlice";
 import { useNavigate } from "react-router-dom";
 function Navigation() {

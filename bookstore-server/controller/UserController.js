@@ -57,7 +57,7 @@ const login = (req, res) => {
         },
         process.env.PRIVATE_KEY,
         {
-          expiresIn: "5000m",
+          expiresIn: "1m",
           issuer: "changwooLee",
         }
       );

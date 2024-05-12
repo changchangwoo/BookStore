@@ -7,6 +7,7 @@ export const ModalContainer = css`
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: rgb(0, 0, 0, 0.8);
@@ -44,16 +45,17 @@ export const loginCheck = css`
   margin-top: 20px;
   font-size: 13px;
   margin-bottom: 30px;
+  color: red;
 `;
 
 export const registerCheck = (color) => css`
-  margin-top: 10px;
+  margin-top: 5px;
   font-size: 13px;
   color: ${color};
 `;
 
 export const passwordCheck = (color) => css`
-  margin-top: 10px;
+  margin-top: 5px;
   margin-bottom: 20px;
   font-size: 13px;
   color: ${color};
