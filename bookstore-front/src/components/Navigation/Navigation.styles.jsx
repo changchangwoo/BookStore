@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-export const navContainer = css`
+export const navContainer =  css`
 width: 100vw;
 height: 60px;
 position: fixed;
@@ -17,8 +17,8 @@ background-color: white;
 border-bottom : 1px solid #e1e1e1;
 `;
 
-export const navButton = css`
-width: 80px;
+export const navButton = (marginRight, width='80px') => css`
+width: ${width};
 height: 40px;
 background-color: #79d7f3;
 color: white;
@@ -29,6 +29,7 @@ font-size: 15px;
 font-weight: 600;
 border-radius: 8px;
 transition: all 0.2s;
+margin-right: ${marginRight};
 
 &:hover {
         background-color: #0882F3;

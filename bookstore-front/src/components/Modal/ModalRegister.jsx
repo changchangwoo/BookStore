@@ -62,7 +62,7 @@ function ModalRegister() {
           setRegisterEmailCheck(false);
         });
       }
-    }, 400)
+    }, 200)
   );
 
   useEffect(()=>{

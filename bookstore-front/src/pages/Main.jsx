@@ -4,7 +4,7 @@ import ContentSection from "../components/Section/ContentSection";
 import LargeCard from "../components/Card/LargeCard";
 import SmallCard from "../components/Card/SmallCard";
 import DivisionSection from "../components/Section/DivisionSection";
-
+import NewBookSection from "../components/Section/NewBookSection";
 function Main() {
   return (
     <>
@@ -15,10 +15,7 @@ function Main() {
         <LargeCard />
       </ContentSection>
       <ContentSection title="신간 안내" backgroundColor="rgba(0,0,0,0)">
-        <SmallCard />
-        <SmallCard />
-        <SmallCard />
-        <SmallCard />
+        <NewBookSection/>
       </ContentSection>
       <ContentSection title="장르별" backgroundColor="white">
         <SmallCard />
