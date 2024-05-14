@@ -1,5 +1,5 @@
 import SmallCard from "../components/Card/SmallCard"
-import ContentSection from "../components/Section/ContentSection"
+import ContentSection from "../components/Section/ContentSection/ContentSection"
 import SearchEngine from "../components/SearchContainer/SearchContainer"
 
 function Search() {

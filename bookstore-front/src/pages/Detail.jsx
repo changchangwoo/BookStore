@@ -1,4 +1,4 @@
-import ContentSection from "../components/Section/ContentSection";
+import ContentSection from "../components/Section/ContentSection/ContentSection";
 import SearchEngine from "../components/SearchContainer/SearchContainer";
 import DetailImageCard from "../components/Card/DetailImageCard";
 import DetailSection from "../components/Section/DetailSections";

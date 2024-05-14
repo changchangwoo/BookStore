@@ -30,6 +30,8 @@ font-weight: 600;
 border-radius: 8px;
 transition: all 0.2s;
 margin-right: ${marginRight};
+cursor: pointer;
+
 
 &:hover {
         background-color: #0882F3;

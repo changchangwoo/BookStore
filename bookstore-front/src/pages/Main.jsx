@@ -1,6 +1,6 @@
 import SearchEngine from "../components/SearchContainer/SearchContainer";
 import MainSlider from "../components/MainSlider/MainSlider";
-import ContentSection from "../components/Section/ContentSection";
+import ContentSection from "../components/Section/ContentSection/ContentSection";
 import LargeCard from "../components/Card/LargeCard";
 import SmallCard from "../components/Card/SmallCard";
 import DivisionSection from "../components/Section/DivisionSection";
