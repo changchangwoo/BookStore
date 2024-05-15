@@ -22,6 +22,17 @@ export const sectionTitle = css`
   margin: auto;
   margin-top: 50px;
   margin-bottom: 20px;
+  ul{
+    display: flex;
+  }
+  li {
+    cursor: pointer;
+    margin-right: 20px;
+    color: #8F8D8D;
+  }
+  li:first-of-type {
+    margin-left: 0px;
+  }
 `;
 
 export const cardList = css`
@@ -40,6 +51,7 @@ export const contentController = css`
   margin: auto;
   align-items: center;
   justify-content: center;
+  pointer-events: none;
 `;
 export const leftControllerButton = css`
   width: 50px;
@@ -48,6 +60,8 @@ export const leftControllerButton = css`
   display: flex;
   justify-content: center;
   align-items: center;
+  pointer-events: all;
+
   cursor: pointer;
   span {
     font-size: 50px;
@@ -65,6 +79,8 @@ export const rightControllerButton = css`
   width: 50px;
   height: 50px;
   margin-right: 20px;
+  pointer-events: all;
+
   cursor: pointer;
   span {
     font-size: 50px;
@@ -84,5 +100,5 @@ export const cards = (currentSlide) => css`
   height: 100%;
   display: flex;
   transform: translateX(-${currentSlide * 1000}px);
-  transition: all 0.5s ease-out;
+  transition: all 0.7s ease-in-out;
 `;

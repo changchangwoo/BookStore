@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import Button from "../Button/Button";
 import { useCallback, useState } from "react";
+import { useSelector } from "react-redux";
 
 const sectionContainer = css`
   width: 611px;
@@ -80,6 +81,10 @@ const calculButton = css`
 function DetailCard() {
   const totalprice = 13000
   const [count, setCount] = useState(1)
+  const detailBook = useSelector((state) => state.detailBook.books)
+
+  console.log(detailBook)
+
   const upCount = useCallback(()=>{
     setCount(count+1)
   })

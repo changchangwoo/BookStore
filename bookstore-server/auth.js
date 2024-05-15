@@ -4,6 +4,7 @@ require("dotenv").config();
 function ensureAuthorization(req, res) {
   try {
     let receivedJWT = req.headers["authorization"];
+    console.log(receivedJWT)
 
     if (receivedJWT) {
       let decodedJWT = jwt.verify(receivedJWT, process.env.PRIVATE_KEY);

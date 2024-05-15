@@ -1,4 +1,7 @@
 import { css } from "@emotion/react";
+import { useDispatch } from "react-redux";
+import { getDetailBook } from "../../reduces/detailBookSlice";
+import { useNavigate } from "react-router-dom";
 
 const sectionContainer = css`
 cursor: pointer;
@@ -12,9 +15,8 @@ cursor: pointer;
   margin-right: 20px;
   transition: all 0.2s ease-in-out;
   &:hover {
-    opacity: 0.6;
+    opacity: 0.5;
   }
-  
 `;
 
 const imgBox = css`
@@ -66,9 +68,18 @@ const price = css`
 `;
 
 function SmallCard(props) {
+  const dispatch = useDispatch();
+  const navigator = useNavigate();
+  const handleCard = () => {
+    console.log(props.id)
+    dispatch(
+      getDetailBook(props.id)
+    )
+    navigator("/detail")
+  }
   return (
     <>
-      <div css={sectionContainer}>
+      <div css={sectionContainer} onClick={handleCard}>
         <img css={imgBox} src={props.img}></img>
         <div css={descriptionBox}>
           <h1>{props.title}</h1>
