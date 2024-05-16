@@ -106,7 +106,9 @@ function ModalRegister() {
   return (
     <>  
       <h1>회원가입</h1>
-      <input css={inputID} placeholder="Email" onChange={(e)=>idCheckDebounced(e.target.value)}></input>
+      <input css={inputID} 
+      autoFocus
+      placeholder="Email" onChange={(e)=>idCheckDebounced(e.target.value)}></input>
       {registerEmailCheck ? (
         <div css={registerCheck}>{emailMessage}</div>
       ) : (

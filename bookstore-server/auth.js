@@ -1,11 +1,11 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
+
 function ensureAuthorization(req, res) {
   try {
-    let receivedJWT = req.headers["authorization"];
-    console.log(receivedJWT)
-
+    let receivedJWT = req.cookies.token
+    // let receivedJWT = req.headers["authorization"];
     if (receivedJWT) {
       let decodedJWT = jwt.verify(receivedJWT, process.env.PRIVATE_KEY);
       return decodedJWT;

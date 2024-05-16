@@ -23,11 +23,16 @@ const imgContainer = css`
   object-fit: fit;
 `;
 
-function DetailImageCard() {
+function DetailImageCard(
+  {
+    img,
+    id
+  }
+) {
   return (
     <>
       <div css={sectionContainer}>
-        <img src="https://image.yes24.com/goods/370331/XL" 
+        <img src={img}
         css={imgContainer}/>
       </div>
     </>

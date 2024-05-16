@@ -71,7 +71,6 @@ function SmallCard(props) {
   const dispatch = useDispatch();
   const navigator = useNavigate();
   const handleCard = () => {
-    console.log(props.id)
     dispatch(
       getDetailBook(props.id)
     )

@@ -6,26 +6,40 @@ import DetailCard from "../components/Card/DetailCard"
 import SmallCard from "../components/Card/SmallCard"
 import DivisionSection from "../components/Section/DivisionSection";
 import LargeCard from "../components/Card/LargeCard";
+import { useSelector } from "react-redux";
 
 function Detail() {
+
+  const detailBook = useSelector((state) => state.detailBook.books)
+
   return (
     <>
           <SearchEngine />
           <DetailSection title="소설" backgroundColor="white">
-            <DetailImageCard />
-            <DetailCard />
+            <DetailImageCard 
+            img={detailBook.img}
+            />
+            <DetailCard 
+            title={detailBook.title}
+            author={detailBook.author}
+            detail={detailBook.detail}
+            price={detailBook.price}
+            />
           </DetailSection>
-          <ContentSection title="위대한 개츠비와 비슷한 작품들">
+
+          <ContentSection title={"지금 보시는 책과 비슷한 작품"}>
             <SmallCard />
             <SmallCard />
             <SmallCard />
             <SmallCard />
           </ContentSection>
+
           <DivisionSection titleLeft="목차" titleRight="상세 소개" 
           backgroundColor="white" >
           <LargeCard />
           <LargeCard />
           </DivisionSection>
+
           <DivisionSection titleLeft="정보" titleRight="리뷰">
           <LargeCard />
           <LargeCard />

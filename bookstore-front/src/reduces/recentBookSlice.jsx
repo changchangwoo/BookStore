@@ -7,16 +7,16 @@ const initialState = {
     title : "생각보다 힘들다",
     author : "이창우",
     summary : "진짜 생각보다 힘들다..",
-    detail : "디테일한게 디테일해요잉",
+    detail : "베스트 셀러가 제일 잘팔려요잉",
     price : 9999,
     img : "그런거없다"
   }],
 
 };
 
-const getDetailBook = createAsyncThunk('books/detailBooks',
-    async (bookId, thunkAPI) => {
-      let url = "books/" + bookId
+const getBestBooks = createAsyncThunk('books/bestBooks',
+    async (thunkAPI) => {
+      let url = "books/best"
         try {
             const response = await API.get(url);
             return response.data
@@ -26,18 +26,18 @@ const getDetailBook = createAsyncThunk('books/detailBooks',
     }
 )
 
-export const detailBookSlice = createSlice({
-  name: "detailBook",
+export const bestBookSlice = createSlice({
+  name: "bestBook",
   initialState,
   reducers: {
   },
   extraReducers: async (builder) => {
-    builder.addCase(getDetailBook.fulfilled, (state, action) => {
+    builder.addCase(getBestBooks.fulfilled, (state, action) => {
       if(action.payload) {
         state.books = action.payload
       }
     })
   }
 });
-export {getDetailBook}
-export default detailBookSlice.reducer;
+export {getBestBooks}
+export default bestBookSlice.reducer;

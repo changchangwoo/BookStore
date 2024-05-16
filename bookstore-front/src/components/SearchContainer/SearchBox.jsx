@@ -35,7 +35,9 @@ function SearchBox() {
           <span class="material-symbols-outlined" style={{ fontSize: 30 }}>
             search
           </span>
-          <input css={inputSearch} placeholder="거미 여인의 키스"/>
+          <input 
+          autoFocus
+          css={inputSearch} placeholder="거미 여인의 키스"/>
         </div>
       </form>
     </>

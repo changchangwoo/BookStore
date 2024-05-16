@@ -15,7 +15,9 @@ const likeRouter = require("./routes/likes.js");
 const cartRouter = require("./routes/carts.js");
 const orderRouter = require("./routes/orders.js");
 const categoryRouter = require("./routes/category.js");
+const cookieParser = require("cookie-parser");
 
+app.use(cookieParser());
 app.use("/users", userRouter);
 app.use("/books", bookRouter);
 app.use("/likes", likeRouter);

@@ -1,4 +1,7 @@
 import { css } from "@emotion/react";
+import { getDetailBook } from "../../reduces/detailBookSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const sectionContainer = css`
   width: 480px;
@@ -12,6 +15,11 @@ const sectionContainer = css`
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.5;
+  }
 `;
 
 const imgBox = css`
@@ -36,39 +44,48 @@ const descriptionBox = css`
     margin: 0;
     margin-top: 10px;
     font-weight: 500;
-    color: #8F8D8D;
+    color: #8f8d8d;
   }
 `;
 
 const simpleDescript = css`
-    margin-top: 50px;
-    width: 190px;
-    height: 200px;
-    font-size: 14px;
-    font-weight: 300;
-`
+  margin-top: 50px;
+  width: 190px;
+  height: 200px;
+  font-size: 14px;
+  font-weight: 300;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+`;
 
 const price = css`
-    margin-top: 30px;
-    font-size: 14px;
-`
+  margin-top: 30px;
+  font-size: 14px;
+`;
 
-function LargeCard() {
+function LargeCard({ id, title, author, bookPrice, detail, img }) {
+  const navigator = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleCard = () => {
+    dispatch(
+      getDetailBook(id)
+    )
+    navigator("/detail")
+  }
+
   return (
     <>
-      <div css={sectionContainer}>
-        <div css={imgBox}></div>
+      <div css={sectionContainer} onClick={handleCard}>
+        <img src={img} css={imgBox}></img>
         <div css={descriptionBox}>
-        <h1>상실의 시대</h1>
-        <h2>무라카미 하루키</h2>
-        <div css={simpleDescript}>
-        이 책은 너무 재밌어서 두번 읽어도 또 읽고싶을 확률이 큽니다 조심하세요.
-참고로 저는 이거 군대에서 처음읽었는데 한번 읽고 또 읽고싶어서 전자책으로 샀습니다.. 그리고 종이책으로도 삼.. 후덜덜덜 내 돈!
-
-        </div>
-        <div css={price}>
-            28,000원
-        </div>
+          <h1>{title}</h1>
+          <h2>{author}</h2>
+          <div css={simpleDescript}>{detail}</div>
+          <div css={price}>{bookPrice}</div>
         </div>
       </div>
     </>

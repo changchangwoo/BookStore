@@ -4,7 +4,7 @@ import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { closeModal, openModal } from "../../reduces/modalSlice";
 import useInput from "../../hooks/useInput";
-import {userLogin} from "../../reduces/userSlice"
+import { userLogin } from "../../reduces/userSlice";
 
 function ModalLogin() {
   const dispatch = useDispatch();
@@ -19,13 +19,18 @@ function ModalLogin() {
     );
   });
   const handleLogin = () => {
-    dispatch(userLogin({userEmail, userPassword}));
+    dispatch(userLogin({ userEmail, userPassword }));
   };
 
   return (
     <>
       <h1>로그인</h1>
-      <input css={inputID} placeholder="Email" onChange={onChangeUserEmail} />
+      <input
+        css={inputID}
+        autoFocus
+        placeholder="Email"
+        onChange={onChangeUserEmail}
+      />
       <input
         css={inputID}
         type="password"
