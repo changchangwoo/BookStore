@@ -7,11 +7,10 @@ import SmallCard from "../components/Card/SmallCard"
 import DivisionSection from "../components/Section/DivisionSection";
 import LargeCard from "../components/Card/LargeCard";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 function Detail() {
-
   const detailBook = useSelector((state) => state.detailBook.books)
-
   return (
     <>
           <SearchEngine />

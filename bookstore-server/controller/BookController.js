@@ -70,7 +70,7 @@ const bookDetail = (req, res) => {
     // 로그인 상태가 아니면 => liked 빼고 보내주면 되고
     // 로그인 상태이면 => liked 추가해서
     let authorization = ensureAuthorization(req, res);
-
+    console.log(req, res)
     if (authorization instanceof jwt.TokenExpiredError) {
         return res.status(StatusCodes.UNAUTHORIZED).json({
             "message": "로그인 세션이 만료되었습니다. 다시 로그인 하세요."

@@ -34,6 +34,7 @@ export const detailBookSlice = createSlice({
   extraReducers: async (builder) => {
     builder.addCase(getDetailBook.fulfilled, (state, action) => {
       if(action.payload) {
+        localStorage.setItem('recentBook', JSON.stringify(action.payload));
         state.books = action.payload
       }
     })

@@ -95,9 +95,9 @@ function DetailCard(
   })
   const downCount = useCallback(()=>{
     if(count <= 1) {
+      if(count === 0) return
       setCount(count-1)
       setbuttonActive(false)
-      return
     } else {
       setCount(count-1)
     }

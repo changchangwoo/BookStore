@@ -4,6 +4,7 @@ import userReducer from "../reduces/userSlice";
 import categoryBookReducer from "../reduces/categoryBookSlice";
 import detailBookReducer from "../reduces/detailBookSlice";
 import bestBookReducer from "../reduces/bestBookSlice";
+import recentBookReducer from "../reduces/recentBookSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     categoryBook : categoryBookReducer,
     detailBook : detailBookReducer,
     bestBook : bestBookReducer,
+    recentBook : recentBookReducer,
   },
 });
