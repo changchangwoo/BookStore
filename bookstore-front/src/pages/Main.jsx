@@ -27,8 +27,8 @@ function Main() {
       </CategorySection>
 
       <DivisionSection titleLeft="내가 방금 본 책" titleRight="방금 본 책과 비슷한 책" backgroundColor="rgba(0,0,0,0)">
-        <RecentContents hold={true}/>
-        <RecentContents hold={false}/>
+        <RecentContents hold={true} type="big"/>
+        <RecentContents hold={false} type="big"/>
       </DivisionSection>
     </>
   );

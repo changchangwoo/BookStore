@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import { useDispatch } from "react-redux";
-import { getDetailBook } from "../../reduces/detailBookSlice";
-import { useNavigate } from "react-router-dom";
+import { getDetailBook, rerender } from "../../reduces/detailBookSlice";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const sectionContainer = css`
 cursor: pointer;
@@ -62,29 +62,31 @@ const simpleDescript = css`
   -webkit-box-orient: vertical;
 `;
 
-const price = css`
+const bookPrice = css`
   margin-top: 20px;
   font-size: 14px;
 `;
 
-function SmallCard(props) {
-  const dispatch = useDispatch();
+function SmallCard({title, author, summary, price, category_id, img, id}) {
   const navigator = useNavigate();
+  const location = useLocation();
   const handleCard = () => {
-    dispatch(
-      getDetailBook(props.id)
-    )
-    navigator("/detail")
-  }
+    const currentUrl = `/detail/${category_id}/${id}`;
+    if (location.pathname === currentUrl) {
+      setReload((prev) => prev + 1); 
+    } else {
+      navigator(currentUrl);
+    }
+  };
   return (
     <>
       <div css={sectionContainer} onClick={handleCard}>
-        <img css={imgBox} src={props.img}></img>
+        <img css={imgBox} src={img}></img>
         <div css={descriptionBox}>
-          <h1>{props.title}</h1>
-          <h2>{props.author}</h2>
-          <div css={simpleDescript}>{props.summary}</div>
-          <div css={price}>{props.price}</div>
+          <h1>{title}</h1>
+          <h2>{author}</h2>
+          <div css={simpleDescript}>{summary}</div>
+          <div css={bookPrice}>{price}</div>
         </div>
       </div>
     </>

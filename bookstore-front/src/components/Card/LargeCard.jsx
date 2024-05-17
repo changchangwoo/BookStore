@@ -1,7 +1,8 @@
 import { css } from "@emotion/react";
-import { getDetailBook } from "../../reduces/detailBookSlice";
+import { getDetailBook, rerender } from "../../reduces/detailBookSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import getRecentCategoryBook from "../../reduces/recentBookSlice"
 
 const sectionContainer = css`
   width: 480px;
@@ -66,15 +67,10 @@ const price = css`
   font-size: 14px;
 `;
 
-function LargeCard({ id, title, author, bookPrice, detail, img }) {
+function LargeCard({ id, title, author, bookPrice, detail, img, category_id }) {
   const navigator = useNavigate();
-  const dispatch = useDispatch();
-
   const handleCard = () => {
-    dispatch(
-      getDetailBook(id)
-    )
-    navigator("/detail")
+    navigator(`/detail/${category_id}/${id}`)
   }
 
   return (

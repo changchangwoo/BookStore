@@ -17,7 +17,6 @@ const sectionContainer = css`
 const imgContainer = css`
   width: 100%;
   height: 100%;
-  background-color: orange;
   border-radius: 8px;
   border: 1px solid #e1e1e1;
   object-fit: fit;

@@ -16,27 +16,16 @@ const initialState = {
 };
 
 const getRecentCategoryBook = createAsyncThunk(
-  "books/bestBooks",
+  "books/recentBooks",
   async ({categoryId, type}, thunkAPI) => {
     try {
-    let paramData
-    if(type === 'solo') {
-        paramData = {
-            lmit : 1,
-            currentPage : 1,
-            category_id: categoryId
-        }
-    } else {
-        paramData = {
-            lmit : 12,
-            currentPage : 1,
-            category_id: categoryId
-        }
-    }
       const response = await API.get("books/", {
-        params: paramData
+        params: {
+          limit : 12,
+          currentPage : 1,
+          category_Id: categoryId
+        }
       });
-      console.log(response.data)
       return response.data;
     } catch (err) {
       console.log(err);

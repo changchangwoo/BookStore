@@ -64,7 +64,6 @@ const login = (req, res) => {
       res.cookie("token", token, {
         httpOnly: true,
       });
-      console.log(token);
       return res.status(StatusCodes.OK).json(results);
     } else {
       return res.status(StatusCodes.UNAUTHORIZED);

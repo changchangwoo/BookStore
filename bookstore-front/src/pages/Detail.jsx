@@ -6,11 +6,25 @@ import DetailCard from "../components/Card/DetailCard"
 import SmallCard from "../components/Card/SmallCard"
 import DivisionSection from "../components/Section/DivisionSection";
 import LargeCard from "../components/Card/LargeCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { getDetailBook } from "../reduces/detailBookSlice";
+import { getRecentCategoryBook } from "../reduces/recentBookSlice";
+import RecentContents from "../components/Section/Contents/RecentContents";
 
 function Detail() {
+  const { category_id, id } = useParams();
+  const dispatch = useDispatch();
   const detailBook = useSelector((state) => state.detailBook.books)
+
+  useEffect(()=>{
+    dispatch(getDetailBook(id))
+    dispatch(getRecentCategoryBook(category_id))
+  }, [])
+  
+
+
   return (
     <>
           <SearchEngine />
@@ -27,10 +41,7 @@ function Detail() {
           </DetailSection>
 
           <ContentSection title={"지금 보시는 책과 비슷한 작품"}>
-            <SmallCard />
-            <SmallCard />
-            <SmallCard />
-            <SmallCard />
+            <RecentContents type="small"/>
           </ContentSection>
 
           <DivisionSection titleLeft="목차" titleRight="상세 소개" 

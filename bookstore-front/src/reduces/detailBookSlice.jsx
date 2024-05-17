@@ -9,9 +9,8 @@ const initialState = {
     summary : "진짜 생각보다 힘들다..",
     detail : "디테일한게 디테일해요잉",
     price : 9999,
-    img : "그런거없다"
+    img : "그런거없다",
   }],
-
 };
 
 const getDetailBook = createAsyncThunk('books/detailBooks',
@@ -30,6 +29,10 @@ export const detailBookSlice = createSlice({
   name: "detailBook",
   initialState,
   reducers: {
+  rerender: (state) => {
+      state.rendering = !state.rendering
+      console.log(state.rendering)
+    },
   },
   extraReducers: async (builder) => {
     builder.addCase(getDetailBook.fulfilled, (state, action) => {
@@ -41,4 +44,5 @@ export const detailBookSlice = createSlice({
   }
 });
 export {getDetailBook}
+export const {rerender} = detailBookSlice.actions
 export default detailBookSlice.reducer;
