@@ -1,16 +1,17 @@
 import { inputID, loginCheck, register } from "./Modal.styles";
 import Button from "../Button/Button";
 import { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { closeModal, openModal } from "../../reduces/modalSlice";
 import useInput from "../../hooks/useInput";
-import { userLogin } from "../../reduces/userSlice";
+import { userLogin, userLogout } from "../../reduces/userSlice";
 
 function ModalLogin() {
   const dispatch = useDispatch();
   const [userEmail, onChangeUserEmail] = useInput("");
   const [userPassword, onChangeUserPassword] = useInput("");
-  const [loginIncorrect, setLoginIncorrect] = useState(false);
+  const loginMessage = useSelector((state)=>state.user.loginMessage)
+
   const handleRegister = useCallback(() => {
     dispatch(
       openModal({
@@ -18,6 +19,7 @@ function ModalLogin() {
       })
     );
   });
+
   const handleLogin = () => {
     dispatch(userLogin({ userEmail, userPassword }));
   };
@@ -38,11 +40,7 @@ function ModalLogin() {
         autoComplete="new-password"
         onChange={onChangeUserPassword}
       ></input>
-      {loginIncorrect ? (
-        <div css={loginCheck}>아이디 또는 패스워드가 일치하지 않습니다</div>
-      ) : (
-        <div css={loginCheck}>　</div>
-      )}
+      <div css={loginCheck}>{loginMessage}</div>
       <Button
         title="시작하기"
         width="150px"

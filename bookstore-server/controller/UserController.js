@@ -46,6 +46,7 @@ const login = (req, res) => {
       return res.status(StatusCodes.BAD_REQUEST).end();
     }
     const loginUser = results[0];
+    if(!loginUser) return res.status(StatusCodes.BAD_REQUEST).end();
     const hashPassword = crypto
       .pbkdf2Sync(password, loginUser.salt, 100, 10, "sha512")
       .toString("base64");

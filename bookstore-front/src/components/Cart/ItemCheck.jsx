@@ -7,6 +7,7 @@ import {
 } from "./Cart_styles";
 import Button from "../Button/Button";
 import { css } from "@emotion/react";
+import { useSelector } from "react-redux";
 
 const finalCheck = css`
   width: 100%;
@@ -22,6 +23,7 @@ const finalCheck = css`
   }
 `;
 function ItemCheck(props) {
+  const cartItem = useSelector((state) => state.cartBook.books)
   return (
     <>
       <div css={cartCheck}>

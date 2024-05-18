@@ -73,7 +73,7 @@ function SmallCard({title, author, summary, price, category_id, img, id}) {
   const handleCard = () => {
     const currentUrl = `/detail/${category_id}/${id}`;
     if (location.pathname === currentUrl) {
-      setReload((prev) => prev + 1); 
+      // setReload((prev) => prev + 1); 
     } else {
       navigator(currentUrl);
     }

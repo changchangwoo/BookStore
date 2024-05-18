@@ -85,7 +85,7 @@ export const titleBox = css`
   flex: 1;
 `;
 
-export const title = css`
+export const cartTitle = css`
   margin: 0;
   font-weight: bold;
   font-size: 16px;
@@ -110,12 +110,13 @@ export const qunaitityBox = css`
 
 export const calculButton = css`
   margin: 10px;
+  cursor: pointer;
   &:hover {
     scale: 1.2;
   }
 `;
 
-export const price = css`
+export const cartPrice = css`
   flex: 1;
   font-size: 16px;
   font-weight: 400;

@@ -5,6 +5,7 @@ import categoryBookReducer from "../reduces/categoryBookSlice";
 import detailBookReducer from "../reduces/detailBookSlice";
 import bestBookReducer from "../reduces/bestBookSlice";
 import recentBookReducer from "../reduces/recentBookSlice";
+import cartBookReducer from "../reduces/cartBookSlice"
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
     detailBook : detailBookReducer,
     bestBook : bestBookReducer,
     recentBook : recentBookReducer,
+    cartBook : cartBookReducer,
   },
 });

@@ -28,14 +28,8 @@ const RecentContents = ({ hold, type }) => {
             img={recentBook.img}
           />
         )}
-        {!hold && relateBooks && (
+        {!hold && (
           <LargeCard
-            id={relateBooks[ranNum].id}
-            category_id={relateBooks[ranNum].category_id}
-            title={relateBooks[ranNum].title}
-            author={relateBooks[ranNum].author}
-            detail={relateBooks[ranNum].detail}
-            img={relateBooks[ranNum].img}
           />
         )}
       </>

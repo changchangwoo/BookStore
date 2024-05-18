@@ -12,9 +12,11 @@ const allBooks = (req, res) => {
     // currentPage : 현재 몇 페이지 ex. 1, 2, 3 ...
     // offset :                      0, 3, 6, 9, 12 ...
     //                               limit * (currentPage-1)
+
     let offset = limit * (currentPage - 1);
 
     let sql = "SELECT SQL_CALC_FOUND_ROWS *, (SELECT count(*) FROM likes WHERE books.id=liked_book_id) AS likes FROM books";
+    
     let values = [];
     if (category_id && news) {
         sql += " WHERE category_id=? AND pub_date BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW()";
@@ -87,6 +89,7 @@ const bookDetail = (req, res) => {
                   LEFT JOIN category 
                   ON books.category_id = category.category_id 
                   WHERE books.id=?;`;
+
         let values = [book_id];
         conn.query(sql, values,
             (err, results) => {

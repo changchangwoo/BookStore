@@ -1,6 +1,8 @@
 import { css } from "@emotion/react";
 import Button from "../Button/Button";
 import { useCallback, useState } from "react";
+import { useSelector } from "react-redux";
+import API from "../../utils/api";
 
 const sectionContainer = css`
   width: 611px;
@@ -80,6 +82,7 @@ const calculButton = css`
 
 function DetailCard(
   {
+    id,
     title,
     author,
     detail,
@@ -88,6 +91,7 @@ function DetailCard(
 ) {
   const [count, setCount] = useState(1)
   const [buttonActive, setbuttonActive] = useState(true)
+  const loginCheck = useSelector((state) => state.user.loginCheck)
   const totalprice = price
   const upCount = useCallback(()=>{
     setbuttonActive(true)
@@ -102,6 +106,16 @@ function DetailCard(
       setCount(count-1)
     }
   })
+  const addToCart = () => {
+    API.post("/carts/", {
+      book_id: id,
+      quantity: count
+    }).then(response => {
+      console.log(response)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
   return (
     <>
       <div css={sectionContainer}>
@@ -119,8 +133,8 @@ function DetailCard(
           <div css={calculPrice}>{totalprice * count} 원 </div>
         </div>
         <div css={buttonContainer}>
-          <Button title="♡" width="90px" marginRight="20px"/>
-          <Button title="장바구니 담기" width="150px" marginRight="20px" active={buttonActive} />
+          <Button title="♡" width="90px" marginRight="20px" active={loginCheck}/>
+          <Button onClick={addToCart} title="장바구니 담기" width="150px" marginRight="20px" active={buttonActive} />
         </div>
       </div>
     </>

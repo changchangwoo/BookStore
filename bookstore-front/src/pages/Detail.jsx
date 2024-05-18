@@ -23,8 +23,6 @@ function Detail() {
     dispatch(getRecentCategoryBook(category_id))
   }, [])
   
-
-
   return (
     <>
           <SearchEngine />
@@ -32,7 +30,8 @@ function Detail() {
             <DetailImageCard 
             img={detailBook.img}
             />
-            <DetailCard 
+            <DetailCard
+            id={detailBook.id} 
             title={detailBook.title}
             author={detailBook.author}
             detail={detailBook.detail}

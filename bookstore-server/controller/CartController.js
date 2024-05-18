@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken");
 const addToCart = (req, res) => {
   const { book_id, quantity } = req.body;
   let authorization = ensureAuthorization(req, res);
+  console.log(authorization.id)
 
   if (authorization instanceof jwt.TokenExpiredError) {
     return res.status(StatusCodes.UNAUTHORIZED).json({
@@ -44,7 +45,7 @@ const getCartItems = (req, res) => {
       message: "잘못된 토큰이다...",
     });
   } else {
-    let sql = `SELECT cartItems.id, book_id, title, summary, quantity, price
+    let sql = `SELECT cartItems.id, book_id, title, author, quantity, price, img
     FROM cartItems LEFT JOIN books
     ON cartItems.book_id = books.id
     WHERE user_id = ?`;

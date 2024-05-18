@@ -17,13 +17,14 @@ const initialState = {
 
 const getRecentCategoryBook = createAsyncThunk(
   "books/recentBooks",
-  async ({categoryId, type}, thunkAPI) => {
+  async (categoryId, thunkAPI) => {
     try {
+      console.log(categoryId)
       const response = await API.get("books/", {
         params: {
           limit : 12,
           currentPage : 1,
-          category_Id: categoryId
+          category_id: categoryId
         }
       });
       return response.data;

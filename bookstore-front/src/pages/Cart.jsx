@@ -1,5 +1,6 @@
 import CartSection from "../components/Section/CartSection";
 import CartContents from "../components/Cart/CartContents";
+
 function Cart() {
   return (
     <>
