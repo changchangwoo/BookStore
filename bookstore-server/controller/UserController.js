@@ -3,6 +3,7 @@ const conn = require("../mariadb");
 const { StatusCodes } = require("http-status-codes");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto"); // crypto 모듈 : 암호화
+const ensureAuthorization = require("../auth");
 require("dotenv").config();
 
 const join = (req, res) => {
@@ -24,6 +25,14 @@ const join = (req, res) => {
   });
 };
 
+const checkLogin = (req, res) => {
+  let authorization = ensureAuthorization(req, res);
+  if (Object.keys(authorization).length > 0) {
+    return res.status(StatusCodes.OK).end();
+  } else {
+    return res.status(StatusCodes.BAD_REQUEST).end();
+  }
+}
 const check = (req, res) => {
   const { email } = req.body;
   let sql = `SELECT * FROM users WHERE email =? `;
@@ -58,7 +67,7 @@ const login = (req, res) => {
         },
         process.env.PRIVATE_KEY,
         {
-          expiresIn: "30m",
+          expiresIn: "1m",
           issuer: "changwooLee",
         }
       );
@@ -105,4 +114,4 @@ const passwordReset = (req, res) => {
     }
   });
 };
-module.exports = { join, login, passwordResetRequest, passwordReset, check};
+module.exports = { join, login, passwordResetRequest, passwordReset, check, checkLogin};

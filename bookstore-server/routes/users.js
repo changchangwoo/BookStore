@@ -7,7 +7,8 @@ const {
   login,
   passwordResetRequest,
   passwordReset,
-  check
+  check,
+  checkLogin
 } = require("../controller/UserController.js");
 
 const validate = (req, res, next) => {
@@ -24,6 +25,7 @@ router.use(express.json());
 router.post("/join", join);
 router.post("/login", login);
 router.post("/check", check)
+router.get("/check", checkLogin)
 router.post("/reset", passwordResetRequest);
 router.put("/reset", passwordReset);
 module.exports = router;

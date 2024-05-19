@@ -10,12 +10,20 @@ import {
 import { useCallback, useEffect, useState } from "react";
 import { openModal } from "../../reduces/modalSlice";
 import { useNavigate } from "react-router-dom";
-import { userLogout } from "../../reduces/userSlice";
+import { checkLogin, setLoginMessage, userLogout } from "../../reduces/userSlice";
 function Navigation() {
   const dispatch = useDispatch();
   const navigator = useNavigate();
   const loginCheck = useSelector((state) => state.user.loginCheck);
+  
+  useEffect(()=>{
+    dispatch(checkLogin())
+    console.log(loginCheck)
+  }, [])
   const handleOpenLogin = useCallback(() => {
+    dispatch(
+      setLoginMessage()
+    )
     dispatch(
       openModal({
         modalType: "login",
