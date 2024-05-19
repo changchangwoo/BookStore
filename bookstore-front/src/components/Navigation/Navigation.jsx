@@ -11,15 +11,16 @@ import { useCallback, useEffect, useState } from "react";
 import { openModal } from "../../reduces/modalSlice";
 import { useNavigate } from "react-router-dom";
 import { checkLogin, setLoginMessage, userLogout } from "../../reduces/userSlice";
+import { openMessage } from "../../reduces/messageSlice";
 function Navigation() {
   const dispatch = useDispatch();
   const navigator = useNavigate();
   const loginCheck = useSelector((state) => state.user.loginCheck);
-  
+
   useEffect(()=>{
     dispatch(checkLogin())
-    console.log(loginCheck)
   }, [])
+
   const handleOpenLogin = useCallback(() => {
     dispatch(
       setLoginMessage()
@@ -35,9 +36,11 @@ function Navigation() {
     navigator("/");
   });
   const handleGoCart = useCallback(() => {
+    if(!loginCheck) dispatch(openMessage("로그인이 만료되었습니다. 다시 로그인해주세요!"))
     navigator("/cart");
   });
   const handleGoOrder = useCallback(() => {
+    if(!loginCheck) dispatch(openMessage("로그인이 만료되었습니다. 다시 로그인해주세요!"))
     navigator("/order");
   });
   const handleLogOut = useCallback(()=>{

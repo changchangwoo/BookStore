@@ -26,24 +26,32 @@ const join = (req, res) => {
 };
 
 const checkLogin = (req, res) => {
-  let authorization = ensureAuthorization(req, res);
-  if (Object.keys(authorization).length > 0) {
-    return res.status(StatusCodes.OK).end();
-  } else {
-    return res.status(StatusCodes.BAD_REQUEST).end();
+  const authorization = ensureAuthorization(req, res)
+  if (authorization instanceof ReferenceError ||
+    authorization instanceof jwt.TokenExpiredError ||
+    authorization instanceof jwt.JsonWebTokenError
+  ) {
+    return res.status(StatusCodes.BAD_REQUEST).end()
   }
+  return res.status(StatusCodes.OK).end()
 }
+
 const check = (req, res) => {
   const { email } = req.body;
   let sql = `SELECT * FROM users WHERE email =? `;
   conn.query(sql, email, (err, results) => {
-    if(err) {
+    if (err) {
       console.log(err);
-      return res.status(StatusCodes.BAD_REQUEST).end();    
+      return res.status(StatusCodes.BAD_REQUEST).end();
     }
-    if(results.length >= 1) return res.status(StatusCodes.BAD_REQUEST).end();
+    if (results.length >= 1) return res.status(StatusCodes.BAD_REQUEST).end();
     return res.status(StatusCodes.OK).end();
   })
+}
+
+const logout = (req, res) => {
+  res.clearCookie('token', { httpOnly: true });
+  return res.status(StatusCodes.OK).end();
 }
 
 const login = (req, res) => {
@@ -55,7 +63,7 @@ const login = (req, res) => {
       return res.status(StatusCodes.BAD_REQUEST).end();
     }
     const loginUser = results[0];
-    if(!loginUser) return res.status(StatusCodes.BAD_REQUEST).end();
+    if (!loginUser) return res.status(StatusCodes.BAD_REQUEST).end();
     const hashPassword = crypto
       .pbkdf2Sync(password, loginUser.salt, 100, 10, "sha512")
       .toString("base64");
@@ -67,7 +75,7 @@ const login = (req, res) => {
         },
         process.env.PRIVATE_KEY,
         {
-          expiresIn: "1m",
+          expiresIn: "30m",
           issuer: "changwooLee",
         }
       );
@@ -114,4 +122,4 @@ const passwordReset = (req, res) => {
     }
   });
 };
-module.exports = { join, login, passwordResetRequest, passwordReset, check, checkLogin};
+module.exports = { join, login, passwordResetRequest, passwordReset, check, checkLogin, logout };

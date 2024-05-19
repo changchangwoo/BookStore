@@ -6,11 +6,13 @@ import detailBookReducer from "../reduces/detailBookSlice";
 import bestBookReducer from "../reduces/bestBookSlice";
 import recentBookReducer from "../reduces/recentBookSlice";
 import cartBookReducer from "../reduces/cartBookSlice"
+import messageReducer from "../reduces/messageSlice";
 
 export const store = configureStore({
   reducer: {
     modal : modalReducer,
     user : userReducer,
+    message : messageReducer,
     categoryBook : categoryBookReducer,
     detailBook : detailBookReducer,
     bestBook : bestBookReducer,

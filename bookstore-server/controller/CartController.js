@@ -31,7 +31,6 @@ const addToCart = (req, res) => {
   }
 };
 
-/* 이창우 */
 const getCartItems = (req, res) => {
   const { selected } = req.body;
   let authorization = ensureAuthorization(req, res);

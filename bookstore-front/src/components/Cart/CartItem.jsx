@@ -1,5 +1,5 @@
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   cartItem,
   cartImg,
@@ -11,8 +11,8 @@ import {
   sub_title,
 } from "./Cart_styles";
 
-import { useCallback, useMemo, useState } from "react";
-import { checked } from "../../reduces/cartBookSlice";
+import { useCallback, useMemo, useRef, useState } from "react";
+import { checked, downCount, upCount } from "../../reduces/cartBookSlice";
 
 
 function CartItem(
@@ -26,22 +26,23 @@ function CartItem(
     img
   }
 ) {
-  const [count, setCount] = useState(quantity);
   const dispatch = useDispatch();
-  const upCount = useCallback(() => {
-    setCount(count + 1);
+
+  const upHandler = useCallback(() => {
+    dispatch(upCount({id : id}))
   });
-  const downCount = useCallback(() => {
-    if (count <= 0) return;
-    setCount(count - 1);
+  const downHandler = useCallback(() => {
+    dispatch(downCount({id : id}))
   });
-  const handleCheck = (e) => {
-    dispatch(checked(e.target.value))
+
+  const checkBoxRef = useRef(null)
+  const checkHandler = (e) => {
+    dispatch(checked({checked : checkBoxRef.current.checked, id : id}))
   }
   return (
     <>
       <li css={cartItem}>
-        <input type="checkbox" value={id} onChange={handleCheck}/>
+        <input type="checkbox" onChange={checkHandler} ref={checkBoxRef}/>
         <img
           src={img}
           css={cartImg}
@@ -50,16 +51,16 @@ function CartItem(
           <div css={cartTitle}>{title}</div>
           <div css={sub_title}>{author}</div>
           <div css={qunaitityBox}>
-            <span css={calculButton} onClick={downCount}>
+            <span css={calculButton} onClick={downHandler}>
               {" "}
               -{" "}
             </span>
-            <span> {count} </span>
-            <span css={calculButton} onClick={upCount}>
+            <span> {quantity} </span>
+            <span css={calculButton} onClick={upHandler}>
               {" "}
               +{" "}
             </span>
-            <div css={cartPrice}>{price * count}원 </div>
+            <div css={cartPrice}>{price * quantity}원 </div>
           </div>
         </div>
       </li>

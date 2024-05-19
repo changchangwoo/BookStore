@@ -32,23 +32,33 @@ export const cartBookSlice = createSlice({
   name: "cartBook",
   initialState,
   reducers: {
-    upCount: (state) => {
-      state.quantity = state.quantity + 1;
+    upCount : (state, action) => {
+      const {id} = action.payload
+      state.books = state.books.map((book) => {
+        if(book.id === id) {
+          return {...book, quantity : book.quantity + 1}
+        }
+        return book
+      })
     },
-    downCount: (state) => {
-      if (state.quantity <= 0) return;
-      state.quantity = state.quantity - 1;
+    downCount : (state, action) => {
+      const {id} = action.payload
+      state.books = state.books.map((book) => {
+        if(book.id === id) {
+          if(book.quantity <= 0) return
+          return {...book, quantity : book.quantity - 1}
+        }
+        return book
+      })
     },
     checked: (state, action) => {
-      return {
-        ...state,
-        books: state.books.map((book) => {
-          if (book.id === action.payload) {
-            return { ...book, checked: !book.checked };
-          }
-          return book;
-        }),
-      };
+      const {checked, id} = action.payload
+      state.books = state.books.map((book)=>{
+        if(book.id === id) {
+          return { ...book, checked : checked}
+        }
+        return book
+      })
     },
   },
   extraReducers: async (builder) => {

@@ -1,8 +1,9 @@
 import { css } from "@emotion/react";
 import Button from "../Button/Button";
 import { useCallback, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import API from "../../utils/api";
+import { openMessage } from "../../reduces/messageSlice";
 
 const sectionContainer = css`
   width: 611px;
@@ -93,6 +94,7 @@ function DetailCard(
   const [buttonActive, setbuttonActive] = useState(true)
   const loginCheck = useSelector((state) => state.user.loginCheck)
   const totalprice = price
+  const dispatch = useDispatch();
   const upCount = useCallback(()=>{
     setbuttonActive(true)
     setCount(count+1)
@@ -106,12 +108,15 @@ function DetailCard(
       setCount(count-1)
     }
   })
+
   const addToCart = () => {
     API.post("/carts/", {
       book_id: id,
       quantity: count
     }).then(response => {
-      console.log(response)
+      if(response.status === 200) {
+        dispatch(openMessage({message : `${title} ${count} 권이 성공적으로 장바구니에 담겼습니다`}))
+      }
     }).catch(err => {
       console.log(err)
     })
@@ -134,7 +139,7 @@ function DetailCard(
         </div>
         <div css={buttonContainer}>
           <Button title="♡" width="90px" marginRight="20px" active={loginCheck}/>
-          <Button onClick={addToCart} title="장바구니 담기" width="150px" marginRight="20px" active={buttonActive} />
+          <Button onClick={addToCart} title="장바구니 담기" width="150px" marginRight="20px" active={loginCheck} />
         </div>
       </div>
     </>

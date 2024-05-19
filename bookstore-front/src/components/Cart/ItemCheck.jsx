@@ -28,9 +28,13 @@ function ItemCheck(props) {
     <>
       <div css={cartCheck}>
         <ul css={selectedBox}>
-          <li>생각 중독 </li>
-          <li>잘하고 싶어서 떄묻은 너에게 </li>
-          <li>여행의 이유 </li>
+          {
+            cartItem.map(cart => {
+              if(cart.checked === true) {
+                return <li>{cart.title} * {cart.quantity}</li>
+              }
+            })
+          }
         </ul>
         <div css={confirmBox}>
           <div css={itemPrice("black")}>상품 91000원</div>

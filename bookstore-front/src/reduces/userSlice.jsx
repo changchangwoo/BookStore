@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import API from "../utils/api";
 import { closeModal } from "./modalSlice";
+import { openMessage } from "./messageSlice";
+import Cookies from "js-cookie";
 
 const initialState = {
   loginCheck: false,
@@ -17,6 +19,7 @@ const userLogin = createAsyncThunk(
       });
       if (response.status === 200) {
         thunkAPI.dispatch(closeModal());
+        thunkAPI.dispatch(openMessage({message : `로그인에 성공하셨습니다! ${userEmail}님 환영해요!`}))
         return response.status;
       }
     } catch (err) {
@@ -37,13 +40,22 @@ const checkLogin = createAsyncThunk(
   }
 );
 
+const userLogout = createAsyncThunk(
+  "users/userLogout",
+  async (_, thunkAPI) => {
+    try {
+      const response = await API.post("users/logout");
+      return response.status;
+    } catch (err) {
+      return err.response.status
+    }
+  }
+)
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    userLogout: (state, action) => {
-      state.loginCheck = false;
-    },
     setLoginMessage: (state) => {
       state.loginMessage = "아이디와 비밀번호를 입력해주세요";
     },
@@ -63,9 +75,14 @@ export const userSlice = createSlice({
         state.loginCheck = false;
       }
     });
+    builder.addCase(userLogout.fulfilled, (state, action) => {
+      if (action.payload === 200) {
+        state.loginCheck = false
+      }
+    });
   },
 });
 
-export { userLogin, checkLogin };
-export const { userLogout, setLoginMessage } = userSlice.actions;
+export { userLogin, checkLogin, userLogout };
+export const { setLoginMessage } = userSlice.actions;
 export default userSlice.reducer;

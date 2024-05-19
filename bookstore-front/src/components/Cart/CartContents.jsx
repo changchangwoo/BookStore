@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 function CartContents() {
   const dispatch = useDispatch()
   const cartBooks = useSelector((state) => state.cartBook.books)
+
   useEffect(()=> {
     dispatch(getUserCartBooks());
   }, [])
@@ -30,7 +31,7 @@ function CartContents() {
               cartBooks && 
                 cartBooks.map((book)=>(
                   <CartItem 
-                  key={book.id}
+                    key={book.id}
                     id={book.id}
                     book_id={book.book_id}
                     title={book.title}

@@ -9,10 +9,12 @@ import Navigation from "./components/Navigation/Navigation";
 import Footer from "./components/Footer/Footer";
 import ModalController from "./components/Modal/ModalController";
 import Delivery from "./pages/Delivery";
+import Message from "./components/Message/Message";
 
 function App() {
   return (
     <>
+    <Message />
     <ModalController />
     <Navigation />
       <Routes>
