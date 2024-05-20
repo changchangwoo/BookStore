@@ -12,6 +12,7 @@ import { openModal } from "../../reduces/modalSlice";
 import { useNavigate } from "react-router-dom";
 import { checkLogin, setLoginMessage, userLogout } from "../../reduces/userSlice";
 import { openMessage } from "../../reduces/messageSlice";
+
 function Navigation() {
   const dispatch = useDispatch();
   const navigator = useNavigate();
@@ -35,17 +36,23 @@ function Navigation() {
   const handleGoHome = useCallback(() => {
     navigator("/");
   });
+
   const handleGoCart = useCallback(() => {
     if(!loginCheck) dispatch(openMessage("로그인이 만료되었습니다. 다시 로그인해주세요!"))
     navigator("/cart");
   });
+
   const handleGoOrder = useCallback(() => {
     if(!loginCheck) dispatch(openMessage("로그인이 만료되었습니다. 다시 로그인해주세요!"))
     navigator("/order");
   });
+
   const handleLogOut = useCallback(()=>{
     dispatch(userLogout())
+    dispatch(openMessage({message : "성공적으로 로그아웃 되었습니다"}))
+    navigator("/");
   })
+  
   return (
     <>
         <div css={navContainer}>

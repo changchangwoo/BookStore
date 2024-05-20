@@ -25,16 +25,18 @@ const order = async (req, res) => {
       message: "잘못된 토큰이다...",
     });
   } else {
-    const { items, delivery, totalQuantity, totalPrice, firstBookTitle } =
-      req.body;
+    const { items, delivery, totalQuantity, totalPrice, firstBookTitle } = req.body;
+
+    console.log(items, delivery, totalQuantity, totalPrice, firstBookTitle)
     let delivery_id;
     let order_id;
 
     // delivery 테이블 삽입
-    let values = [delivery.address, delivery.receiver, delivery.contact];
+    let values = [delivery.address, delivery.name, delivery.contact];
     let sql = `INSERT INTO delivery (address, receiver, contact) VALUES (?, ?, ?)`;
     let [results] = await conn.execute(sql, values);
     delivery_id = results.insertId;
+    console.log(delivery_id)
 
     // orders 테이블 삽입
     sql = `INSERT INTO orders (book_title, total_quantity, total_price, user_id, delivery_id) VALUES (?,?,?,?,?)`;
@@ -52,7 +54,7 @@ const order = async (req, res) => {
     sql = `SELECT book_id, quantity FROM cartItems WHERE id IN (?)`;
     let [orderItems, fields] = await conn.query(sql, [items]);
     // orderdBook 테이블 삽입 테이블 삽입
-    sql = `INSERT INTO orderdBook (order_id, book_id, quantity) VALUES ?;`;
+    sql = `INSERT INTO orderdbook (order_id, book_id, quantity) VALUES ?;`;
     values = [];
     orderItems.forEach((item) => {
       values.push([order_id, item.book_id, item.quantity]);
@@ -107,7 +109,7 @@ const getOrderDetail = async (req, res) => {
   const conn = await maraidb.createConnection({
     host: "127.0.0.1",
     user: "root",
-    password: "1234",
+    password: "1234!",
     database: "bookstore",
     dateStrings: true,
   });

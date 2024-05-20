@@ -39,6 +39,8 @@ function CartContents() {
                     price={book.price}
                     quantity={book.quantity}
                     img={book.img}
+                    checked={book.checked}
+                    cartPage={true}
                   />
                 ))
             }

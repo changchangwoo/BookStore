@@ -1,11 +1,9 @@
 import { css } from "@emotion/react";
 import React from "react";
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion";
 import { messageAnimation } from "../../utils/animation";
 import { useDispatch, useSelector } from "react-redux";
 import { closeMessage } from "../../reduces/messageSlice";
-;
-
 
 const MessageContainer = css`
   top: 0;
@@ -25,11 +23,11 @@ const MessageContainer = css`
 
 const MessageBox = css`
   width: 600px;
-  height: 40px;
+  height: 60px;
   border-radius: 8px;
   text-align: center;
-  justify-content: space-between; /* 변경된 부분 */
-  align-items: center;
+  justify-content: space-between; 
+    align-items: center;
   background-color: #79d7f3;
   box-sizing: border-box;
   padding: 10px;
@@ -42,7 +40,7 @@ const MessageBox = css`
 
 const textBox = css`
   text-align: center;
-  flex: 1; /* 추가된 부분 */
+  flex: 1; 
 `;
 
 const exitBox = css`
@@ -51,8 +49,7 @@ const exitBox = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 10px; /* 추가된 부분 */
-
+  margin-left: 10px;
   span {
     font-size: 25px;
     cursor: pointer;
@@ -61,29 +58,38 @@ const exitBox = css`
 
 const Message = () => {
   const dispatch = useDispatch();
-  const isOpen = useSelector((state) => state.message.isOpen)
-  const message = useSelector((state) => state.message.message)
+  const isOpen = useSelector((state) => state.message.isOpen);
+  const message = useSelector((state) => state.message.message);
+  
   const closeMessageBox = () => {
-    dispatch(closeMessage())
-  }
+    dispatch(closeMessage());
+  };
+
   return (
-    <>
-    {isOpen &&
-    <motion.div css={MessageContainer}
-      initial={messageAnimation.initial}
-      animate={messageAnimation.animate}
-      transition={messageAnimation.transition}
-    >
-      <div css={MessageBox}>
-        <div css={textBox}>{message}</div>
-        <div css={exitBox}>
-          <span class="material-symbols-outlined"
-          onClick={closeMessageBox}
-          >close</span>
-        </div>
-      </div>
-    </motion.div>}
-    </>
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          css={MessageContainer}
+          key="Message"
+          initial={messageAnimation.initial}
+          animate={messageAnimation.animate}
+          exit={messageAnimation.exit}
+          transition={messageAnimation.transition}
+        >
+          <div css={MessageBox}>
+            <div css={textBox}>{message}</div>
+            <div css={exitBox}>
+              <span
+                className="material-symbols-outlined"
+                onClick={closeMessageBox}
+              >
+                close
+              </span>
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 

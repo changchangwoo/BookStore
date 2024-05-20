@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-const buttonContainer = (width, marginRight, color) => css`
+const buttonContainer = (width, marginRight, color, marginTop) => css`
   width: ${width};
   height: 50px;
   box-sizing: border-box;
@@ -13,13 +13,14 @@ const buttonContainer = (width, marginRight, color) => css`
   font-weight: 600;
   transition: all 0.4s;
   margin-right: ${marginRight};
+  margin-top: ${marginTop};
   cursor: pointer;
   &:hover {
     background-color: ${color === "red" ? "#EA0573" : "#0882F3"};
   }
 `;
 
-const buttonInactiveContainer = (width, marginRight, color) => css`
+const buttonInactiveContainer = (width, marginRight, marginTop) => css`
   width: ${width};
   height: 50px;
   box-sizing: border-box;
@@ -32,17 +33,19 @@ const buttonInactiveContainer = (width, marginRight, color) => css`
   font-weight: 600;
   transition: all 0.4s;
   margin-right: ${marginRight};
+  margin-top: ${marginTop};
+
 `;
 
 function Button(props) {
   return (
     <>
       {props.active ? (
-        <div css={buttonContainer(props.width, props.marginRight, props.color)} onClick={props.onClick}>
+        <div css={buttonContainer(props.width, props.marginRight, props.color, props.marginTop)} onClick={props.onClick}>
           {props.title}
         </div>
       ) : (
-        <div css={buttonInactiveContainer(props.width, props.marginRight)}>
+        <div css={buttonInactiveContainer(props.width, props.marginRight, props.marginTop)}>
           {props.title}
         </div>
       )}

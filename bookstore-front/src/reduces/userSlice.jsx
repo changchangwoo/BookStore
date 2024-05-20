@@ -19,7 +19,7 @@ const userLogin = createAsyncThunk(
       });
       if (response.status === 200) {
         thunkAPI.dispatch(closeModal());
-        thunkAPI.dispatch(openMessage({message : `로그인에 성공하셨습니다! ${userEmail}님 환영해요!`}))
+        thunkAPI.dispatch(openMessage({message : `로그인에 성공하셨습니다!`}))
         return response.status;
       }
     } catch (err) {

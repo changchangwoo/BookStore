@@ -27,4 +27,7 @@ export const messageAnimation = {
     duration: 1,
     damping: 15,
   },
+  exit : {
+    opacity: 0,
+  }
 };

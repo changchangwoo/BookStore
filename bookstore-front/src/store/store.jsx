@@ -7,16 +7,19 @@ import bestBookReducer from "../reduces/bestBookSlice";
 import recentBookReducer from "../reduces/recentBookSlice";
 import cartBookReducer from "../reduces/cartBookSlice"
 import messageReducer from "../reduces/messageSlice";
+import orderReducer from "../reduces/orderSlice";
 
 export const store = configureStore({
   reducer: {
     modal : modalReducer,
     user : userReducer,
     message : messageReducer,
+    order : orderReducer,
     categoryBook : categoryBookReducer,
     detailBook : detailBookReducer,
     bestBook : bestBookReducer,
     recentBook : recentBookReducer,
     cartBook : cartBookReducer,
+
   },
 });
