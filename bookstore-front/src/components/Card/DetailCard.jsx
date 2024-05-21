@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import Button from "../Button/Button";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import API from "../../utils/api";
 import { openMessage } from "../../reduces/messageSlice";
@@ -56,7 +56,7 @@ const buttonContainer = css`
   width: 100%;
   display: flex;
   justify-content: right;
-  margin-top: 20px;  
+  margin-top: 20px;
 `;
 const quantitiyController = css`
   flex: 0.5;
@@ -81,65 +81,121 @@ const calculButton = css`
   }
 `;
 
-function DetailCard(
-  {
-    id,
-    title,
-    author,
-    detail,
-    price
-  }
-) {
-  const [count, setCount] = useState(1)
-  const [buttonActive, setbuttonActive] = useState(true)
-  const loginCheck = useSelector((state) => state.user.loginCheck)
-  const totalprice = price
+function DetailCard({ id, title, author, detail, price }) {
+  const [count, setCount] = useState(1);
+  const [buttonActive, setbuttonActive] = useState(true);
+  const [likesCount, setLikesCount] = useState(0);
+  const [likesCheck, setLikesCheck] = useState(false);
+  const loginCheck = useSelector((state) => state.user.loginCheck);
+  const totalprice = price;
   const dispatch = useDispatch();
-  const upCount = useCallback(()=>{
-    setbuttonActive(true)
-    setCount(count+1)
-  })
-  const downCount = useCallback(()=>{
-    if(count <= 1) {
-      if(count === 0) return
-      setCount(count-1)
-      setbuttonActive(false)
+
+  useEffect(() => {
+    API.get(`/likes/${id}`).then((response) => {
+        console.log(response.data.liked);
+        if (response.data.liked) {
+          setLikesCheck(true);
+        } else {
+          setLikesCheck(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      }); 
+  }, []);
+
+  const likeHandler = () => {
+    if (likesCheck) {
+      API.delete(`/likes/${id}`)
+        .then((response) => {
+          console.log(response.data);
+          if (response.status === 200) setLikesCheck(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
-      setCount(count-1)
+      console.log('추가 동작')
+      API.post("/likes", {
+        id: id,
+      })
+        .then((response) => {
+          console.log(response.data);
+          if (response.status === 200) setLikesCheck(true);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-  })
+  };
+  const upCount = useCallback(() => {
+    setbuttonActive(true);
+    setCount(count + 1);
+  });
+  const downCount = useCallback(() => {
+    if (count <= 1) {
+      if (count === 0) return;
+      setCount(count - 1);
+      setbuttonActive(false);
+    } else {
+      setCount(count - 1);
+    }
+  });
 
   const addToCart = () => {
     API.post("/carts/", {
       book_id: id,
-      quantity: count
-    }).then(response => {
-      if(response.status === 200) {
-        dispatch(openMessage({message : `${title} ${count} 권이 성공적으로 장바구니에 담겼습니다`}))
-      }
-    }).catch(err => {
-      console.log(err)
+      quantity: count,
     })
-  }
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(
+            openMessage({
+              message: `${title} ${count} 권이 성공적으로 장바구니에 담겼습니다`,
+            })
+          );
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <>
       <div css={sectionContainer}>
         <h1>{title}</h1>
         <h2>{author} </h2>
-        <h3>
-          {detail}
-        </h3>
+        <h3>{detail}</h3>
         <div css={quantitiyBox}>
           <div css={quantitiyController}>
-            <span css={calculButton} onClick={downCount}> - </span>
+            <span css={calculButton} onClick={downCount}>
+              {" "}
+              -{" "}
+            </span>
             <span> {count} </span>
-            <span css={calculButton} onClick={upCount}> + </span>
+            <span css={calculButton} onClick={upCount}>
+              {" "}
+              +{" "}
+            </span>
           </div>
           <div css={calculPrice}>{totalprice * count} 원 </div>
         </div>
         <div css={buttonContainer}>
-          <Button title="♡" width="90px" marginRight="20px" active={loginCheck}/>
-          <Button onClick={addToCart} title="장바구니 담기" width="150px" marginRight="20px" active={loginCheck} />
+          <Button
+            title="♡"
+            width="90px"
+            marginRight="20px"
+            active={loginCheck}
+            onClick={likeHandler}
+            color={likesCheck ? "red" : "blue"}
+          />
+          <Button
+            onClick={addToCart}
+            title="장바구니 담기"
+            width="150px"
+            marginRight="20px"
+            active={loginCheck}
+          />
         </div>
       </div>
     </>

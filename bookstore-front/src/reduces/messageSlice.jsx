@@ -13,6 +13,7 @@ export const openMessage = createAsyncThunk(
     const state = getState().message;
 
     if (state.timerCheck) {
+      dispatch(closeMessage());
       clearTimeout(state.timerCheck);
     }
 
@@ -20,7 +21,7 @@ export const openMessage = createAsyncThunk(
 
     const timerCheck = setTimeout(() => {
       dispatch(closeMessage());
-    }, 5000);
+    }, 3000);
 
     return {timerCheck}
   }

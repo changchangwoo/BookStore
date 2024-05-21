@@ -75,7 +75,7 @@ const deleteCartItems = async (conn, items) => {
   return result;
 };
 
-const getOrders = async (req, res) => {
+const getOrders = async (req, res) => { // 주문목록 전체 출력
   let authorization = ensureAuthorization(req, res);
 
   if (authorization instanceof jwt.TokenExpiredError) {
@@ -90,7 +90,7 @@ const getOrders = async (req, res) => {
     const conn = await maraidb.createConnection({
       host: "127.0.0.1",
       user: "root",
-      password: "1234",
+      password: "1234!",
       database: "bookstore",
       dateStrings: true,
     });
@@ -98,13 +98,15 @@ const getOrders = async (req, res) => {
     sql = `SELECT orders.id, book_title, total_quantity, total_price, created_at,
     address, receiver, contact
     FROM orders LEFT JOIN delivery
-    ON orders.delivery_id = delivery.id;`;
-    let [rows, fields] = await conn.query(sql);
+    ON orders.delivery_id = delivery.id
+    WHERE user_id = ?;`;
+
+    let [rows, fields] = await conn.query(sql, authorization.id);
     return res.status(StatusCodes.OK).json(rows);
   }
 };
 
-const getOrderDetail = async (req, res) => {
+const getOrderDetail = async (req, res) => { // 주문목록 상세 출력
   let orderId = req.params.id;
   const conn = await maraidb.createConnection({
     host: "127.0.0.1",

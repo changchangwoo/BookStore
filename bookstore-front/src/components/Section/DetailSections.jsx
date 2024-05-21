@@ -22,7 +22,7 @@ width: 990px;
     margin-top: 50px;
     margin-bottom: 20px;
 `
-
+        
 const cardList = css`
     display: flex;
     align-items: center;

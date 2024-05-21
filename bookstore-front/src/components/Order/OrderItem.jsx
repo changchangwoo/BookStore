@@ -1,18 +1,28 @@
 import { orderItem } from "./Order_styles"
 
-function OrderItem () {
+function OrderItem (
+    {
+        created_at,
+        id,
+        receiver,
+        contact,
+        address,
+        total_quantity,
+        book_title
+    }
+) {
     return(
         <>
         <div css={orderItem}>
                 <ul>
-                    <li>2024.05-06</li>
-                    <li>130302</li>
-                    <li>이창우
+                    <li>{created_at}</li>
+                    <li>{id}</li>
+                    <li>{receiver}
                         <br />
-                        010-8539-2067
+                        {contact}
                     </li>
-                    <li>서울시 도봉구 방학2동 대동아트빌에서 50분 더 가야 나오는 공원에 있는 굴다리 밑</li>
-                    <li>여행의 이유 외 3권</li>
+                    <li>{address}</li>
+                    <li>{book_title} 외 {total_quantity}권</li>
                 </ul>
             </div>
         </>
