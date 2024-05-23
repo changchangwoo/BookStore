@@ -1,71 +1,69 @@
 /* 이창우 */
 const conn = require("../mariadb");
+const maraidb = require("mysql2/promise");
 const { StatusCodes } = require("http-status-codes");
 const ensureAuthorization = require("../auth.js");
 const jwt = require("jsonwebtoken");
 
-const allBooks = (req, res) => {
-    let allBooksRes = {};
-    let { category_id, news, limit, currentPage } = req.query;
+const allBooks = async (req, res) => {
+    try {
+        const connection = await maraidb.createConnection({
+            host: "127.0.0.1",
+            user: "root",
+            password: "1234!",
+            database: "bookstore",
+            dateStrings: true,
+        });
 
-    // limit : page 당 도서 수     ex. 3
-    // currentPage : 현재 몇 페이지 ex. 1, 2, 3 ...
-    // offset :                      0, 3, 6, 9, 12 ...
-    //                               limit * (currentPage-1)
+        let allBooksRes = {};
+        let { category_id, news, limit, currentPage } = req.query;
 
-    let offset = limit * (currentPage - 1);
+        let offset = limit * (currentPage - 1);
 
-    let sql = "SELECT SQL_CALC_FOUND_ROWS *, (SELECT count(*) FROM likes WHERE books.id=liked_book_id) AS likes FROM books";
+        let sql = "SELECT SQL_CALC_FOUND_ROWS *, (SELECT count(*) FROM likes WHERE books.id=liked_book_id) AS likes FROM books";
+        let values = [];
 
-    let values = [];
-    if (category_id && news) {
-        sql += " WHERE category_id=? AND pub_date BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW()";
-        values = [category_id];
-    } else if (category_id) {
-        sql += " WHERE category_id=?";
-        values = [category_id];
-    } else if (news) {
-        sql += " WHERE pub_date BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW()";
+        if (category_id && news) {
+            sql += " WHERE category_id=? AND pub_date BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW()";
+            values = [category_id];
+        } else if (category_id) {
+            sql += " WHERE category_id=?";
+            values = [category_id];
+        } else if (news) {
+            sql += " WHERE pub_date BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW()";
+        }
+
+        sql += " LIMIT ? OFFSET ?";
+        values.push(parseInt(limit), offset);
+
+        const [booksResults] = await connection.query(sql, values);
+
+        if (booksResults.length) {
+            booksResults.map(result => {
+                result.pubDate = result.pub_date;
+                delete result.pub_date;
+            });
+
+            allBooksRes.books = booksResults;
+        } else {
+            return res.status(StatusCodes.NOT_FOUND).end();
+        }
+
+        const [[paginationResult]] = await connection.query("SELECT found_rows()");
+
+        let pagination = {};
+        pagination.currentPage = parseInt(currentPage);
+        pagination.totalCount = paginationResult["found_rows()"];
+
+        allBooksRes.pagination = pagination;
+
+        return res.status(StatusCodes.OK).json(allBooksRes);
+    } catch (err) {
+        console.log(err);
+        return res.status(StatusCodes.BAD_REQUEST).end();
     }
-
-    sql += " LIMIT ? OFFSET ?";
-    values.push(parseInt(limit), offset);
-    conn.query(sql, values,
-        (err, results) => {
-            if (err) {
-                console.log(err);
-                return res.status(StatusCodes.BAD_REQUEST).end();
-            }
-            if (results.length) {
-                results.map(function (result) {
-                    result.pubDate = result.pub_date;
-                    delete result.pub_date;
-                });
-
-                allBooksRes.books = results;
-            }
-            else
-                return res.status(StatusCodes.NOT_FOUND).end();
-        })
-
-    sql = "SELECT found_rows()";
-    conn.query(sql,
-        (err, results) => {
-            if (err) {
-                console.log(err);
-                return res.status(StatusCodes.BAD_REQUEST).end();
-            }
-
-            let pagination = {};
-            pagination.currentPage = parseInt(currentPage);
-            pagination.totalCount = results[0]["found_rows()"];
-
-            allBooksRes.pagination = pagination;
-
-            return res.status(StatusCodes.OK).json(allBooksRes);
-        })
-
 };
+
 
 const bookDetail = (req, res) => {
 
