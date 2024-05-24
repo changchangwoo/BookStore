@@ -30,13 +30,15 @@ const allBooks = async (req, res) => {
             sql += " WHERE category_id=?";
             values = [category_id];
         } else if (news) {
-            sql += " WHERE pub_date BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW()";
+            sql += " WHERE STR_TO_DATE(pub_date, '%Y-%m') BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW()";
+            console.log(sql)
         }
 
         sql += " LIMIT ? OFFSET ?";
         values.push(parseInt(limit), offset);
 
         const [booksResults] = await connection.query(sql, values);
+        if(news) console.log(booksResults)
 
         if (booksResults.length) {
             booksResults.map(result => {
@@ -134,29 +136,32 @@ const bookDetail = (req, res) => {
     }
 };
 
-const bestBooks = (req, res) => {
-    let sql = `SELECT liked_book_id, COUNT(liked_book_id) AS count
+const bestBooks = async (req, res) => {
+    try {
+    const connection = await maraidb.createConnection({
+        host: "127.0.0.1",
+        user: "root",
+        password: "1234!",
+        database: "bookstore",
+        dateStrings: true,
+    });
+
+    const sql = `SELECT liked_book_id, COUNT(liked_book_id) AS count
     FROM likes
     GROUP BY liked_book_id
     ORDER BY count DESC
     LIMIT 6;`;
 
-    conn.query(sql, (err, results) => {
-        if (err) {
-            console.log(err);
-            return res.status(StatusCodes.BAD_REQUEST).end();
-        }
-        const likedBookIds = results.map(result => result.liked_book_id);
-        let bookDetailSql = `SELECT * FROM books WHERE id IN (?)`;
-
-        conn.query(bookDetailSql, [likedBookIds], (err, bookResults) => {
-            if (err) {
-                console.log(err);
-                return res.status(StatusCodes.BAD_REQUEST).end();
-            }
-            return res.status(StatusCodes.OK).json(bookResults);
-        });
-    });
+    const [results] = await connection.query(sql)
+    const likedBookIds = results.map(book=> book.liked_book_id)    
+    const bestSQL = `SELECT * FROM books WHERE id IN (${likedBookIds.join(',')})`;
+    const [bestResults] = await connection.query(bestSQL)
+    if(bestResults.length > 0) {
+        return res.status(StatusCodes.OK).json(bestResults)
+    }
+} catch (err) {
+    return res.status(StatusCodes.BAD_REQUEST).end()
+}
 };
 
 module.exports = {

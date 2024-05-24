@@ -22,6 +22,9 @@ const sectionContainer = css`
     font-size: 26px;
     margin: 0;
     font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   h2 {
@@ -29,6 +32,9 @@ const sectionContainer = css`
     margin-top: 10px;
     font-weight: 600;
     color: #8f8d8d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   h3 {
@@ -38,12 +44,14 @@ const sectionContainer = css`
     font-weight: 300;
     margin-top: 45px;
     margin-bottom: 45px;
+    overflow-x: auto;
+    
   }
 `;
 
 const quantitiyBox = css`
   width: 100%;
-  height: 90px;
+  height: 90px;   
   background-color: white;
   border: 1px solid #e1e1e1;
   border-left: none;

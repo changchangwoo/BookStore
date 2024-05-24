@@ -15,6 +15,7 @@ function NewBookSection () {
             }
           }).then((response) => {
             setNewBooks(response.data.books)
+            console.log(response.data.books)
     })
           .catch((err)=>console.log(err))
     }, [])

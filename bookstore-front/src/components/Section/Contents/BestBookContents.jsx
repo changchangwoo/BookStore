@@ -5,10 +5,10 @@ import { getBestBooks } from '../../../reduces/bestBookSlice'
 
 const BestBookContents = () => {
     const BestBooks = useSelector((state) => state.bestBook.books)
-    // const dispatch = useDispatch();
-    // useEffect(()=>{
-    //     dispatch(getBestBooks())
-    // }, [])
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        dispatch(getBestBooks())
+    }, [])
   return (
     <>
     {
