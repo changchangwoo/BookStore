@@ -6,7 +6,7 @@ import SmallCard from "../../Card/SmallCard";
 const RecentContents = ({ hold, type }) => {
   const relateBooks = useSelector((state) => state.recentBook.books.books);
   const [recentBook, setRecentBook] = useState(null);
-  const ranNum = Math.floor(Math.random() * 5);
+  const [randNum, setRandNum] = useState(Math.floor(Math.random() * 10))
 
   useEffect(() => {
     const storedRecentBook = localStorage.getItem("recentBook");
@@ -28,9 +28,15 @@ const RecentContents = ({ hold, type }) => {
             img={recentBook.img}
           />
         )}
-        {!hold && (
+        {!hold && relateBooks && (
           <LargeCard
-          />
+          id={relateBooks[randNum].id}
+          category_id={relateBooks[randNum].category_id}
+          title={relateBooks[randNum].title}
+          author={relateBooks[randNum].author}
+          detail={relateBooks[randNum].detail}
+          img={relateBooks[randNum].img}
+        />
         )}
       </>
     );

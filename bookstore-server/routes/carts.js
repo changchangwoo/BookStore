@@ -10,6 +10,6 @@ router.use(express.json());
 
 router.post("/", addToCart); // 장바구니 담기
 router.get("/", getCartItems); // 장바구니 아이템 조회
-router.delete("/:id", removeCartItem); // 장바구니 삭제
+router.delete("/", removeCartItem); // 장바구니 삭제
 
 module.exports = router;

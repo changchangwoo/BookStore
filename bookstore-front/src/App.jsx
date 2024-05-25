@@ -4,19 +4,21 @@ import Cart from "./pages/Cart";
 import Detail from "./pages/Detail";
 import Order from "./pages/Order";
 import Search from "./pages/Search";
-import './index.css';
+import "./index.css";
 import Navigation from "./components/Navigation/Navigation";
 import Footer from "./components/Footer/Footer";
 import ModalController from "./components/Modal/ModalController";
 import Delivery from "./pages/Delivery";
 import Message from "./components/Message/Message";
+import ScrollToTop from "./utils/scrollToTop";
 
 function App() {
   return (
     <>
-    <Message />
-    <ModalController />
-    <Navigation />
+      <ScrollToTop />
+      <Message />
+      <ModalController />
+      <Navigation />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/cart" element={<Cart />} />
@@ -25,7 +27,7 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/delivery" element={<Delivery />} />
       </Routes>
-    <Footer/>
+      <Footer />
     </>
   );
 }

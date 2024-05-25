@@ -10,8 +10,8 @@ import {
   sub_title,
 } from "./Cart_styles";
 
-import { useCallback, useMemo, useRef, useState } from "react";
-import { checked, downCount, upCount } from "../../reduces/cartBookSlice";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { oneChecked, downCount, upCount } from "../../reduces/cartBookSlice";
 
 function CartItem({
   id,
@@ -21,27 +21,31 @@ function CartItem({
   price,
   quantity,
   img,
-  cartPage
+  cartPage,
+  checked
 }) {
   
   const dispatch = useDispatch();
-
   const upHandler = useCallback(() => {
     dispatch(upCount({ id: id }));
   });
   const downHandler = useCallback(() => {
+    if(quantity < 1) return
     dispatch(downCount({ id: id }));
   });
-
-  const checkBoxRef = useRef(null);
+  const [isChecked, setIsChecked] = useState(checked)
+  useEffect(()=>{
+    setIsChecked(checked)
+  })
   const checkHandler = (e) => {
-    dispatch(checked({ checked: checkBoxRef.current.checked, id: id }));
+    setIsChecked(!isChecked)
+    dispatch(oneChecked({ checkType: e.target.checked, id: id }));
   };
   return (
     <>
       <li css={cartItem}>
         {cartPage &&
-        <input type="checkbox" onChange={checkHandler} ref={checkBoxRef} />
+        <input type="checkbox" checked={isChecked} onChange={checkHandler}/>
         }
         <img src={img} css={cartImg}></img>
         <div css={titleBox}>

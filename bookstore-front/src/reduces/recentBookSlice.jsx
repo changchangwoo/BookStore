@@ -19,7 +19,6 @@ const getRecentCategoryBook = createAsyncThunk(
   "books/recentBooks",
   async (categoryId, thunkAPI) => {
     try {
-      console.log(categoryId)
       const response = await API.get("books/", {
         params: {
           limit : 12,

@@ -16,15 +16,17 @@ import ReviewSection from "../components/Section/ReviewSection/ReviewSection";
 import ReviewContents from "../components/Section/ReviewSection/ReviewContents";
 
 
+
 function Detail() {
   const { category_id, id } = useParams();
   const dispatch = useDispatch();
   const detailBook = useSelector((state) => state.detailBook.books);
+  const rerender = useSelector((state) => state.detailBook.rendering)
 
   useEffect(() => {
     dispatch(getDetailBook(id));
     dispatch(getRecentCategoryBook(category_id));
-  }, []);
+  }, [rerender]);
 
   return (
     <>

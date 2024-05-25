@@ -69,13 +69,15 @@ const bookPrice = css`
 
 function SmallCard({title, author, summary, price, category_id, img, id}) {
   const navigator = useNavigate();
+  const dispatch = useDispatch();
   const location = useLocation();
   const handleCard = () => {
-    const currentUrl = `/detail/${category_id}/${id}`;
-    if (location.pathname === currentUrl) {
-      // setReload((prev) => prev + 1); 
+    const Url = `/detail/${category_id}/${id}`;
+    if (location.pathname === Url) {
+      navigator(Url);
     } else {
-      navigator(currentUrl);
+      dispatch(rerender())
+      navigator(Url);
     }
   };
   return (

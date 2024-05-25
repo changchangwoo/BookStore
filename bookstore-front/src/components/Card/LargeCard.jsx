@@ -2,7 +2,8 @@ import { css } from "@emotion/react";
 import { getDetailBook, rerender } from "../../reduces/detailBookSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import getRecentCategoryBook from "../../reduces/recentBookSlice"
+import getRecentCategoryBook from "../../reduces/recentBookSlice";
+import parse from "html-react-parser";
 
 const sectionContainer = css`
   width: 480px;
@@ -39,13 +40,22 @@ const descriptionBox = css`
     font-size: 20px;
     margin: 0;
     font-weight: bold;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   h2 {
     font-size: 16px;
     margin: 0;
     margin-top: 10px;
     font-weight: 500;
-    color: #8f8d8d;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
 
@@ -70,8 +80,8 @@ const price = css`
 function LargeCard({ id, title, author, bookPrice, detail, img, category_id }) {
   const navigator = useNavigate();
   const handleCard = () => {
-    navigator(`/detail/${category_id}/${id}`)
-  }
+    navigator(`/detail/${category_id}/${id}`);
+  };
 
   return (
     <>
@@ -80,7 +90,9 @@ function LargeCard({ id, title, author, bookPrice, detail, img, category_id }) {
         <div css={descriptionBox}>
           <h1>{title}</h1>
           <h2>{author}</h2>
-          <div css={simpleDescript}>{detail}</div>
+          <div css={simpleDescript}>
+            {typeof detail === "string" ? parse(detail) : detail}
+          </div>
           <div css={price}>{bookPrice}</div>
         </div>
       </div>

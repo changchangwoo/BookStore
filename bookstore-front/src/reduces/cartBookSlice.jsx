@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import API from "../utils/api";
+import { openMessage } from "./messageSlice";
 
 const initialState = {
   books: [
@@ -21,6 +22,18 @@ const getUserCartBooks = createAsyncThunk(
   async (thunkAPI) => {
     try {
       const response = await API.get("carts/");
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
+
+const deleteUserCartBooks = createAsyncThunk(
+  "books/delteBooks",
+  async (thunkAPI) => {
+    try { 
+      const response = await API.delete(`carts/`);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -51,13 +64,18 @@ export const cartBookSlice = createSlice({
         return book
       })
     },
-    checked: (state, action) => {
-      const {checked, id} = action.payload
+    oneChecked: (state, action) => {
+      const {checkType, id} = action.payload
       state.books = state.books.map((book)=>{
         if(book.id === id) {
-          return { ...book, checked : checked}
+          return { ...book, checked : checkType}
         }
         return book
+      })
+    },
+    allChecked: (state, action) => {
+      state.books = state.books.map((book) => {
+        return {...book, checked : action.payload}
       })
     },
   },
@@ -65,11 +83,13 @@ export const cartBookSlice = createSlice({
     builder.addCase(getUserCartBooks.fulfilled, (state, action) => {
       if (action.payload) {
         state.books = action.payload.map(book => ({...book, checked : false}))
-
       }
     });
+    builder.addCase(deleteUserCartBooks.fulfilled, (state, action) => {
+      state.books = []
+    })
   },
 });
-export const { upCount, downCount, checked } = cartBookSlice.actions;
-export { getUserCartBooks };
+export const { upCount, downCount, oneChecked, allChecked } = cartBookSlice.actions;
+export { getUserCartBooks, deleteUserCartBooks };
 export default cartBookSlice.reducer;

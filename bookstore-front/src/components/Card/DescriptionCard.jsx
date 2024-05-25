@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import React from "react";
+import parse from 'html-react-parser'
 
 const sectionContainer = css`
   width: 480px;
@@ -11,13 +12,13 @@ const sectionContainer = css`
   border-radius: 8px;
   margin-right: 20px;
   display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: 14px;
+  flex-direction: column;
+  overflow: auto;
 `;
 
 const DescriptionCard = ({ detail }) => {
-  return <div css={sectionContainer}>{detail}</div>;
+  return <div css={sectionContainer}>{typeof detail === 'string' ? parse(detail) : detail}</div>;
 };
 
 export default DescriptionCard;

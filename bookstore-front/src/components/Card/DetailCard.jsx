@@ -4,6 +4,8 @@ import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import API from "../../utils/api";
 import { openMessage } from "../../reduces/messageSlice";
+import parse from 'html-react-parser';
+
 
 const sectionContainer = css`
   width: 611px;
@@ -173,7 +175,7 @@ function DetailCard({ id, title, author, detail, price }) {
       <div css={sectionContainer}>
         <h1>{title}</h1>
         <h2>{author} </h2>
-        <h3>{detail}</h3>
+        <h3>{typeof detail === 'string' ? parse(detail) : detail}</h3>
         <div css={quantitiyBox}>
           <div css={quantitiyController}>
             <span css={calculButton} onClick={downCount}>

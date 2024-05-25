@@ -31,14 +31,12 @@ const allBooks = async (req, res) => {
             values = [category_id];
         } else if (news) {
             sql += " WHERE STR_TO_DATE(pub_date, '%Y-%m') BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW()";
-            console.log(sql)
         }
 
         sql += " LIMIT ? OFFSET ?";
         values.push(parseInt(limit), offset);
 
         const [booksResults] = await connection.query(sql, values);
-        if(news) console.log(booksResults)
 
         if (booksResults.length) {
             booksResults.map(result => {
@@ -164,8 +162,25 @@ const bestBooks = async (req, res) => {
 }
 };
 
+const searchBooks = (req, res) => {
+    const query = req.query.query;
+    if (!query) {
+        return res.status(StatusCodes.BAD_REQUEST).end();
+    }
+
+    const searchTerm = `%${query}%`;
+    const sql = "SELECT * FROM books WHERE title LIKE ?";
+    conn.query(sql, [searchTerm], (err, results) => {
+        if (err) {
+            console.error("Error executing SQL query:", err);
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "An internal server error occurred." });
+        }
+        return res.status(StatusCodes.OK).json(results);
+    });
+};
 module.exports = {
     allBooks,
     bookDetail,
-    bestBooks
+    bestBooks,
+    searchBooks
 };

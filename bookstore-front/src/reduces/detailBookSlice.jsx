@@ -11,6 +11,7 @@ const initialState = {
     price : 9999,
     img : "그런거없다",
   }],
+  rendering : false
 };
 
 const getDetailBook = createAsyncThunk('books/detailBooks',
@@ -31,7 +32,6 @@ export const detailBookSlice = createSlice({
   reducers: {
   rerender: (state) => {
       state.rendering = !state.rendering
-      console.log(state.rendering)
     },
   },
   extraReducers: async (builder) => {

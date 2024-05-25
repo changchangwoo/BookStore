@@ -28,13 +28,7 @@ const ReviewContents = () => {
       </ul>
       <ul css={reviewList}>
         <ReviewCard/>
-        <ReviewCard/>
-        <ReviewCard/>
-        <ReviewCard/>
-        <ReviewCard/>
-        <ReviewCard/>
-        <ReviewCard/>
-        <ReviewCard/>
+
         <ReviewCard/>
       </ul>
     </div>
