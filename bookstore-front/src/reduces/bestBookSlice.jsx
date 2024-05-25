@@ -11,7 +11,6 @@ const initialState = {
     price : 9999,
     img : "그런거없다"
   }],
-
 };
 
 const getBestBooks = createAsyncThunk('books/bestBooks',

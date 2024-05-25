@@ -1,30 +1,33 @@
-import SmallCard from "../components/Card/SmallCard"
-import ContentSection from "../components/Section/ContentSection/ContentSection"
-import SearchEngine from "../components/SearchContainer/SearchContainer"
-import { useEffect } from "react"
-import { useSelector } from "react-redux"
-import LargeCard from "../components/Card/LargeCard"
+import SmallCard from "../components/Card/SmallCard";
+import ContentSection from "../components/Section/ContentSection/ContentSection";
+import SearchEngine from "../components/SearchContainer/SearchContainer";
+import { useSelector } from "react-redux";
+import SearchResultContents from "../components/Section/Contents/SearchResultContents";
+import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function Search() {
-    const searchBooks = useSelector(state => state.searchBook.books)
-    console.log(searchBooks)
+  const searchBooks = useSelector((state) => state.searchBook.books);
+  const [resultKeyword, setResultKeyword] = useState("");
+  const location = useLocation();
 
-    return (
-      <>
-      <SearchEngine/>
-      <ContentSection title="검색 결과">
-        <LargeCard/>
-        <LargeCard/>
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const query = searchParams.get("query");
+    setResultKeyword(query);
+  }, [location.search]);
+
+  return (
+    <>
+      <SearchEngine />
+      <ContentSection
+        title={`"${resultKeyword}" 에 대해 검색한 결과`}
+        slideLength={searchBooks.length / 4}>
+        <SearchResultContents searchBooks={searchBooks} query={resultKeyword} />
       </ContentSection>
-      <ContentSection title="장르별 / 소설">
-      <SmallCard/>
-      <SmallCard/>
-      <SmallCard/>
-      <SmallCard/>
-      </ContentSection>
-      </>
-    )
-  }
-  
-  export default Search
-  
+
+    </>
+  );
+}
+
+export default Search;

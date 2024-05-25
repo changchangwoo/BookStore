@@ -4,7 +4,7 @@ import { getDetailBook, rerender } from "../../reduces/detailBookSlice";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const sectionContainer = css`
-cursor: pointer;
+  cursor: pointer;
   width: 230px;
   height: 438px;
   background-color: white;
@@ -37,8 +37,11 @@ const descriptionBox = css`
     margin-top: 20px;
     font-weight: bold;
     height: 20px;
-    overflow: hidden; /* 넘친 텍스트를 숨김 */
-    text-overflow: ellipsis; /* 생략 부호 (...) 표시 */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   h2 {
     font-size: 14px;
@@ -46,6 +49,11 @@ const descriptionBox = css`
     margin-top: 5px;
     font-weight: 500;
     color: #8f8d8d;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
 
@@ -67,25 +75,39 @@ const bookPrice = css`
   font-size: 14px;
 `;
 
-function SmallCard({title, author, summary, price, category_id, img, id}) {
+const highlightStyle = css`
+  background-color: yellow;
+`;
+
+function SmallCard({ title, author, summary, price, category_id, img, id, query }) {
   const navigator = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
+
   const handleCard = () => {
     const Url = `/detail/${category_id}/${id}`;
     if (location.pathname === Url) {
       navigator(Url);
     } else {
-      dispatch(rerender())
+      dispatch(rerender());
       navigator(Url);
     }
   };
+
+  const highlightText = (text, query) => {
+    if (!query) return text;
+    const parts = text.split(new RegExp(`(${query})`, 'gi'));
+    return parts.map((part, index) =>
+      part.toLowerCase() === query.toLowerCase() ? <span css={highlightStyle} key={index}>{part}</span> : part
+    );
+  };
+
   return (
     <>
       <div css={sectionContainer} onClick={handleCard}>
-        <img css={imgBox} src={img}></img>
+        <img css={imgBox} src={img} alt={title} />
         <div css={descriptionBox}>
-          <h1>{title}</h1>
+          <h1>{highlightText(title, query)}</h1>
           <h2>{author}</h2>
           <div css={simpleDescript}>{summary}</div>
           <div css={bookPrice}>{price}</div>

@@ -6,7 +6,7 @@ import DetailCard from "../components/Card/DetailCard";
 import DivisionSection from "../components/Section/DivisionSection";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getDetailBook } from "../reduces/detailBookSlice";
 import { getRecentCategoryBook } from "../reduces/recentBookSlice";
 import RecentContents from "../components/Section/Contents/RecentContents";
@@ -22,8 +22,24 @@ function Detail() {
   const dispatch = useDispatch();
   const detailBook = useSelector((state) => state.detailBook.books);
   const rerender = useSelector((state) => state.detailBook.rendering)
+  const [categoryName, setCategoryName] = useState(null)
 
   useEffect(() => {
+    switch(category_id) {
+      case '0' : setCategoryName('소설')
+      break;
+      case '1' : setCategoryName('인문')
+      break;
+      case '2' : setCategoryName('건강')
+      break;
+      case '3' : setCategoryName('IT')
+      break;
+      case '4' : setCategoryName('자기계발')
+      break;
+      case '5' : setCategoryName('에세이')
+      break;
+      case '6' : setCategoryName('시')
+    }
     dispatch(getDetailBook(id));
     dispatch(getRecentCategoryBook(category_id));
   }, [rerender]);
@@ -31,7 +47,7 @@ function Detail() {
   return (
     <>
       <SearchEngine />
-      <DetailSection title="소설" backgroundColor="white">
+      <DetailSection title={categoryName} backgroundColor="white">
         <DetailImageCard img={detailBook.img} />
         <DetailCard
           id={detailBook.id}

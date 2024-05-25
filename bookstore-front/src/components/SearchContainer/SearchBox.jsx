@@ -1,9 +1,11 @@
 import { css } from "@emotion/react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import API from "../../utils/api";
 import useInput from "../../hooks/useInput";
 import { useDispatch } from "react-redux";
 import { getSearchBooks } from "../../reduces/searchBookSlice";
+import { useRef, useState } from "react";
+import { debounce } from "lodash";
 
 const inputBox = css`
   width: 650px;
@@ -37,27 +39,40 @@ const submitButton = css`
 `;
 
 function SearchBox() {
-  // 만약에 다른 페이지인 경우에는, 검색하면 해당 페이지로 넘어가면서 데이터 출력
-  // 동일한 페이지의 경우 실시간 디바운싱을 통해서 데이터 통신
   const navigator = useNavigate();
   const dispatch = useDispatch();
-  const [inputSearch, onChangeInputSearch] = useInput("");
-  const handleSearch = () => {
-    dispatch(getSearchBooks(inputSearch));
-    navigator(`/search?query=${inputSearch}`);
+  const location = useLocation();
+  const searchRef = useRef(null);
+
+  const handleSearch = (event) => {
+    if (location.pathname === "/search") {
+      event.preventDefault()
+      navigator(`/search?query=${searchRef.current.value}`);  
+    } else {
+      event.preventDefault()
+      navigator(`/search?query=${searchRef.current.value}`);
+    }
   };
+  
+  const onChangeInputSearch = debounce((e) => {
+    if(location.pathname === "/search") {
+      dispatch(getSearchBooks(searchRef.current.value))
+    };
+  }, 300);
+
   return (
     <>
       <form css={inputBox}>
         <div css={searchIcon}>
-          <span class="material-symbols-outlined" style={{ fontSize: 30 }}>
+          <span className="material-symbols-outlined" style={{ fontSize: 30 }}>
             search
           </span>
           <input
             autoFocus
             css={inputSearchBox}
+            ref={searchRef}
             onChange={onChangeInputSearch}
-            placeholder="거미 여인의 키스"
+            placeholder="검색할 책 이름을 입력해주세요"
           />
         </div>
         <button type="submit" css={submitButton} onClick={handleSearch} />

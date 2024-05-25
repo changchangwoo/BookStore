@@ -61,7 +61,7 @@ function Navigation() {
               로고
             </div>
             <div css={menuButton}>
-              <span class="material-symbols-outlined">menu</span>
+              <span className="material-symbols-outlined">menu</span>
             </div>
           </div>
           <div css={rightContainer}>

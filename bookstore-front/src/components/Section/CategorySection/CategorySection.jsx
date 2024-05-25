@@ -39,7 +39,6 @@ const CategorySection = (props) => {
 
   const handleCategory = useCallback((index) => {
     setSelectedCategory(index)
-    console.log(index)
     dispatch(
       getCategoryBook(index)
     )
@@ -49,10 +48,10 @@ const CategorySection = (props) => {
     <div css={sectionContainer(props.backgroundColor)}>
       <div css={contentController}>
         <div css={leftControllerButton} onClick={prevSlide}>
-          <span class="material-symbols-outlined">chevron_left</span>
+          <span className="material-symbols-outlined">chevron_left</span>
         </div>
         <div css={rightControllerButton} onClick={nextSlide}>
-          <span class="material-symbols-outlined">chevron_right</span>
+          <span className="material-symbols-outlined">chevron_right</span>
         </div>
       </div>
       <div css={contentContainer}>

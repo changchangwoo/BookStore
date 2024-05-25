@@ -10,12 +10,15 @@ import {
   cards,
 } from "./ContentSection.styles";
 
-function ContentSection(props) {
+function ContentSection({backgroundColor, title, children, slideLength}) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const totalSlides = 3;
+  const [totalSlides, setTotalSlides] = useState(3)
+  useEffect(()=>{
+    if(slideLength) setTotalSlides(slideLength)
+  }, [totalSlides])
   
   const nextSlide = useCallback(() => {
-    if (currentSlide === 2) return;
+    if (currentSlide === totalSlides-1) return;
     setCurrentSlide((prev) => (prev + 1) % totalSlides);
   }, [currentSlide]);
 
@@ -26,19 +29,19 @@ function ContentSection(props) {
 
     return (
       <>
-        <div css={sectionContainer(props.backgroundColor)}>
+        <div css={sectionContainer(backgroundColor)}>
           <div css={contentController}>
             <div css={leftControllerButton} onClick={prevSlide}>
-              <span class="material-symbols-outlined">chevron_left</span>
+              <span className="material-symbols-outlined">chevron_left</span>
             </div>
             <div css={rightControllerButton} onClick={nextSlide}>
-              <span class="material-symbols-outlined">chevron_right</span>
+              <span className="material-symbols-outlined">chevron_right</span>
             </div>
           </div>
           <div css={contentContainer}>
-            <div css={sectionTitle}>{props.title}</div>
+            <div css={sectionTitle}>{title}</div>
             <div css={cardList}>
-              <div css={cards(currentSlide)}>{props.children}</div>
+              <div css={cards(currentSlide)}>{children}</div>
             </div>
           </div>
         </div>

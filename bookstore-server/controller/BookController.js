@@ -30,14 +30,14 @@ const allBooks = async (req, res) => {
             sql += " WHERE category_id=?";
             values = [category_id];
         } else if (news) {
-            sql += " WHERE STR_TO_DATE(pub_date, '%Y-%m') BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW()";
+            sql += " WHERE STR_TO_DATE(CONCAT(pub_date, '-01'), '%Y-%m-%d') BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW()";
+            // sql += " WHERE STR_TO_DATE(pub_date, '%Y-%m') BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW()";
         }
 
         sql += " LIMIT ? OFFSET ?";
         values.push(parseInt(limit), offset);
 
         const [booksResults] = await connection.query(sql, values);
-
         if (booksResults.length) {
             booksResults.map(result => {
                 result.pubDate = result.pub_date;

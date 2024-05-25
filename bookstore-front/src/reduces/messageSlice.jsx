@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 const initialState = {
   message: "",
   isOpen: false,
-  timerCheck : null
+  timerCheck: null
 };
 
 export const openMessage = createAsyncThunk(
@@ -13,17 +13,17 @@ export const openMessage = createAsyncThunk(
     const state = getState().message;
 
     if (state.timerCheck) {
-      dispatch(closeMessage());
       clearTimeout(state.timerCheck);
+      dispatch(closeMessage());
     }
 
     dispatch(setMessage(message));
 
     const timerCheck = setTimeout(() => {
       dispatch(closeMessage());
-    }, 3000);
+    }, 2000);
 
-    return {timerCheck}
+    return { timerCheck };
   }
 );
 
@@ -37,11 +37,12 @@ export const messageSlice = createSlice({
     },
     closeMessage: (state) => {
       state.isOpen = false;
+      state.message = "";
     },
   },
   extraReducers: (builder) => {
     builder.addCase(openMessage.fulfilled, (state, action) => {
-      state.timerCheck = action.payload.timerCheck
+      state.timerCheck = action.payload.timerCheck;
     });
   }
 });

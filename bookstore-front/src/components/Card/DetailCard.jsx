@@ -102,7 +102,6 @@ function DetailCard({ id, title, author, detail, price }) {
 
   useEffect(() => {
     API.get(`/likes/${id}`).then((response) => {
-        console.log(response.data.liked);
         if (response.data.liked) {
           setLikesCheck(true);
         } else {

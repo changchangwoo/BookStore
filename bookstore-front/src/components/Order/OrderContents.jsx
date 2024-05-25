@@ -10,7 +10,6 @@ function OrderContents() {
   useEffect(() => {
     API.get("orders/")
       .then((response) => {
-        console.log(orderList)
         setOrderList(response.data);
       })
       .catch((err) => {
@@ -33,6 +32,7 @@ function OrderContents() {
         {orderList &&
           orderList.map((order) => {
             return <OrderItem
+              key={order.id}
               created_at={formatDate(order.created_at)}
               id={order.id}
               receiver={order.receiver}
