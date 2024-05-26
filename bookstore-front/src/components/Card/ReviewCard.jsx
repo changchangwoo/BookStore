@@ -4,26 +4,37 @@ import {
   imgBox,
   reivewDescriptiton,
   reviewBox,
+  reviewDate,
   reviewTitle,
+  titleBox,
   userImg,
 } from "../Section/ReviewSection/ReviewContents.styles";
 
-const ReviewCard = () => {
-  const randomValue = () => Math.floor(Math.random() * 256);
-  const r = randomValue();
-  const g = randomValue();
-  const b = randomValue();
-  const rgb = `rgb(${r}, ${g}, ${b})`;
+const ReviewCard = (
+  {
+    email,
+    id,
+    rgb,
+    title,
+    comment,
+    date
+  }
+) => {
 
   return (
     <li css={reviewBox}>
       <div css={imgBox}>
-        <div css={userImg(rgb)}></div>
+        <div css={userImg(rgb)}>{email[0]}</div>
       </div>
       <div css={ContentBox}>
-        <div css={reviewTitle}>너무나도 재밌는 마법같은 책</div>
+        <div css={titleBox}>
+        <div css={reviewTitle}>
+          {email}
+          </div>
+          <div css={reviewDate}>{date}</div>
+          </div>
         <div css={reivewDescriptiton}>
-          마법에 걸린 것 처럼 고혈압에 걸렸습니다
+         {comment}
         </div>
       </div>
     </li>

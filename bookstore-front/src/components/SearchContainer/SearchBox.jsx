@@ -50,6 +50,7 @@ function SearchBox() {
       navigator(`/search?query=${searchRef.current.value}`);  
     } else {
       event.preventDefault()
+      dispatch(getSearchBooks(searchRef.current.value))
       navigator(`/search?query=${searchRef.current.value}`);
     }
   };

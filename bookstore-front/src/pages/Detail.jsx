@@ -74,7 +74,9 @@ function Detail() {
       </DivisionSection>
 
       <ReviewSection title="리뷰">
-        <ReviewContents/>
+        <ReviewContents
+          id={detailBook.id}
+        />
       </ReviewSection>
     </>
   );

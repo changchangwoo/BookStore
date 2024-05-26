@@ -44,8 +44,9 @@ export const topBox = css`
 `;
 export const reviewList = css`
 width: 100%;
-height: 100%;
-margin-top: 10px;
+height: 80%;
+margin-top: 0px;
+margin-bottom: 10px;
 overflow-y: auto;
 `;
 
@@ -77,24 +78,49 @@ padding: 5px;
 box-sizing: border-box;
 `;
 export const reviewTitle = css`
-font-size: 16px;
+font-size: 14px;
 font-weight: bold;
 margin-bottom: 5px;
+flex: 1;
+`;
 
-`;
-export const reivewDescriptiton = css`
+export const reviewDate = css`
 font-size: 13px;
+`
+export const titleBox = css`
+display: flex;
+
+`
+
+export const reivewDescriptiton = css`
+font-size: 16px;
 `;
+
+
 
 export const userImg = (rgb) => css`
 width: 50px;
 height: 50px;
 border-radius: 50px;
 background-color: ${rgb};
+display: flex;
+justify-content: center;
+align-items: center;
+color: white;
+font-size: 24px;
 `
 
 export const commentBox = css`
 width: 100%;
-height: 50px;
+height: 60px;
+display: flex;
+`
 
+export const commentInput = css`
+width: 80%;
+margin-right: 30px;
+border: 1px solid #e1e1e1;
+border-radius: 8px;
+font-size: 15px;
+padding-left: 20px;
 `

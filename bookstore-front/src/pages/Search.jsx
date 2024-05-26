@@ -21,8 +21,8 @@ function Search() {
     <>
       <SearchEngine />
       <ContentSection
-        title={`"${resultKeyword}" 에 대해 검색한 결과`}
-        slideLength={searchBooks.length / 4}>
+          title={`"${resultKeyword}" 에 대해 검색한 결과 (${searchBooks.length})`}
+        slideLength={Math.ceil(searchBooks.length / 4)}>
         <SearchResultContents searchBooks={searchBooks} query={resultKeyword} />
       </ContentSection>
 
