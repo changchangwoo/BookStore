@@ -3,21 +3,24 @@ import { css } from "@emotion/react";
 export const orderContainer = css`
   width: 100%;
   height: 750px;
-  background-color: white;
-  border: 1px solid #e1e1e1;
+  background-color: var(--subBG);
+  border: 1px solid var(--outLine);
   border-radius: 8px;
-  overflow-y: scroll;
-  overflow-x: hidden;
   padding: 40px;
+  overflow-y: auto;
+  overflow-x: hidden;
   box-sizing: border-box;
+  .hide-scrollbar::-webkit-scrollbar {
+  width: 0;
+}
 `;
 
 export const topBox = css`
   width: 100%;
   height: 40px;
-  border: 1px solid #e1e1e1;
+  border: 1px solid var(--outLine);
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background-color: var(--mainBG);
   margin-bottom: 40px;
   ul {
     display: flex;
@@ -30,7 +33,10 @@ export const topBox = css`
       justify-content: center;
       align-items: center;
     }
-
+    li:nth-of-type(1) {
+      margin-left: 20px;
+      flex: 0.1;
+    }
     li:nth-of-type(4) {
       flex: 0.3;
     }
@@ -40,10 +46,12 @@ export const topBox = css`
 export const orderItem = css`
   width: 100%;
   height: 80px;
-  border: 1px solid #e1e1e1;
+  border: 1px solid var(--outLine);
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background-color: var(--mainBG);
   margin-bottom: 10px;
+  padding: 20px;
+  box-sizing: border-box;
 
   ul {
     display: flex;
@@ -56,7 +64,9 @@ export const orderItem = css`
       justify-content: center;
       align-items: center;
     }
-
+    li:nth-of-type(1) {
+      flex: 0.1;
+    }
     li:nth-of-type(4) {
       flex: 0.3;
     }

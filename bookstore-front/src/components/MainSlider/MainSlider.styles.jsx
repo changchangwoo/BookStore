@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 export const mainSliderContainer = (currentSlide) => css`
   width: 500vw;
   height: 350px;
-  border-bottom: 1px solid #e1e1e1;
+  border-bottom: 1px solid var(--outLine);
   display: flex;
   position: relative;
   background-color: ${currentSlide % 2 === 0 ? 'white' : '#3F3D55'};

@@ -1,16 +1,21 @@
 import { css } from "@emotion/react";
 import SearchBox from "./SearchBox";
+import { useSelector } from "react-redux";
 function SearchEngine() {
-  const searchEngineContainer = css`
+  const searchEngineContainer = (isDark) => css`
     width: 100%;
     height: 160px;
     text-align: center;
-    border-bottom: 1px solid #e1e1e1;
+    background-color: var(--mainBG);
+    border-bottom: 1px solid var(--outLine);
+    color: var(--fontColor);
+    transition: all 0.2s;
+    padding-top: 60px;
     h1 {
+      margin: 0;
       font-size: 24px;
       font-weight: bold;
       position: relative;
-      margin-top: 50px;
       margin-bottom: 20px;
     }
   `;

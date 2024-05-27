@@ -10,10 +10,11 @@ import {
   cardList,
   cards,
 } from "../ContentSection/ContentSection.styles";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getCategoryBook } from "../../../reduces/categoryBookSlice";
 
 const CategorySection = (props) => {
+  const isDark = useSelector((state) => state.user.isDark);
   const dispatch = useDispatch();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState(0);
@@ -21,12 +22,10 @@ const CategorySection = (props) => {
   const categorys = ["소설", "인문", "건강", "IT", "자기계발", "에세이", "시"];
   const totalSlides = 2;
 
-  useEffect(()=>{
-    dispatch(
-      getCategoryBook(0)
-    )
-  }, [])
-  
+  useEffect(() => {
+    dispatch(getCategoryBook(0));
+  }, []);
+
   const nextSlide = useCallback(() => {
     if (currentSlide === 1) return;
     setCurrentSlide((prev) => (prev + 1) % totalSlides);
@@ -38,14 +37,12 @@ const CategorySection = (props) => {
   }, [currentSlide]);
 
   const handleCategory = useCallback((index) => {
-    setSelectedCategory(index)
-    dispatch(
-      getCategoryBook(index)
-    )
+    setSelectedCategory(index);
+    dispatch(getCategoryBook(index));
   }, []);
 
   return (
-    <div css={sectionContainer(props.backgroundColor)}>
+    <div css={sectionContainer}>
       <div css={contentController}>
         <div css={leftControllerButton} onClick={prevSlide}>
           <span className="material-symbols-outlined">chevron_left</span>
@@ -62,7 +59,12 @@ const CategorySection = (props) => {
                 key={index}
                 onClick={() => handleCategory(index)}
                 style={{
-                  color: index === selectedCategory ? "black" : "#8F8D8D",
+                  color:
+                    index === selectedCategory
+                      ? isDark
+                        ? "white"
+                        : "black"
+                      : "#8F8D8D",
                 }}
               >
                 {category}

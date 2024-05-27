@@ -11,10 +11,13 @@ import ModalController from "./components/Modal/ModalController";
 import Delivery from "./pages/Delivery";
 import Message from "./components/Message/Message";
 import ScrollToTop from "./utils/scrollToTop";
+import GlobalStyles from './GlobalStyles';
+
 
 function App() {
   return (
     <>
+      <GlobalStyles />
       <ScrollToTop />
       <Message />
       <ModalController />
@@ -27,7 +30,6 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/delivery" element={<Delivery />} />
       </Routes>
-      {/* <Footer /> */}
     </>
   );
 }

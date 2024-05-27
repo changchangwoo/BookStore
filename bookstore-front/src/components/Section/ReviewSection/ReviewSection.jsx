@@ -4,8 +4,11 @@ import React from "react";
 const sectionContainer = css`
   width: 100%;
   height: 700px;
-  background-color: #f9f9f9;
-  border-bottom: 1px solid #e1e1e1;
+  background-color: var(--mainBG);
+  border-bottom: 1px solid var(--outline);
+  padding-top: 50px;
+  color: var(--fontColor);
+  transition: all 0.2s;
 `;
 
 const contentContainer = css`
@@ -18,7 +21,6 @@ const sectionTitle = css`
   font-size: 24px;
   font-weight: bold;
   margin: auto;
-  margin-top: 50px;
   margin-bottom: 20px;
 `;
 

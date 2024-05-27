@@ -1,4 +1,4 @@
-import { cartCheck, selectedBox, confirmBox, itemPrice } from "./Cart_styles";
+import { cartCheck, selectedBox, confirmBox, itemPrice, finalPrice } from "./Cart_styles";
 import Button from "../Button/Button";
 import { css } from "@emotion/react";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,7 +15,6 @@ const finalCheck = css`
   align-items: center;
   text-align: center;
   font-size: 14px;
-  margin-top: 20px;
   input {
     width: 14px;
     height: 14px;
@@ -107,9 +106,9 @@ function ItemCheck({
           })}
         </ul>
         <div css={confirmBox}>
-          <div css={itemPrice("black")}>상품 {totalPrice} 원</div>
-          <div css={itemPrice("#8f8d8d")}>배송비 3000원</div>
-          <div css={totalPrice}>총 {totalPrice + 3000}원</div>
+          <div css={itemPrice}>상품 {totalPrice} 원</div>
+          <div css={itemPrice}>배송비 3000 원</div>
+          <div css={finalPrice}>총 {totalPrice + 3000}원</div>
           {deliveryCheck && (
             <form css={finalCheck}>
               <input type="checkbox" id="agree" onClick={finalCheckHandler} />

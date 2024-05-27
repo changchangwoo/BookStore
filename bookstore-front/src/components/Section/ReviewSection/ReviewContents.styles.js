@@ -5,12 +5,12 @@ export const sectionContainer = css`
   display: flex;
   flex-direction: column;
   margin: auto;
-  border: 1px solid #e1e1e1;
+  border: 1px solid var(--outLine);
   border-radius: 8px;
   padding: 20px;
   box-sizing: border-box;
   height: 600px;
-  background-color: white;
+  background-color: var(--MainBG);
 `;
 
 export const topBox = css`
@@ -21,7 +21,7 @@ export const topBox = css`
   align-items: center;
   li {
     flex: 1;
-    border-right: 1px solid #e1e1e1;
+    border-right: 1px solid var(--outLine);
     text-align: center;
 
     h3 {
@@ -40,7 +40,7 @@ export const topBox = css`
   li:last-child {
     border: none;
   }
-  border-bottom: 1px solid #e1e1e1;
+  border-bottom: 1px solid var(--outLine);
 `;
 export const reviewList = css`
 width: 100%;
@@ -56,7 +56,7 @@ height: 80px;
 display: flex;
 padding: 10px;
 box-sizing: border-box;
-border-bottom : 1px solid #e1e1e1;
+border-bottom : 1px solid var(--outLine);
 align-items: center;
 justify-content: center;
 cursor: pointer;
@@ -89,14 +89,10 @@ font-size: 13px;
 `
 export const titleBox = css`
 display: flex;
-
 `
-
 export const reivewDescriptiton = css`
 font-size: 16px;
 `;
-
-
 
 export const userImg = (rgb) => css`
 width: 50px;
@@ -119,8 +115,10 @@ display: flex;
 export const commentInput = css`
 width: 80%;
 margin-right: 30px;
-border: 1px solid #e1e1e1;
+background-color: var(--subBG);
+border: 1px solid var(--outLine);
 border-radius: 8px;
 font-size: 15px;
 padding-left: 20px;
+color : var(--fontColor);
 `

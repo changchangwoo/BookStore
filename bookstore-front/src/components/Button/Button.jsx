@@ -7,11 +7,11 @@ const buttonContainer = (width, marginRight, color, marginTop) => css`
   padding: 15px;
   text-align: center;
   font-size: 16px;
-  color: white;
+  color: var(--reverseFontColor);
   background-color: ${color === "red" ? "#EF6BAA" : "#79D7F3"};
   border-radius: 8px;
   font-weight: 600;
-  transition: all 0.4s;
+  transition: all 0.2s;
   margin-right: ${marginRight};
   margin-top: ${marginTop};
   cursor: pointer;
@@ -27,7 +27,7 @@ const buttonInactiveContainer = (width, marginRight, marginTop) => css`
   padding: 15px;
   text-align: center;
   font-size: 16px;
-  color: white;
+  color : var(--reverseFontColor);
   background-color: #8F8D8D;
   border-radius: 8px;
   font-weight: 600;

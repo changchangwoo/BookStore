@@ -3,10 +3,12 @@ import { css } from "@emotion/react"
 const sectionContainer = (backgroundColor) => css`
     width: 100%;
     height: 665px;
-    background-color: ${backgroundColor};
+    background-color: var(--mainBG);
     margin: auto;
     overflow: hidden;
-    border-bottom: 1px solid #e1e1e1;
+    border-bottom: 1px solid var(--outLine);
+    transition : all 0.2s;
+    color : var(--fontColor);
 `
 
 const contentContainer = css`

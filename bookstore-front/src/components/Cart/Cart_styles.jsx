@@ -10,12 +10,13 @@ export const cartContainer = css`
   overflow: hidden;
   display: flex;
   border-radius: 8px;
-  border: 1px solid #e1e1e1;
-  background-color: white;
+  border: 1px solid var(--outLine);
+  background-color: var(--subBG);
   box-sizing: border-box;
   padding: 20px;
   flex-direction: column;
   overflow-y: scroll;
+  transition: all 0.2s;
   input {
     width: 15px;
     height: 15px;
@@ -32,9 +33,10 @@ export const topBox = css`
 export const cartCheck = css`
   width: 315px;
   height: 470px;
-  background-color: white;
+  background-color: var(--subBG);
   border-radius: 8px;
-  border: 1px solid #e1e1e1;
+  color: var(--fontColor);
+  border: 1px solid var(--outLine);
   margin-left: 20px;
   padding: 20px;
   box-sizing: border-box;
@@ -58,8 +60,8 @@ export const cartList = css`
 export const cartItem = css`
   width: 100%;
   height: 190px;
-  background-color: #f9f9f9;
-  border: 1px solid #e1e1e1;
+  background-color: var(--mainBG);
+  border: 1px solid var(--outLine);
   border-radius: 8px;
   margin-bottom: 10px;
   box-sizing: border-box;
@@ -75,7 +77,7 @@ export const cartImg = css`
   align-items: center;
   width: 105px;
   height: 100%;
-  border: 1px solid #e1e1e1;
+  border: 1px solid var(--outLine);
   border-radius: 8px;
   margin-left: 10px;
   margin-right: 10px;
@@ -142,12 +144,12 @@ box-sizing: border-box;
 `
 
 export const itemPrice = (color) => css`
-  color : ${color};
+  color : var(--fontColor);
   font-size: 16px;
   margin-bottom: 10px;
 `
 
-export const totalPrice = css`
+export const finalPrice = css`
   font-size: 20px;
   font-weight: bold;
   margin-top: 10px;

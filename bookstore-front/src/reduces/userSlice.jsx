@@ -2,10 +2,10 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import API from "../utils/api";
 import { closeModal } from "./modalSlice";
 import { openMessage } from "./messageSlice";
-import Cookies from "js-cookie";
 
 const initialState = {
   loginCheck: false,
+  isDark : false,
   loginMessage: "아이디와 비밀번호를 입력해주세요",
 };
 
@@ -59,6 +59,10 @@ export const userSlice = createSlice({
     setLoginMessage: (state) => {
       state.loginMessage = "아이디와 비밀번호를 입력해주세요";
     },
+    setDarkMode: (state) => {
+      state.isDark = !state.isDark
+      console.log(state.isDark)
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(userLogin.fulfilled, (state, action) => {
@@ -84,5 +88,5 @@ export const userSlice = createSlice({
 });
 
 export { userLogin, checkLogin, userLogout };
-export const { setLoginMessage } = userSlice.actions;
+export const { setLoginMessage, setDarkMode } = userSlice.actions;
 export default userSlice.reducer;

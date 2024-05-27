@@ -5,8 +5,8 @@ import parse from 'html-react-parser'
 const sectionContainer = css`
   width: 480px;
   height: 438px;
-  background-color: white;
-  border: 1px solid #e1e1e1;
+  background-color: var(--subBG);
+  border: 1px solid var(--outLine);
   padding: 20px;
   box-sizing: border-box;
   border-radius: 8px;
@@ -15,6 +15,9 @@ const sectionContainer = css`
   font-size: 14px;
   flex-direction: column;
   overflow: auto;
+  ::-webkit-scrollbar {
+  width: 0;
+  }
 `;
 
 const DescriptionCard = ({ detail }) => {

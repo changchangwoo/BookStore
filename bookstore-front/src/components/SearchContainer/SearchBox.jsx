@@ -11,12 +11,15 @@ const inputBox = css`
   width: 650px;
   height: 60px;
   border-radius: 8px;
-  border: 1px solid #e1e1e1;
+  border: 1px solid var(--outLine);
+  background-color: var(--subBG);
+  color: var(--fontColor);
   padding-left: 20px;
   padding-right: 20px;
   margin: auto;
   display: flex;
   box-sizing: border-box;
+    transition: all 0.2s;
 `;
 
 const searchIcon = css`
@@ -27,6 +30,7 @@ const searchIcon = css`
 
 const inputSearchBox = css`
   width: 580px;
+  color: var(--fontColor);
   font-size: 20px;
   font-weight: 500;
   border: none;

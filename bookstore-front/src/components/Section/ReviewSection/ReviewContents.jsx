@@ -43,15 +43,14 @@ const ReviewContents = ({ id }) => {
 
 
   const handleAddComment = (event) => {
-    console.log("handle");
     setInitialRender(false);
+    setInputComment("");
     API.post("/reviews", {
       bookId: id,
       comment: inputComment,
     })
       .then((res) => {
         fetchReviews();
-        setInputComment("");
       })
       .catch((err) => {
         console.log(err);
@@ -102,6 +101,7 @@ const ReviewContents = ({ id }) => {
         <input
           css={commentInput}
           placeholder="한 줄 리뷰를 남겨보세요"
+          value={inputComment}
           onChange={onChangeInputComment}
         ></input>
         <Button

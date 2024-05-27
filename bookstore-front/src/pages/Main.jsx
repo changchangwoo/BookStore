@@ -18,7 +18,7 @@ function Main() {
         <BestBookContents/>
       </ContentSection>
 
-      <ContentSection title="신간 안내" backgroundColor="rgba(0,0,0,0)">
+      <ContentSection title="신간 안내">
         <NewBookContents/>
       </ContentSection>
 

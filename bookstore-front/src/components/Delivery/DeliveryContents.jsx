@@ -14,8 +14,9 @@ const deliveryContainer = css`
   overflow: hidden;
   display: flex;
   border-radius: 8px;
-  border: 1px solid #e1e1e1;
-  background-color: white;
+  border: 1px solid var(--outLine);
+  background-color: var(--subBG);
+  color: var(--fontColor);
   box-sizing: border-box;
   padding: 20px;
   flex-direction: column;
@@ -26,9 +27,9 @@ const deliveryInfo = css`
   width: 100%;
   height: 185px;
   font-size: 16px;
-  background-color: #f9f9f9;
+  background-color: var(--mainBG);
   border-radius: 8px;
-  border: 1px solid #e1e1e1;
+  border: 1px solid var(--outLine);
   margin-top: 20px;
   margin-bottom: 20px;
   padding: 20px;
@@ -38,8 +39,11 @@ const deliveryInfo = css`
   input {
     width: 100%;
     border: none;
-    border-bottom: 1px solid #e1e1e1;
+    background-color: var(--mainBG);
+    border-bottom: 1px solid var(--outLine);
     height: 35px;
+    color: var(--fontColor);
+
   }
 `;
 
@@ -48,8 +52,11 @@ const itemList = css`
   margin-top: 20px;
   padding-bottom: 50px;
   max-height: 500px;
-  overflow-y: scroll;
   border-radius: 8px;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+  width: 0;
+}
 `;
 
 function DeliveryContents() {

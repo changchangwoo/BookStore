@@ -1,13 +1,15 @@
 import { css } from "@emotion/react";
 import { current } from "@reduxjs/toolkit";
 
-export const sectionContainer = (backgroundColor) => css`
+export const sectionContainer = css`
   width: 100%;
-  height: 567px;
-  background-color: ${backgroundColor};
+  height: 587px;
+  background-color: var(--mainBG);
+  color : var(--fontColor);
   margin: auto;
   overflow: hidden;
-  border-bottom: 1px solid #e1e1e1;
+  border-bottom: 1px solid var(--outLine);
+  transition: all 0.2s;
 `;
 
 export const contentContainer = css`

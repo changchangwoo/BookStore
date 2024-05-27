@@ -17,7 +17,9 @@ export const ModalContainer = css`
 export const ModalBox = css`
   width: 355px;
   height: 355px;
-  background-color: white;
+  background-color: var(--mainBG);
+  color: var(--fontColor);
+  border: 1px solid var(--outLine);
   border-radius: 8px;
   display: flex;
   padding: 35px 20px 35px 20px;
@@ -64,7 +66,5 @@ export const register = css`
   font-size: 13px;
   color: #8f8d8d;
   margin-top: 10px;
-  &:hover {
-    color: #2f2f2f;
-  }
+  cursor: pointer;
 `;

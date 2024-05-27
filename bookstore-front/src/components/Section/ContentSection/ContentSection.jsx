@@ -9,10 +9,13 @@ import {
   cardList,
   cards,
 } from "./ContentSection.styles";
+import { useSelector } from "react-redux";
 
 function ContentSection({backgroundColor, title, children, slideLength}) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [totalSlides, setTotalSlides] = useState(3)
+  const isDark = useSelector(state => state.user.isDark)
+
   useEffect(()=>{
     if(slideLength) setTotalSlides(slideLength)
   }, [totalSlides])
@@ -29,7 +32,7 @@ function ContentSection({backgroundColor, title, children, slideLength}) {
 
     return (
       <>
-        <div css={sectionContainer(backgroundColor)}>
+        <div css={sectionContainer}>
           <div css={contentController}>
             <div css={leftControllerButton} onClick={prevSlide}>
               <span className="material-symbols-outlined">chevron_left</span>

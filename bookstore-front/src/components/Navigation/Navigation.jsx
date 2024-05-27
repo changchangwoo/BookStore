@@ -10,10 +10,11 @@ import {
 import { useCallback, useEffect, useState } from "react";
 import { openModal } from "../../reduces/modalSlice";
 import { useNavigate } from "react-router-dom";
-import { checkLogin, setLoginMessage, userLogout } from "../../reduces/userSlice";
+import { checkLogin, setDarkMode, setLoginMessage, userLogout } from "../../reduces/userSlice";
 import { openMessage } from "../../reduces/messageSlice";
 
 function Navigation() {
+  const isDark = useSelector(state => state.user.isDark)
   const dispatch = useDispatch();
   const navigator = useNavigate();
   const loginCheck = useSelector((state) => state.user.loginCheck);
@@ -52,6 +53,10 @@ function Navigation() {
     dispatch(openMessage({message : "성공적으로 로그아웃 되었습니다"}))
     navigator("/");
   })
+
+  const handleDarkMode = (()=>{
+    dispatch(setDarkMode())
+  })
   
   return (
     <>
@@ -83,8 +88,13 @@ function Navigation() {
               로그인
             </div>
             }
-            <div css={darkModeButton}>
-              <span className="material-symbols-outlined">light_mode</span>
+            <div css={darkModeButton}
+            onClick={handleDarkMode}>
+             { isDark ?
+             <span className="material-symbols-outlined">light_mode</span>
+             :
+             <span className="material-symbols-outlined">dark_mode</span>
+            }
             </div>
           </div>
 

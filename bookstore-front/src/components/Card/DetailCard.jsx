@@ -10,8 +10,9 @@ import parse from 'html-react-parser';
 const sectionContainer = css`
   width: 611px;
   height: 526px;
-  background-color: #f9f9f9;
-  border: 1px solid #e1e1e1;
+  background-color: var(--subBG);
+  border: 1px solid var(--outLine);
+  color : var(--fontColor);
   padding: 50px 0px 50px 0px;
   box-sizing: border-box;
   border-radius: 8px;
@@ -47,6 +48,9 @@ const sectionContainer = css`
     margin-top: 45px;
     margin-bottom: 45px;
     overflow-x: auto;
+    ::-webkit-scrollbar {
+  width: 0;
+  }
     
   }
 `;
@@ -54,8 +58,8 @@ const sectionContainer = css`
 const quantitiyBox = css`
   width: 100%;
   height: 90px;   
-  background-color: white;
-  border: 1px solid #e1e1e1;
+  background-color: var(--mainBG);;
+  border: 1px solid var(--outline);
   border-left: none;
   border-right: none;
   display: flex;

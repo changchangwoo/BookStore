@@ -8,8 +8,9 @@ import parse from "html-react-parser";
 const sectionContainer = css`
   width: 480px;
   height: 438px;
-  background-color: white;
-  border: 1px solid #e1e1e1;
+  background-color: var(--subBG);
+  border: 1px solid var(--outLine);
+  color: var(--fontColor);
   padding: 20px;
   box-sizing: border-box;
   border-radius: 8px;
@@ -27,7 +28,7 @@ const sectionContainer = css`
 const imgBox = css`
   width: 230px;
   height: 90%;
-  border: 1px solid #e1e1e1;
+  border: 1px solid var(--outLine);
   box-sizing: border-box;
   border-radius: 8px;
   margin-right: 20px;
