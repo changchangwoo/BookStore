@@ -10,6 +10,7 @@ const getReview = (req, res) => {
         FROM reviews r
         JOIN users u ON r.user_id = u.id
         WHERE r.book_id = ?
+        ORDER BY r.date;
     `;
         
     conn.query(sql, [bookId], (err, results) => {

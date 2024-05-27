@@ -59,7 +59,7 @@ const quantitiyBox = css`
   width: 100%;
   height: 90px;   
   background-color: var(--mainBG);;
-  border: 1px solid var(--outline);
+  border: 1px solid var(--outLine);
   border-left: none;
   border-right: none;
   display: flex;

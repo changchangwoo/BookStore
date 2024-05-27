@@ -6,12 +6,14 @@
 html, body, #root {
     padding: 0px;
     margin: 0px;
+    background-color: var(--mainBG);
     font-family: 'pretendard', sans-serif;
     width: 100%;
     height: 100%;
     display: inline;
-    margin-top: 60px;
-    overflow-x: hidden
+    margin-top: 40px;
+    overflow-x: hidden;
+    transition : all 0.2s;
 }
 
 input {

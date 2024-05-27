@@ -10,7 +10,8 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import API from "../../utils/api";
 import useInput from "../../hooks/useInput";
 import { useDispatch } from "react-redux";
-import { openModal } from "../../reduces/modalSlice";
+import { closeModal, openModal } from "../../reduces/modalSlice";
+import { openMessage } from "../../reduces/messageSlice";
 
 function ModalRegister() {
   const dispatch = useDispatch();
@@ -93,9 +94,10 @@ function ModalRegister() {
     }).then((response)=>{
       if(response.status === 201) {
         dispatch(
-          openModal({
-            modalType: "login"
-          })
+          closeModal()
+        )
+        dispatch(
+          openMessage({message : `성공적으로 회원가입 되었습니다. 환영합니다!`})
         )
       }
     }).catch((err)=> {

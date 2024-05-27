@@ -4,7 +4,7 @@ const sectionContainer = css`
   width: 324px;
   height: 526px;
   background-color: var(--subBG);
-  border: 1px solid var(--outline);
+  border: 1px solid var(--outLine);
   color : var(--fontColor);
   padding: 20px;
   box-sizing: border-box;

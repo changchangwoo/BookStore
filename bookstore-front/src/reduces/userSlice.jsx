@@ -61,7 +61,6 @@ export const userSlice = createSlice({
     },
     setDarkMode: (state) => {
       state.isDark = !state.isDark
-      console.log(state.isDark)
     }
   },
   extraReducers: (builder) => {

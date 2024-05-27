@@ -63,11 +63,11 @@ function Navigation() {
         <div css={navContainer}>
           <div css={leftContainer}>
             <div css={navButton} onClick={handleGoHome}>
-              로고
+              홈
             </div>
-            <div css={menuButton}>
+            {/* <div css={menuButton}>
               <span className="material-symbols-outlined">menu</span>
-            </div>
+            </div> */}
           </div>
           <div css={rightContainer}>
             {

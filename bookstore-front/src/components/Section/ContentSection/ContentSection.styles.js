@@ -37,6 +37,7 @@ export const sectionTitle = css`
   }
 `;
 
+
 export const cardList = css`
   width: 1000px;
   display: flex;
