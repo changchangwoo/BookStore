@@ -19,7 +19,6 @@ const getReview = (req, res) => {
             return res.status(StatusCodes.BAD_REQUEST).end();
         }
         if (results) {
-            console.log(results)
             return res.status(StatusCodes.OK).json(results);
         }
     });

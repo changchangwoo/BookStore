@@ -10,7 +10,7 @@ const sectionContainer = css`
   height: 438px;
   background-color: var(--subBG);
   border: 1px solid var(--outLine);
-  color: var(--fontColor);
+  color: var(--fontColor);  
   padding: 20px;
   box-sizing: border-box;
   border-radius: 8px;
@@ -18,7 +18,7 @@ const sectionContainer = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.2s;
   cursor: pointer;
   &:hover {
     opacity: 0.5;

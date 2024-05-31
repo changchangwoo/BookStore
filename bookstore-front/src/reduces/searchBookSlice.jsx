@@ -14,16 +14,20 @@ const initialState = {
       checked: false,
     },
   ],
+  totalCount : 0
 };
 
 const getSearchBooks = createAsyncThunk(
   "books/searchBooks",
-  async (inputSearch, thunkAPI) => {
+  async ({inputSearch, currentPage, totalCount }, thunkAPI) => {
     const url = "books/search";
     try {
       const response = await API.get(url, {
         params: {
           query: inputSearch,
+          limit: 8,
+          currentPage: currentPage,
+          totalCount : totalCount
         },
       });
       return response.data;
@@ -42,7 +46,8 @@ export const searchSlice = createSlice({
   extraReducers: async (builder) => {
     builder.addCase(getSearchBooks.fulfilled, (state, action) => {
       if (action.payload) {
-        state.books = action.payload;
+        state.books = action.payload.books;
+        state.totalCount = action.payload.totalCount;
       }
     });
   },

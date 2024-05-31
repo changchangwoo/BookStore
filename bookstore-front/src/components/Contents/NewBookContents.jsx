@@ -1,7 +1,7 @@
 import Slider from "react-slick";
-import SmallCard from "../../Card/SmallCard";
+import SmallCard from "../Card/SmallCard";
 import React, { useEffect, useState } from "react";
-import API from "../../../utils/api";
+import API from "../../utils/api";
 
 function NewBookSection () {
     const [newBooks, setNewBooks] = useState([]);

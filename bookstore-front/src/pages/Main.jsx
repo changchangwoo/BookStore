@@ -1,13 +1,12 @@
-import SearchEngine from "../components/SearchContainer/SearchContainer";
 import MainSlider from "../components/MainSlider/MainSlider";
 import ContentSection from "../components/Section/ContentSection/ContentSection";
-import LargeCard from "../components/Card/LargeCard";
 import DivisionSection from "../components/Section/DivisionSection";
-import NewBookContents from "../components/Section/Contents/NewBookContents";
 import CategorySection from "../components/Section/CategorySection/CategorySection";
-import CategoryContents from "../components/Section/CategorySection/CategoryContents";
-import BestBookContents from "../components/Section/Contents/BestBookContents";
-import RecentContents from "../components/Section/Contents/RecentContents";
+import BestBookContents from "../components/Contents/BestBookContents"
+import NewBookContents from "../components/Contents/NewBookContents"
+import RecentContents from "../components/Contents/RecentContents"
+import CategoryContents from "../components/Contents/CategoryContents";
+import SearchEngine from "../components/Search/SearchContainer";
 function Main() {
   return (
     <>

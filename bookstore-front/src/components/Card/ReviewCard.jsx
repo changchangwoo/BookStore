@@ -8,7 +8,7 @@ import {
   reviewTitle,
   titleBox,
   userImg,
-} from "../Section/ReviewSection/ReviewContents.styles";
+} from "../Contents/ReviewContents/ReviewContents.styles"
 
 const ReviewCard = (
   {

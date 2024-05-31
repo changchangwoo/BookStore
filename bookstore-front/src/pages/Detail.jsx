@@ -1,5 +1,4 @@
 import ContentSection from "../components/Section/ContentSection/ContentSection";
-import SearchEngine from "../components/SearchContainer/SearchContainer";
 import DetailImageCard from "../components/Card/DetailImageCard";
 import DetailSection from "../components/Section/DetailSections";
 import DetailCard from "../components/Card/DetailCard";
@@ -9,12 +8,12 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getDetailBook } from "../reduces/detailBookSlice";
 import { getRecentCategoryBook } from "../reduces/recentBookSlice";
-import RecentContents from "../components/Section/Contents/RecentContents";
 import ListCard from "../components/Card/ListCard";
 import DescriptionCard from "../components/Card/DescriptionCard";
 import ReviewSection from "../components/Section/ReviewSection/ReviewSection";
-import ReviewContents from "../components/Section/ReviewSection/ReviewContents";
-
+import ReviewContents from "../components/Contents/ReviewContents/ReviewContents";
+import RecentContents from "../components/Contents/RecentContents";
+import SearchEngine from "../components/Search/SearchContainer";
 
 
 function Detail() {

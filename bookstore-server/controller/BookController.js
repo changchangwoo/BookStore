@@ -144,21 +144,34 @@ const bestBooks = async (req, res) => {
     }
 };
 
-const searchBooks = (req, res) => {
-    const query = req.query.query;
-    if (!query) {
-        return res.status(StatusCodes.BAD_REQUEST).end();
-    }
+const searchBooks = async (req, res) => {
+    try {
+        const { query, limit, currentPage, totalCount} = req.query;
+        const offset = limit * (currentPage - 1);
 
-    const searchTerm = `%${query}%`;
-    const sql = "SELECT * FROM books WHERE title LIKE ?";
-    conn.query(sql, [searchTerm], (err, results) => {
-        if (err) {
-            console.error("Error executing SQL query:", err);
-            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "An internal server error occurred." });
+        console.log(query, currentPage);
+
+        if (!query) {
+            return res.status(StatusCodes.BAD_REQUEST).end();
         }
-        return res.status(StatusCodes.OK).json(results);
-    });
+
+        const searchTerm = `%${query}%`;
+        const sql = "SELECT * FROM books WHERE title LIKE ? LIMIT ? OFFSET ?";
+
+        const [results] = await asynConn.query(sql, [searchTerm, parseInt(limit), parseInt(offset)]);
+
+        let response = { books: results };
+        if (totalCount) {
+            const countSql = "SELECT COUNT(*) as count FROM books WHERE title LIKE ?";
+            const [countResults] = await asynConn.query(countSql, [searchTerm]);
+            response.totalCount = countResults[0].count;
+        }
+
+        return res.status(StatusCodes.OK).json(response);
+    } catch (err) {
+        console.error("Error executing SQL query:", err);
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "An internal server error occurred." });
+    }
 };
 module.exports = {
     allBooks,

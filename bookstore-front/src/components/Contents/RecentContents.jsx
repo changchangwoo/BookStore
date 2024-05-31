@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import LargeCard from "../../Card/LargeCard";
 import { useSelector } from "react-redux";
-import SmallCard from "../../Card/SmallCard";
+import LargeCard from "../Card/LargeCard";
+import SmallCard from "../Card/SmallCard";
 
 const RecentContents = ({ hold, type }) => {
   const relateBooks = useSelector((state) => state.recentBook.books.books);

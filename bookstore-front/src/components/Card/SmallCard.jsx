@@ -7,6 +7,7 @@ const sectionContainer = css`
   cursor: pointer;
   width: 230px;
   height: 438px;
+  transition: all 0.2s;
   background-color: var(--subBG);
   border: 1px solid var(--outLine);
   color : var(--fontColor);

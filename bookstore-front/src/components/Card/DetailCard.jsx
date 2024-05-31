@@ -121,7 +121,6 @@ function DetailCard({ id, title, author, detail, price }) {
     if (likesCheck) {
       API.delete(`/likes/${id}`)
         .then((response) => {
-          console.log(response.data);
           if (response.status === 200) setLikesCheck(false);
         })
         .catch((err) => {

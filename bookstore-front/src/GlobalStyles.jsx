@@ -10,7 +10,9 @@ const GlobalStyles = () => {
       --fontColor : ${isDark ? "#ffffff" : "#000000"};
       --outLine: ${isDark ? "#35393d" : "#e1e1e1"};
       --reverseFontColor : ${isDark ? "#000000" : "#ffffff"};
-      --reverseMainBG : ${isDark ? "#f9f9f9" : "#282C30"}; 
+      --reverseMainBG : ${isDark ? "#f9f9f9" : "#282C30"};
+      --primary : #79d7f3;
+      --primaryHover : #0882f3; 
       // var(--MainBG);
       // var(--SubBG);
       // var(--fontColor);

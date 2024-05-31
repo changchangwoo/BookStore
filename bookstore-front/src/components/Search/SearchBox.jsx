@@ -49,21 +49,23 @@ function SearchBox() {
   const searchRef = useRef(null);
 
   const handleSearch = (event) => {
+    const query = searchRef.current.value 
     if (location.pathname === "/search") {
       event.preventDefault()
-      navigator(`/search?query=${searchRef.current.value}`);  
+      navigator(`/search?query=${query}`);  
     } else {
       event.preventDefault()
-      dispatch(getSearchBooks(searchRef.current.value))
-      navigator(`/search?query=${searchRef.current.value}`);
+      dispatch(getSearchBooks({inputSearch : query, currentPage : 1, totalCount : true}))
+      navigator(`/search?query=${query}`);
     }
   };
   
   const onChangeInputSearch = debounce((e) => {
     if(location.pathname === "/search") {
-      dispatch(getSearchBooks(searchRef.current.value))
+      dispatch(getSearchBooks({inputSearch : searchRef.current.value, currentPage : 1, totalCount : true}))
     };
   }, 300);
+
 
   return (
     <>

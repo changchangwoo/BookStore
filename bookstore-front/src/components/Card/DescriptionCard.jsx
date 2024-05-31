@@ -5,6 +5,7 @@ import parse from 'html-react-parser'
 const sectionContainer = css`
   width: 480px;
   height: 438px;
+  transition: all 0.2s;
   background-color: var(--subBG);
   border: 1px solid var(--outLine);
   padding: 20px;

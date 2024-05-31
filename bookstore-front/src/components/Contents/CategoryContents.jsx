@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import SmallCard from "../../Card/SmallCard";
 import { useSelector } from 'react-redux';
+import SmallCard from '../Card/SmallCard';
 
 const CategoryContents = () => {
     const categoryBooks = useSelector((state) => state.categoryBook.books)

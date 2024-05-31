@@ -1,15 +1,11 @@
 import { css } from "@emotion/react";
 import React from "react";
-import SmallCard from "../../Card/SmallCard";
+import SmallCard from "../Card/SmallCard";
 
-const sectionContainer = css`
-  width: 100%;
-  height: 100%;
-  display: flex;
-`;
+
 const SearchResultContents = ({ searchBooks, query }) => {
   return (
-    <div css={sectionContainer}>
+    <>
       {searchBooks &&
         searchBooks.map((book) => {
           return (
@@ -27,7 +23,7 @@ const SearchResultContents = ({ searchBooks, query }) => {
             </li>
           );
         })}
-    </div>
+    </>
   );
 };
 

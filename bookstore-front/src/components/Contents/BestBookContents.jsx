@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import LargeCard from '../../Card/LargeCard'
 import { useDispatch, useSelector } from 'react-redux'
-import { getBestBooks } from '../../../reduces/bestBookSlice'
+import {getBestBooks} from "../../reduces/bestBookSlice"
+import LargeCard from "../Card/LargeCard"
 
 const BestBookContents = () => {
     const BestBooks = useSelector((state) => state.bestBook.books)
