@@ -1,20 +1,10 @@
 /* 이창우 */
-const conn = require("../mariadb");
-const maraidb = require("mysql2/promise");
+const { conn, asynConn } = require("../mariadb");
 const { StatusCodes } = require("http-status-codes");
 const ensureAuthorization = require("../auth.js");
 const jwt = require("jsonwebtoken");
-
 const allBooks = async (req, res) => {
     try {
-        const connection = await maraidb.createConnection({
-            host: "127.0.0.1",
-            user: "root",
-            password: "1234!",
-            database: "bookstore",
-            dateStrings: true,
-        });
-
         let allBooksRes = {};
         let { category_id, news, limit, currentPage } = req.query;
 
@@ -37,7 +27,7 @@ const allBooks = async (req, res) => {
         sql += " LIMIT ? OFFSET ?";
         values.push(parseInt(limit), offset);
 
-        const [booksResults] = await connection.query(sql, values);
+        const [booksResults] = await asynConn.query(sql, values);
         if (booksResults.length) {
             booksResults.map(result => {
                 result.pubDate = result.pub_date;
@@ -49,7 +39,7 @@ const allBooks = async (req, res) => {
             return res.status(StatusCodes.NOT_FOUND).end();
         }
 
-        const [[paginationResult]] = await connection.query("SELECT found_rows()");
+        const [[paginationResult]] = await asynConn.query("SELECT found_rows()");
 
         let pagination = {};
         pagination.currentPage = parseInt(currentPage);
@@ -136,30 +126,22 @@ const bookDetail = (req, res) => {
 
 const bestBooks = async (req, res) => {
     try {
-    const connection = await maraidb.createConnection({
-        host: "127.0.0.1",
-        user: "root",
-        password: "1234!",
-        database: "bookstore",
-        dateStrings: true,
-    });
-
-    const sql = `SELECT liked_book_id, COUNT(liked_book_id) AS count
+        const sql = `SELECT liked_book_id, COUNT(liked_book_id) AS count
     FROM likes
     GROUP BY liked_book_id
     ORDER BY count DESC
     LIMIT 6;`;
 
-    const [results] = await connection.query(sql)
-    const likedBookIds = results.map(book=> book.liked_book_id)    
-    const bestSQL = `SELECT * FROM books WHERE id IN (${likedBookIds.join(',')})`;
-    const [bestResults] = await connection.query(bestSQL)
-    if(bestResults.length > 0) {
-        return res.status(StatusCodes.OK).json(bestResults)
+        const [results] = await asynConn.query(sql)
+        const likedBookIds = results.map(book => book.liked_book_id)
+        const bestSQL = `SELECT * FROM books WHERE id IN (${likedBookIds.join(',')})`;
+        const [bestResults] = await asynConn.query(bestSQL)
+        if (bestResults.length > 0) {
+            return res.status(StatusCodes.OK).json(bestResults)
+        }
+    } catch (err) {
+        return res.status(StatusCodes.BAD_REQUEST).end()
     }
-} catch (err) {
-    return res.status(StatusCodes.BAD_REQUEST).end()
-}
 };
 
 const searchBooks = (req, res) => {

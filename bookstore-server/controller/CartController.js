@@ -1,6 +1,5 @@
 /* 이창우 */
-
-const conn = require("../mariadb");
+const { conn, asynConn } = require("../mariadb");
 const { StatusCodes } = require("http-status-codes");
 const ensureAuthorization = require("../auth.js");
 const jwt = require("jsonwebtoken");

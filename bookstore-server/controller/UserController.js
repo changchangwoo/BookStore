@@ -1,5 +1,5 @@
 /* 이창우 */
-const conn = require("../mariadb");
+const { conn } = require("../mariadb");
 const { StatusCodes } = require("http-status-codes");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto"); // crypto 모듈 : 암호화
@@ -27,7 +27,7 @@ const join = (req, res) => {
 
 const checkLogin = (req, res) => {
   const authorization = ensureAuthorization(req, res)
-  if (authorization instanceof ReferenceError ||
+  if (authorization instanceof ReferenceError ||  
     authorization instanceof jwt.TokenExpiredError ||
     authorization instanceof jwt.JsonWebTokenError
   ) {
