@@ -14,7 +14,6 @@ import ReviewSection from "../components/Section/ReviewSection/ReviewSection";
 import ReviewContents from "../components/Contents/ReviewContents/ReviewContents";
 import RecentContents from "../components/Contents/RecentContents";
 import SearchEngine from "../components/Search/SearchContainer";
-import ScrollToTop from "../utils/scrollToTop";
 
 
 function Detail() {

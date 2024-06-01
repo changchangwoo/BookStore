@@ -1,5 +1,30 @@
 import { css } from "@emotion/react";
 
+const getBackgroundColor = (color) => {
+  switch (color) {
+    case 'red':
+      return '#EF6BAA';
+    case 'blue':
+      return '#79D7F3';
+    case 'hover':
+      return '#0882F3';
+    default:
+      return '#79D7F3'; // 기본 색상
+  }
+};
+
+const getHoverBackgroundColor = (color) => {
+  switch (color) {
+    case 'red':
+      return '#EA0573';
+    case 'hover':
+      return '#0882F3';
+    default:
+      return '#0882F3';
+  }
+};
+
+
 const buttonContainer = (width, marginRight, color, marginTop) => css`
   width: ${width};
   height: 50px;
@@ -8,7 +33,7 @@ const buttonContainer = (width, marginRight, color, marginTop) => css`
   text-align: center;
   font-size: 16px;
   color: var(--reverseFontColor);
-  background-color: ${color === "red" ? "#EF6BAA" : "#79D7F3"};
+  background-color: ${getBackgroundColor(color)};
   border-radius: 8px;
   font-weight: 600;
   transition: all 0.2s;
@@ -16,7 +41,7 @@ const buttonContainer = (width, marginRight, color, marginTop) => css`
   margin-top: ${marginTop};
   cursor: pointer;
   &:hover {
-    background-color: ${color === "red" ? "#EA0573" : "#0882F3"};
+    background-color: ${getHoverBackgroundColor(color)};
   }
 `;
 
@@ -37,16 +62,16 @@ const buttonInactiveContainer = (width, marginRight, marginTop) => css`
 
 `;
 
-function Button(props) {
+function Button({width, marginRight, color, marginTop, onClick, active, title}) {
   return (
     <>
-      {props.active ? (
-        <div css={buttonContainer(props.width, props.marginRight, props.color, props.marginTop)} onClick={props.onClick}>
-          {props.title}
+      {active ? (
+        <div css={buttonContainer(width, marginRight, color, marginTop)} onClick={onClick}>
+          {title}
         </div>
       ) : (
-        <div css={buttonInactiveContainer(props.width, props.marginRight, props.marginTop)}>
-          {props.title}
+        <div css={buttonInactiveContainer(width, marginRight, marginTop)}>
+          {title}
         </div>
       )}
     </>

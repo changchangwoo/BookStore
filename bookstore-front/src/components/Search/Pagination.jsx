@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import { getSearchBooks } from "../../reduces/searchBookSlice";
+import { getSearchBooks, getSearchCategory } from "../../reduces/searchBookSlice";
 
 const sectionContainer = css`
   padding: 20px 0;
@@ -30,7 +30,7 @@ const sectionContainer = css`
     transition: all 0.5s;
   }
 `;
-const Pagination = ({ query, totalCount }) => {
+const Pagination = ({ totalCount }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
   const pages = Math.ceil(totalCount / 8);
@@ -55,15 +55,33 @@ const Pagination = ({ query, totalCount }) => {
 
   const handleClickPage = (page) => {
     const newSearchParams = new URLSearchParams(searchParams);
+    const categoryId = parseInt(newSearchParams.get("categoryId"))
+    const queryString = newSearchParams.get("query")
     newSearchParams.set("page", page);
     setSearchParams(newSearchParams);
-    dispatch(
-      getSearchBooks({
-        inputSearch: query,
-        currentPage: page,
-        totalCount: true,
-      })
-    );
+    if (queryString) {
+      console.log('쿼리스트링 추가')
+      dispatch(
+        getSearchBooks({
+          inputSearch: queryString,
+          currentPage: page,
+          totalCount: false,
+        })
+      );
+      return
+    }
+    if(categoryId !== null && categoryId !== undefined && categoryId !== NaN) {
+      console.log('category 추가', queryString, categoryId)
+      dispatch(
+        getSearchCategory({
+          categoryId: parseInt(categoryId),
+          currentPage: page,
+          totalCount : true
+        })
+      );
+    }
+
+
   };
 
   const prevPage = () => {
