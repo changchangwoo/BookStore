@@ -4,9 +4,9 @@ import DetailSection from "../components/Section/DetailSections";
 import DetailCard from "../components/Card/DetailCard";
 import DivisionSection from "../components/Section/DivisionSection";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getDetailBook } from "../reduces/detailBookSlice";
+import { getDetailBook, rerender } from "../reduces/detailBookSlice";
 import { getRecentCategoryBook } from "../reduces/recentBookSlice";
 import ListCard from "../components/Card/ListCard";
 import DescriptionCard from "../components/Card/DescriptionCard";
@@ -14,34 +14,27 @@ import ReviewSection from "../components/Section/ReviewSection/ReviewSection";
 import ReviewContents from "../components/Contents/ReviewContents/ReviewContents";
 import RecentContents from "../components/Contents/RecentContents";
 import SearchEngine from "../components/Search/SearchContainer";
+import ScrollToTop from "../utils/scrollToTop";
 
 
 function Detail() {
-  const { category_id, id } = useParams();
+  const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
   const detailBook = useSelector((state) => state.detailBook.books);
-  const rerender = useSelector((state) => state.detailBook.rendering)
+  const category = useSelector((state)=> state.category.category)
   const [categoryName, setCategoryName] = useState(null)
 
   useEffect(() => {
-    switch(category_id) {
-      case '0' : setCategoryName('소설')
-      break;
-      case '1' : setCategoryName('인문')
-      break;
-      case '2' : setCategoryName('건강')
-      break;
-      case '3' : setCategoryName('IT')
-      break;
-      case '4' : setCategoryName('자기계발')
-      break;
-      case '5' : setCategoryName('에세이')
-      break;
-      case '6' : setCategoryName('시')
-    }
-    dispatch(getDetailBook(id));
-    dispatch(getRecentCategoryBook(category_id));
-  }, [rerender]);
+    const categoryId = parseInt(searchParams.get('category_id'));
+    const bookId = parseInt(searchParams.get('book_id'));
+    category.map((item)=>{
+      if(item.category_id === categoryId) setCategoryName(item.category_name)
+    })
+    dispatch(getDetailBook(bookId));
+    dispatch(getRecentCategoryBook(categoryId));
+    window.scrollTo(0, 0);
+  }, [searchParams]);
+  
 
   return (
     <>

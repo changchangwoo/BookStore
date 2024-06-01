@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import SearchBox from "./SearchBox";
 import { useSelector } from "react-redux";
 function SearchEngine() {
-  const searchEngineContainer = (isDark) => css`
+  const searchEngineContainer = css`
     width: 100%;
     height: 160px;
     text-align: center;

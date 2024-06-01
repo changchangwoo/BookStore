@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import { useDispatch } from "react-redux";
 import { getDetailBook, rerender } from "../../reduces/detailBookSlice";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 
 const sectionContainer = css`
   cursor: pointer;
@@ -10,7 +10,7 @@ const sectionContainer = css`
   transition: all 0.2s;
   background-color: var(--subBG);
   border: 1px solid var(--outLine);
-  color : var(--fontColor);
+  color: var(--fontColor);
   padding: 20px;
   box-sizing: border-box;
   border-radius: 8px;
@@ -77,44 +77,47 @@ const bookPrice = css`
   font-size: 14px;
 `;
 
-const highlightStyle = css` 
+const highlightStyle = css`
   background-color: yellow;
 `;
 
-function SmallCard({ title, author, summary, price, category_id, img, id, query }) {
-  const navigator = useNavigate();
-  const dispatch = useDispatch();
-  const location = useLocation();
-
-  const handleCard = () => {
-    const Url = `/detail/${category_id}/${id}`;
-    if (location.pathname === Url) {
-      navigator(Url);
-    } else {
-      dispatch(rerender());
-      navigator(Url);
-    }
-  };
-
+function SmallCard({
+  title,
+  author,
+  summary,
+  price,
+  category_id,
+  img,
+  id,
+  query,
+}) {
   const highlightText = (text, query) => {
     if (!query) return text;
-    const parts = text.split(new RegExp(`(${query})`, 'gi'));
+    const parts = text.split(new RegExp(`(${query})`, "gi"));
     return parts.map((part, index) =>
-      part.toLowerCase() === query.toLowerCase() ? <span css={highlightStyle} key={index}>{part}</span> : part
+      part.toLowerCase() === query.toLowerCase() ? (
+        <span css={highlightStyle} key={index}>
+          {part}
+        </span>
+      ) : (
+        part
+      )
     );
   };
 
   return (
     <>
-      <div css={sectionContainer} onClick={handleCard}>
-        <img css={imgBox} src={img} alt={title} />
-        <div css={descriptionBox}>
-          <h1>{highlightText(title, query)}</h1>
-          <h2>{author}</h2>
-          <div css={simpleDescript}>{summary}</div>
-          <div css={bookPrice}>{price}</div>
+      <Link to={`/detail?category_id=${category_id}&book_id=${id}`}>
+        <div css={sectionContainer}>
+          <img css={imgBox} src={img} alt={title} />
+          <div css={descriptionBox}>
+            <h1>{highlightText(title, query)}</h1>
+            <h2>{author}</h2>
+            <div css={simpleDescript}>{summary}</div>
+            <div css={bookPrice}>{price}</div>
+          </div>
         </div>
-      </div>
+      </Link>
     </>
   );
 }

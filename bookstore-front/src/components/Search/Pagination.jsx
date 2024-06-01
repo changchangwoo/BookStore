@@ -1,7 +1,8 @@
 import { css } from "@emotion/react";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
+import { getSearchBooks } from "../../reduces/searchBookSlice";
 
 const sectionContainer = css`
   padding: 20px 0;
@@ -23,31 +24,71 @@ const sectionContainer = css`
     color: var(--reverseFontColor);
     background-color: var(--primary);
     border-radius: 8px;
-    &:hover {
-      background-color: #0882f3;
-      transition: all 0.2s;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s;
   }
 `;
-const Pagination = ({ totalCount }) => {
+const Pagination = ({ query, totalCount }) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const dispatch = useDispatch();
   const pages = Math.ceil(totalCount / 8);
+  const currentPage = parseInt(searchParams.get("page")) || 1;
+  const currentPageGroup = Math.ceil(currentPage / 5);
+
+  const pageButtonRender = () => {
+    const startPage = (currentPageGroup - 1) * 5 + 1;
+    const endPage = Math.min(5 * currentPageGroup, pages);
+    const pageNumbers = [];
+    for (let i = startPage; i <= endPage; i++) {
+      pageNumbers.push(
+        <li key={i}>
+          <button 
+          style={{backgroundColor : currentPage === i ? "var(--primaryHover)" : "var(--primary" }}
+          onClick={() => handleClickPage(i)}>{i}</button>
+        </li>
+      );
+    }
+    return pageNumbers;
+  };
+
   const handleClickPage = (page) => {
     const newSearchParams = new URLSearchParams(searchParams);
     newSearchParams.set("page", page);
     setSearchParams(newSearchParams);
+    dispatch(
+      getSearchBooks({
+        inputSearch: query,
+        currentPage: page,
+        totalCount: true,
+      })
+    );
   };
+
+  const prevPage = () => {
+    if(currentPage > 1) {
+      handleClickPage(currentPage-1)
+    }
+  }
+
+  const nextPage = () => {
+    if(currentPage < pages) {
+      handleClickPage(currentPage+1)
+    }
+  }
+
   return (
     <div css={sectionContainer}>
       {pages > 0 && (
         <ol>
-          {Array(pages)
-            .fill(0)
-            .map((_, index) => (
-              <li>
-                <button onClick={handleClickPage(index+1)}>{index+1}</button>
-              </li>
-            ))}
+          <button onClick={prevPage}>
+            <span className="material-symbols-outlined">chevron_left</span>
+          </button>
+          {pageButtonRender()}
+          <button onClick={nextPage}>
+            <span className="material-symbols-outlined">chevron_right</span>
+          </button>
         </ol>
       )}
     </div>

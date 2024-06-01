@@ -25,10 +25,10 @@ function Search() {
     <>
       <SearchEngine />
       <SearchSection
-          title={`"${resultKeyword}" 에 대해 검색한 결과`}>
+          title={`"${resultKeyword}" 에 대해 검색한 결과 (${totalCount})`}>
         <SearchResultContents searchBooks={searchBooks} query={resultKeyword} />
       </SearchSection>
-      <Pagination totalCount={totalCount}/>
+      <Pagination query={resultKeyword} totalCount={totalCount}/>
 
 
     </>

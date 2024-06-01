@@ -12,17 +12,19 @@ import {
 } from "../ContentSection/ContentSection.styles";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategoryBook } from "../../../reduces/categoryBookSlice";
+import API from "../../../utils/api";
+import { getCategory } from "../../../reduces/categorySlice";
 
 const CategorySection = (props) => {
   const isDark = useSelector((state) => state.user.isDark);
+  const category = useSelector((state) => state.category.category);
   const dispatch = useDispatch();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState(0);
-
-  const categorys = ["소설", "인문", "건강", "IT", "자기계발", "에세이", "시"];
   const totalSlides = 2;
 
   useEffect(() => {
+    dispatch(getCategory());
     dispatch(getCategoryBook(0));
   }, []);
 
@@ -54,9 +56,9 @@ const CategorySection = (props) => {
       <div css={contentContainer}>
         <div css={sectionTitle}>
           <ul>
-            {categorys.map((category, index) => (
+            {category.map((item, index) => (
               <li
-                key={index}
+                key={item.category_id}
                 onClick={() => handleCategory(index)}
                 style={{
                   color:
@@ -67,7 +69,7 @@ const CategorySection = (props) => {
                       : "#8F8D8D",
                 }}
               >
-                {category}
+                {item.category_name}
               </li>
             ))}
           </ul>

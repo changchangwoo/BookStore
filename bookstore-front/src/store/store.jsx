@@ -9,6 +9,7 @@ import cartBookReducer from "../reduces/cartBookSlice"
 import messageReducer from "../reduces/messageSlice";
 import orderReducer from "../reduces/orderSlice";
 import searchBookReducer from "../reduces/searchBookSlice";
+import categoryReducer from "../reduces/categorySlice";
 
 export const store = configureStore({
   reducer: {
@@ -17,11 +18,12 @@ export const store = configureStore({
     message : messageReducer,
     order : orderReducer,
     categoryBook : categoryBookReducer,
+    category : categoryReducer,
     detailBook : detailBookReducer,
     bestBook : bestBookReducer,
     recentBook : recentBookReducer,
     cartBook : cartBookReducer,
-    searchBook : searchBookReducer
+    searchBook : searchBookReducer,
 
   },
 });

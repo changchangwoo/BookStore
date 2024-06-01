@@ -30,14 +30,14 @@ const cardList = css`
     align-items: center;
     justify-content: center;
 `   
-function DetailSection (props) {
+function DetailSection ({backgroundColor, title, children}) {
     return(
         <>
-        <div css={sectionContainer(props.backgroundColor)}>
+        <div css={sectionContainer(backgroundColor)}>
             <div css={contentContainer}>
-                <div css={sectionTitle}>{props.title}</div>
+                <div css={sectionTitle}>{title}</div>
                 <div css={cardList}>
-                    {props.children}
+                    {children}
                 </div>
             </div>
         </div>

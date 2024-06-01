@@ -4,7 +4,7 @@ import API from "../../utils/api";
 import useInput from "../../hooks/useInput";
 import { useDispatch } from "react-redux";
 import { getSearchBooks } from "../../reduces/searchBookSlice";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { debounce } from "lodash";
 
 const inputBox = css`
@@ -19,7 +19,7 @@ const inputBox = css`
   margin: auto;
   display: flex;
   box-sizing: border-box;
-    transition: all 0.2s;
+  transition: all 0.2s;
 `;
 
 const searchIcon = css`
@@ -44,28 +44,22 @@ const submitButton = css`
 
 function SearchBox() {
   const navigator = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
   const dispatch = useDispatch();
-  const location = useLocation();
   const searchRef = useRef(null);
 
   const handleSearch = (event) => {
-    const query = searchRef.current.value 
-    if (location.pathname === "/search") {
-      event.preventDefault()
-      navigator(`/search?query=${query}`);  
-    } else {
-      event.preventDefault()
-      dispatch(getSearchBooks({inputSearch : query, currentPage : 1, totalCount : true}))
-      navigator(`/search?query=${query}`);
-    }
+    console.log(searchQuery)
+    event.preventDefault();
+    dispatch(
+      getSearchBooks({
+        inputSearch: searchQuery,
+        currentPage: 1,
+        totalCount: true,
+      })
+    );
+    navigator(`/search?query=${searchQuery}`);
   };
-  
-  const onChangeInputSearch = debounce((e) => {
-    if(location.pathname === "/search") {
-      dispatch(getSearchBooks({inputSearch : searchRef.current.value, currentPage : 1, totalCount : true}))
-    };
-  }, 300);
-
 
   return (
     <>
@@ -77,8 +71,8 @@ function SearchBox() {
           <input
             autoFocus
             css={inputSearchBox}
+            onChange={(e) => setSearchQuery(e.target.value)}
             ref={searchRef}
-            onChange={onChangeInputSearch}
             placeholder="검색할 책 이름을 입력해주세요"
           />
         </div>
