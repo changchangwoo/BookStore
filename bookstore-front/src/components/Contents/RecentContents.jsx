@@ -28,7 +28,7 @@ const RecentContents = ({ hold, type }) => {
             img={recentBook.img}
           />
         )}
-        {!hold && relateBooks && (
+        {!hold && relateBooks &&
           <LargeCard
           id={relateBooks[randNum].id}
           category_id={relateBooks[randNum].category_id}
@@ -37,7 +37,17 @@ const RecentContents = ({ hold, type }) => {
           detail={relateBooks[randNum].detail}
           img={relateBooks[randNum].img}
         />
-        )}
+        }
+                {!hold && !relateBooks &&
+          <LargeCard
+          id={0}
+          category_id={0}
+          title={0}
+          author={0}
+          detail={0}
+          img={0}
+        />
+        }
       </>
     );
   } else if (type === "small" && relateBooks) {

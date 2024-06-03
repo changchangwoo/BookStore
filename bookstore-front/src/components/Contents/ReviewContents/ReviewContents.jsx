@@ -3,7 +3,6 @@ import {
   commentBox,
   commentInput,
   reviewList,
-  sectionContainer,
   topBox,
 } from "./ReviewContents.styles";
 import ReviewCard from "../../Card/ReviewCard";
@@ -66,7 +65,7 @@ const ReviewContents = ({ id }) => {
   };
 
   return (
-    <div css={sectionContainer}>
+    <>
       <ul css={topBox}>
         <li>
           <h3>평점</h3>
@@ -112,7 +111,7 @@ const ReviewContents = ({ id }) => {
           onClick={handleAddComment}
         />
       </div>
-    </div>
+    </>
   );
 };
 

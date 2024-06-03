@@ -38,7 +38,7 @@ const Pagination = ({ totalCount }) => {
   const currentPageGroup = Math.ceil(currentPage / 5);
 
   const pageButtonRender = () => {
-    const startPage = (currentPageGroup - 1) * 5 + 1;
+    const startPage = (currentPageGroup - 1) * 5 + 1; 
     const endPage = Math.min(5 * currentPageGroup, pages);
     const pageNumbers = [];
     for (let i = startPage; i <= endPage; i++) {

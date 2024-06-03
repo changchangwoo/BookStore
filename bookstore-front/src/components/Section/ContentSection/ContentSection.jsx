@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 
 function ContentSection({backgroundColor, title, children, slideLength}) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [totalSlides, setTotalSlides] = useState(3)
+  const [totalSlides, setTotalSlides] = useState(10)
   const isDark = useSelector(state => state.user.isDark)
 
   useEffect(()=>{

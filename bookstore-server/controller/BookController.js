@@ -5,10 +5,8 @@ const ensureAuthorization = require("../auth.js");
 const jwt = require("jsonwebtoken");
 const allBooks = async (req, res) => {
     try {
-        console.log("allbooks")
         let allBooksRes = {};
         let { category_id, news, limit, currentPage, totalCount } = req.query;
-        console.log(totalCount)
         let offset = limit * (currentPage - 1);
 
         let sql = "SELECT SQL_CALC_FOUND_ROWS *, (SELECT count(*) FROM likes WHERE books.id=liked_book_id) AS likes FROM books";
@@ -147,9 +145,6 @@ const searchBooks = async (req, res) => {
     try {
         const { query, limit, currentPage, totalCount} = req.query;
         const offset = limit * (currentPage - 1);
-
-        console.log(query, currentPage);
-
         if (!query) {
             return res.status(StatusCodes.BAD_REQUEST).end();
         }

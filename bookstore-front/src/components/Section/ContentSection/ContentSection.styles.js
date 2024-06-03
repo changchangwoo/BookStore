@@ -10,59 +10,71 @@ export const sectionContainer = css`
   overflow: hidden;
   border-bottom: 1px solid var(--outLine);
   transition: all 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const contentContainer = css`
-  max-width: 1200px;
+  width: 1000px;
   margin: auto;
 `;
 
 export const sectionTitle = css`
-  width: 990px;
+  width: 1000px;
   font-size: 24px;
   font-weight: bold;
   margin: auto;
-  margin-top: 50px;
   margin-bottom: 20px;
+  padding-left: 10px;
   ul{
     display: flex;
   }
   li {
     cursor: pointer;
-    margin-right: 20px;
+    margin-right: 10px;
     color: #8F8D8D;
   }
-  li:first-of-type {
-    margin-left: 0px;
+
+  @media (max-width: 768px) {
+    width: 500px;
+
+    li {
+      margin-right: 10px;
+    }
   }
 `;
 
 
 export const cardList = css`
-  width: 1000px;
-  display: flex;
-  align-items: center;
+  width: 100%;
   overflow-x: hidden;
   overflow-y: hidden;
   margin: auto;
+
+  @media (max-width: 768px) {
+    width: 500px;
+    
+  }
 `;
 export const contentController = css`
-  width: 100%;
+  width: 1200px;
   height: 567px;
   position: absolute;
   display: flex;
   margin: auto;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   pointer-events: none;
+  @media (max-width: 768px) {
+    width: 600px;
+    
+  }
 `;
 export const leftControllerButton = css`
   width: 50px;
   height: 50px;
-  margin-right: 1000px;
   display: flex;
-  justify-content: center;
-  align-items: center;
   pointer-events: all;
 
   cursor: pointer;
@@ -81,7 +93,6 @@ export const leftControllerButton = css`
 export const rightControllerButton = css`
   width: 50px;
   height: 50px;
-  margin-right: 20px;
   pointer-events: all;
 
   cursor: pointer;
@@ -104,4 +115,9 @@ export const cards = (currentSlide) => css`
   display: flex;
   transform: translateX(-${currentSlide * 1000}px);
   transition: all 0.7s ease-in-out;
+
+  @media (max-width: 760px) {
+    transform: translateX(-${currentSlide * 500}px);
+
+  }
 `;

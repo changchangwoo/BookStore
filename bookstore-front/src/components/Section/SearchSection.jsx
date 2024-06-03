@@ -15,12 +15,13 @@ const sectionContainer = css`
 `;
 
 export const sectionTitle = css`
-  width: 990px;
+  width: 1000px;
   font-size: 24px;
   font-weight: bold;
   margin: auto;
   margin-top: 50px;
   margin-bottom: 20px;
+  padding-left: 10px;
   ul {
     display: flex;
   }
@@ -32,6 +33,10 @@ export const sectionTitle = css`
   li:first-of-type {
     margin-left: 0px;
   }
+
+  @media (max-width: 768px) {
+    width: 500px;
+  }
 `;
 
 const cardList = css`
@@ -41,6 +46,14 @@ const cardList = css`
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
   row-gap: 20px;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    width: 500px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+
+  }
 `;
 
 const SearchSection = ({ title, children }) => {

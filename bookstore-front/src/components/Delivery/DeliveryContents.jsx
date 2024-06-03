@@ -22,6 +22,12 @@ const deliveryContainer = css`
   flex-direction: column;
   font-size: 20px;
   font-weight: bold;
+
+  @media (max-width: 765px) {
+    width: 500px;
+    margin-bottom: 20px;
+    
+  }
 `;
 const deliveryInfo = css`
   width: 100%;
@@ -95,12 +101,12 @@ function DeliveryContents() {
               ))}
           </div>
         </div>
-        <ItemCheck
+      </div>
+      <ItemCheck
           delivery={true}
           deliveryInfo={{name, address, contact}}
           cartBooks={cartBooks}
         />
-      </div>
     </>
   );
 }

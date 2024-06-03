@@ -1,8 +1,5 @@
 import { css } from "@emotion/react";
-import { getDetailBook, rerender } from "../../reduces/detailBookSlice";
-import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import getRecentCategoryBook from "../../reduces/recentBookSlice";
+import { Link } from "react-router-dom";
 import parse from "html-react-parser";
 
 const sectionContainer = css`
@@ -14,7 +11,8 @@ const sectionContainer = css`
   padding: 20px;
   box-sizing: border-box;
   border-radius: 8px;
-  margin-right: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
   display: flex;
   justify-content: center;
   align-items: center;

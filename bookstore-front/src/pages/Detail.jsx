@@ -6,7 +6,7 @@ import DivisionSection from "../components/Section/DivisionSection";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getDetailBook, rerender } from "../reduces/detailBookSlice";
+import { getDetailBook } from "../reduces/detailBookSlice";
 import { getRecentCategoryBook } from "../reduces/recentBookSlice";
 import ListCard from "../components/Card/ListCard";
 import DescriptionCard from "../components/Card/DescriptionCard";
@@ -46,6 +46,7 @@ function Detail() {
           author={detailBook.author}
           detail={detailBook.detail}
           price={detailBook.price}
+          likes={detailBook.likes}
         />
       </DetailSection>
 

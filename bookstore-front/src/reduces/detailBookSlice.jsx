@@ -9,6 +9,7 @@ const initialState = {
     summary : "진짜 생각보다 힘들다..",
     detail : "디테일한게 디테일해요잉",
     price : 9999,
+    likes : 0,
     img : "그런거없다",
   }],
   rendering : false
@@ -30,8 +31,10 @@ export const detailBookSlice = createSlice({
   name: "detailBook",
   initialState,
   reducers: {
-  rerender: (state) => {
-      state.rendering = !state.rendering
+  likesCount: (state, actions) => {
+    const { type } = actions.payload;
+    if(type === "decrease") state.books.likes--;
+    if(type === "increase") state.books.likes++;
     },
   },
   extraReducers: async (builder) => {
@@ -44,5 +47,5 @@ export const detailBookSlice = createSlice({
   }
 });
 export {getDetailBook}
-export const {rerender} = detailBookSlice.actions
+export const {likesCount} = detailBookSlice.actions
 export default detailBookSlice.reducer;

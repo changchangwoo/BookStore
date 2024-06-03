@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import API from "../../utils/api";
 import { openMessage } from "../../reduces/messageSlice";
 import parse from 'html-react-parser';
+import { likesCount } from "../../reduces/detailBookSlice";
 
 
 const sectionContainer = css`
@@ -53,6 +54,12 @@ const sectionContainer = css`
   }
     
   }
+
+  @media (max-width: 768px) {
+    width: 500px;
+    margin-bottom: 40px;
+    flex-direction: column;
+  }
 `;
 
 const quantitiyBox = css`
@@ -95,10 +102,9 @@ const calculButton = css`
   }
 `;
 
-function DetailCard({ id, title, author, detail, price }) {
+function DetailCard({ id, title, author, detail, price, likes }) {
   const [count, setCount] = useState(1);
   const [buttonActive, setbuttonActive] = useState(true);
-  const [likesCount, setLikesCount] = useState(0);
   const [likesCheck, setLikesCheck] = useState(false);
   const loginCheck = useSelector((state) => state.user.loginCheck);
   const totalprice = price;
@@ -119,21 +125,27 @@ function DetailCard({ id, title, author, detail, price }) {
 
   const likeHandler = () => {
     if (likesCheck) {
+      console.log(likesCheck, 'decrease')
+      setLikesCheck(false);
       API.delete(`/likes/${id}`)
         .then((response) => {
-          if (response.status === 200) setLikesCheck(false);
+          if (response.status === 200)
+          dispatch(likesCount({type : "decrease"}))
         })
         .catch((err) => {
           console.log(err);
         });
     } else {
-      console.log('추가 동작')
+      console.log(likesCheck, 'decrease')
+      setLikesCheck(true);
       API.post("/likes", {
         id: id,
       })
         .then((response) => {
           console.log(response.data);
-          if (response.status === 200) setLikesCheck(true);
+          if (response.status === 200) 
+          dispatch(likesCount({type : "increase"}))
+
         })
         .catch((err) => {
           console.log(err);
@@ -194,7 +206,7 @@ function DetailCard({ id, title, author, detail, price }) {
         </div>
         <div css={buttonContainer}>
           <Button
-            title="♡"
+            title={likesCheck ? "♥ "+likes:"♡ "+likes}
             width="90px"
             marginRight="20px"
             active={loginCheck}

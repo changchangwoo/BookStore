@@ -9,20 +9,32 @@ export const mainSliderContainer = (currentSlide) => css`
   background-color: ${currentSlide % 2 === 0 ? 'white' : '#3F3D55'};
   transform: translateX(-${currentSlide * 100}vw);
   transition: ${currentSlide===0 ? 'none' : 'all 1s ease'};
+
+  @media (max-width: 765px) {
+    height: 250px;
+  }
 `;
 
 export const imageContainer = css`
   width: 100vw;
+  overflow-x: hidden;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding : 50px;
+  box-sizing: border-box;
 `;
 
 export const imageBox = css`
-  width: 400px;
-  height: 344px;
+  width: 450px;
+  height: 300px;
   background-size: cover;
+
+  @media (max-width: 765px) {
+    width: 300px;
+  height: 200px;
+  }
 `;
 
 export const sliderDescript = (currentSlide) => css`
@@ -42,6 +54,16 @@ export const sliderDescript = (currentSlide) => css`
     font-size: 20px;
     margin: 0px;
     font-weight: 400;
+  }
+
+  @media (max-width: 765px) {
+    h1 {
+      font-size: 20px;
+    }
+    h2 {
+      font-size: 16px;
+    }
+    
   }
 `;
 

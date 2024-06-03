@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-const sectionContainer = (backgroundColor) => css`
+const sectionContainer = css`
   width: 100%;
   height: 587px;
   background-color: var(--mainBG);
@@ -9,35 +9,49 @@ const sectionContainer = (backgroundColor) => css`
   border-bottom: 1px solid var(--outLine);
   transition: all 0.2s;
   color: var(--fontColor);
+  display: flex;
+  padding-bottom: 40px;
+  @media (max-width: 760px) {
+   height: auto;
+  }
 `;
 
 const contentContainer = css`
-  max-width: 1200px;
-  height: 100%;
+  max-width: 1000px;
   margin: auto;
   display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 760px) {
+   flex-direction: column;
+   max-width: 500px;
+
+  }
+
 `;
 
-const leftContainer = css`
+const divisioContainer = css`
   width: 50%;
   height: 100%;
-  padding-left: 105px;
-
+  @media (max-width: 760px) {
+   width: 100%;
+  }
 `;
 
-const rightContainer = css`
-  width: 50%;
-  height: 100%;
-  padding-right: 105px;
-
-`;
 const sectionTitle = css`
+width: 100%;
   font-size: 24px;
   font-weight: bold;
   margin: auto;
-
-  margin-top: 50px;
   margin-bottom: 20px;
+  padding-left: 10px;
+
+  
+  @media (max-width: 760px) {
+   margin-top: 40px;
+   width: 100%;
+  }
 `;
 
 const cardList = css`
@@ -48,13 +62,13 @@ const cardList = css`
 function DivisionSection(props) {
   return (
     <>
-      <div css={sectionContainer(props.backgroundColor)}>
+      <div css={sectionContainer}>
         <div css={contentContainer}>
-          <div css={leftContainer}>
+          <div css={divisioContainer}>
             <div css={sectionTitle}>{props.titleLeft}</div>
             <div css={cardList}>{props.children[0]}</div>
           </div>
-          <div css={rightContainer}>
+          <div css={divisioContainer}>
             <div css={sectionTitle}>{props.titleRight}</div>
             <div css={cardList}>{props.children[1]}</div>
           </div>

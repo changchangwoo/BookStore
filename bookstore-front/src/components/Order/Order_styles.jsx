@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 
 export const orderContainer = css`
   width: 100%;
-  height: 750px;
+  height: 765px;
   background-color: var(--subBG);
   border: 1px solid var(--outLine);
   border-radius: 8px;
@@ -12,6 +12,10 @@ export const orderContainer = css`
   box-sizing: border-box;
   .hide-scrollbar::-webkit-scrollbar {
   width: 0;
+
+  @media (max-width: 765px) {
+    width: 600px;    
+  }
 }
 `;
 
@@ -41,6 +45,7 @@ export const topBox = css`
       flex: 0.3;
     }
   }
+  
 `;
 
 export const orderItem = css`

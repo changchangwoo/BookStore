@@ -20,6 +20,7 @@ function Search() {
   const location = useLocation();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const searchParams = new URLSearchParams(location.search);
     const query = searchParams.get("query");
     const categoryId = parseInt(searchParams.get("categoryId"));

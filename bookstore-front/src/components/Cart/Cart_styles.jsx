@@ -1,9 +1,5 @@
 import { css } from "@emotion/react";
 
-export const cartDisplay = css`
-  display: flex;
-`;
-
 export const cartContainer = css`
   width: 650px;
   height: 765px;
@@ -12,15 +8,22 @@ export const cartContainer = css`
   border-radius: 8px;
   border: 1px solid var(--outLine);
   background-color: var(--subBG);
-  box-sizing: border-box;
   padding: 20px;
+  box-sizing: border-box;
+
   flex-direction: column;
-  overflow-y: scroll;
+  overflow-y: auto;
   transition: all 0.2s;
   input {
     width: 15px;
     height: 15px;
   }
+
+  @media (max-width: 765px) {
+    width: 500px;
+    margin-bottom: 20px;
+  }
+  
 `;
 
 export const topBox = css`
@@ -38,8 +41,15 @@ export const cartCheck = css`
   color: var(--fontColor);
   border: 1px solid var(--outLine);
   margin-left: 20px;
-  padding: 20px;
   box-sizing: border-box;
+  padding: 20px;
+
+  @media (max-width: 765px) {
+    width: 500px;
+    margin-left: 0px;
+
+    
+  }
 `;
 
 export const allCheck = css`

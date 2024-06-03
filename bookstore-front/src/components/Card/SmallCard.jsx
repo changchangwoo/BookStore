@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { useDispatch } from "react-redux";
-import { getDetailBook, rerender } from "../../reduces/detailBookSlice";
+import { getDetailBook } from "../../reduces/detailBookSlice";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 
 const sectionContainer = css`
@@ -14,7 +14,8 @@ const sectionContainer = css`
   padding: 20px;
   box-sizing: border-box;
   border-radius: 8px;
-  margin-right: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
   &:hover {
     opacity: 0.5;
   }

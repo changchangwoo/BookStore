@@ -1,18 +1,5 @@
 import { css } from "@emotion/react";
 
-export const sectionContainer = css`
-  width: 1000px;
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  border: 1px solid var(--outLine);
-  border-radius: 8px;
-  padding: 20px;
-  box-sizing: border-box;
-  height: 600px;
-  background-color: var(--MainBG);
-`;
-
 export const topBox = css`
   width: 100%;
   display: flex;
@@ -67,6 +54,8 @@ cursor: pointer;
 export const imgBox = css`
 flex: 0.1;
 margin-right: 30px;
+padding: 5px;
+box-sizing: border-box;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -107,13 +96,17 @@ font-size: 24px;
 `
 
 export const commentBox = css`
-width: 100%;
+max-width: 1200px;
+margin: auto;
 height: 60px;
 display: flex;
+margin-top: 50px;
+justify-content: center;
 `
 
 export const commentInput = css`
-width: 80%;
+width: 100%;
+height: 50px;
 margin-right: 30px;
 background-color: var(--subBG);
 border: 1px solid var(--outLine);

@@ -8,9 +8,8 @@ export const navContainer = css`
   justify-content: center;
   align-items: center;
   top: 0px;
-  padding: 10px;
-  padding-left: 20px;
-  padding-right: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
   box-sizing: border-box;
   z-index: 998;
   background-color: var(--mainBG);

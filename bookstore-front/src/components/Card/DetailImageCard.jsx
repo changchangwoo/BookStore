@@ -13,6 +13,12 @@ const sectionContainer = css`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 768px) {
+    width: 500px;
+    height: 400px;
+    margin-bottom: 40px;
+  }
 `;
 
 const imgContainer = css`
@@ -21,6 +27,10 @@ const imgContainer = css`
   border-radius: 8px;
   border: 1px solid var(--outline);
   object-fit: fit;
+
+  @media (max-width: 768px) {
+    object-fit: scale-down;
+  }
 `;
 
 function DetailImageCard(

@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { debounce } from "lodash";
 
 const inputBox = css`
-  width: 650px;
+  max-width  : 650px;
   height: 60px;
   border-radius: 8px;
   border: 1px solid var(--outLine);
@@ -20,6 +20,10 @@ const inputBox = css`
   display: flex;
   box-sizing: border-box;
   transition: all 0.2s;
+
+  @media (max-width: 768px) {
+    width: 80%;
+  }
 `;
 
 const searchIcon = css`

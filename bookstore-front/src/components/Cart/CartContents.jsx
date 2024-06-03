@@ -1,12 +1,12 @@
 import { css } from "@emotion/react";
 import Button from "../Button/Button";
-import { cartDisplay, cartContainer, topBox, allCheck, cartList, cartCheck, selectedBox, confirmBox, itemPrice } from "./Cart_styles";
+import { cartContainer, topBox, allCheck, cartList, cartCheck, selectedBox, confirmBox, itemPrice } from "./Cart_styles";
 import CartItem from "./CartItem";
-import ItemCheck from "./ItemCheck";
 import { useEffect, useState } from "react";
 import { allChecked, deleteUserCartBooks, getUserCartBooks } from "../../reduces/cartBookSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { openMessage } from "../../reduces/messageSlice";
+import ItemCheck from "./ItemCheck";
 
 function CartContents() {
   const dispatch = useDispatch()
@@ -35,7 +35,6 @@ function CartContents() {
 
   return (
     <>
-      <div css={cartDisplay}>
         <div css={cartContainer}>
           <div css={topBox}>
             <div css={allCheck}>
@@ -64,8 +63,7 @@ function CartContents() {
             }
           </ul>
         </div>
-        <ItemCheck/>
-      </div>
+        <ItemCheck/>  
     </>
   );
 }
