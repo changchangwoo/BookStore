@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import API from "../../utils/api";
 import { openMessage } from "../../reduces/messageSlice";
 import parse from 'html-react-parser';
-import { likesCount } from "../../reduces/detailBookSlice";
+import { addLikes, removeLikes } from "../../reduces/detailBookSlice";
 
 
 const sectionContainer = css`
@@ -102,54 +102,23 @@ const calculButton = css`
   }
 `;
 
-function DetailCard({ id, title, author, detail, price, likes }) {
+function DetailCard({ id, title, author, detail, price, likes, liked }) {
   const [count, setCount] = useState(1);
-  const [buttonActive, setbuttonActive] = useState(true);
-  const [likesCheck, setLikesCheck] = useState(false);
+  const [likesCheck, setLikesCheck] = useState(liked === 1 ? true : false);
   const loginCheck = useSelector((state) => state.user.loginCheck);
-  const totalprice = price;
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    API.get(`/likes/${id}`).then((response) => {
-        if (response.data.liked) {
-          setLikesCheck(true);
-        } else {
-          setLikesCheck(false);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      }); 
-  }, []);
 
   const likeHandler = () => {
     if (likesCheck) {
-      console.log(likesCheck, 'decrease')
-      setLikesCheck(false);
-      API.delete(`/likes/${id}`)
-        .then((response) => {
-          if (response.status === 200)
-          dispatch(likesCount({type : "decrease"}))
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      dispatch(removeLikes({bookId: id}))
+      setLikesCheck(!likesCheck)
+      console.log(likesCheck)
     } else {
-      console.log(likesCheck, 'decrease')
-      setLikesCheck(true);
-      API.post("/likes", {
-        id: id,
-      })
-        .then((response) => {
-          console.log(response.data);
-          if (response.status === 200) 
-          dispatch(likesCount({type : "increase"}))
+      dispatch(addLikes({bookId: id}))
+      setLikesCheck(!likesCheck)
+      console.log(likesCheck)
 
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+
     }
   };
   const upCount = useCallback(() => {
@@ -202,7 +171,7 @@ function DetailCard({ id, title, author, detail, price, likes }) {
               +{" "}
             </span>
           </div>
-          <div css={calculPrice}>{totalprice * count} 원 </div>
+          <div css={calculPrice}>{price * count} 원 </div>
         </div>
         <div css={buttonContainer}>
           <Button

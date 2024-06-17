@@ -1,7 +1,6 @@
 import {
   inputID,
   registerCheck,
-  register,
   passwordCheck,
 } from "./Modal.styles";
 import Button from "../Button/Button";

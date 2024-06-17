@@ -12,7 +12,6 @@ import {
 } from "../ContentSection/ContentSection.styles";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategoryBook } from "../../../reduces/categoryBookSlice";
-import API from "../../../utils/api";
 import { getCategory } from "../../../reduces/categorySlice";
 
 const CategorySection = (props) => {

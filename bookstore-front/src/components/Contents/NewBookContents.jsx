@@ -3,7 +3,7 @@ import SmallCard from "../Card/SmallCard";
 import React, { useEffect, useState } from "react";
 import API from "../../utils/api";
 
-function NewBookSection () {
+function NewBookContents () {
     const [newBooks, setNewBooks] = useState([]);
 
     useEffect(()=>{
@@ -37,4 +37,4 @@ function NewBookSection () {
     );
 }
 
-export default NewBookSection
+export default NewBookContents

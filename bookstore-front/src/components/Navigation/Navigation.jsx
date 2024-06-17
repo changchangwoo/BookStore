@@ -65,9 +65,6 @@ function Navigation() {
             <div css={navButton} onClick={handleGoHome}>
               홈
             </div>
-            {/* <div css={menuButton}>
-              <span className="material-symbols-outlined">menu</span>
-            </div> */}
           </div>
           <div css={rightContainer}>
             {

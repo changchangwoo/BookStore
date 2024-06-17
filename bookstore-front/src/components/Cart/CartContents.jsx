@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import Button from "../Button/Button";
-import { cartContainer, topBox, allCheck, cartList, cartCheck, selectedBox, confirmBox, itemPrice } from "./Cart_styles";
+import { cartContainer, topBox, allCheck, cartList, cartCheck, selectedBox, confirmBox, itemPrice } from "./Cart.styles";
 import CartItem from "./CartItem";
 import { useEffect, useState } from "react";
 import { allChecked, deleteUserCartBooks, getUserCartBooks } from "../../reduces/cartBookSlice";

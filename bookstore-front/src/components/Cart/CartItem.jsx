@@ -8,7 +8,7 @@ import {
   cartPrice,
   cartTitle,
   sub_title,
-} from "./Cart_styles";
+} from "./Cart.styles";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { oneChecked, downCount, upCount } from "../../reduces/cartBookSlice";

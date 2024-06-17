@@ -18,6 +18,7 @@ export const mainSliderContainer = (currentSlide) => css`
 export const imageContainer = css`
   width: 100vw;
   overflow-x: hidden;
+  overflow-y: hidden;
   position: relative;
   display: flex;
   justify-content: center;

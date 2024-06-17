@@ -8,19 +8,47 @@ import {
   imageContainer,
   imageBox,
   sliderDescript,
-} from "./MainSlider.styles.jsx";
+} from "./MainSlider.styles.js";
 import { useCallback, useEffect, useState } from "react";
+
+const sliderData = [
+  {
+    img: sliderImage1,
+    subTitle: "잠이 안 오는 늦은 새벽에는",
+    pointTitle: "감성 에세이 한 편 어떠세요?",
+  },
+  {
+    img: sliderImage2,
+    subTitle: "어느 순간 까마득히 잊어버렸던",
+    pointTitle: "우주 여행을 떠나요",
+  },
+  {
+    img: sliderImage3,
+    subTitle: "일상에서 일상을 벗어나는",
+    pointTitle: "새로운 경험의 창구",
+  },
+  {
+    img: sliderImage4,
+    subTitle: "오늘의 새로운 친구들은",
+    pointTitle: "어떤 이야기들을 준비했을까요?",
+  },
+  {
+    img: sliderImage1,
+    subTitle: "잠이 안 오는 늦은 새벽에는",
+    pointTitle: "감성 에세이 한 편 어떠세요?",
+  },
+];
 
 function MainSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const totalSlides = 5;
+  const totalSlides = sliderData.length;
 
   useEffect(() => {
     const slideInterval = setInterval(() => {
-      if(currentSlide === 4) {
-        setCurrentSlide(0)
+      if (currentSlide === totalSlides - 1) {
+        setCurrentSlide(0);
       } else {
-      nextSlide();
+        nextSlide();
       }
     }, 5000);
 
@@ -28,62 +56,21 @@ function MainSlider() {
   }, [currentSlide]);
 
   const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev + 1) % totalSlides); 
+    setCurrentSlide((prev) => (prev + 1) % totalSlides);
   }, [currentSlide]);
 
   return (
-    <>
-      <div css={mainSliderContainer(currentSlide)}>
-      <div css={imageContainer}>
-          <img src={sliderImage1} css={imageBox} />
+    <div css={mainSliderContainer(currentSlide)}>
+      {sliderData.map((slide, index) => (
+        <div key={index} css={imageContainer}>
+          <img src={slide.img} css={imageBox} />
           <div css={sliderDescript(currentSlide)}>
-            <h2>잠이 안 오는 늦은 새벽에는</h2>
-            <h1>감성 에세이 한 편 어떠세요?</h1>
+            <h2>{slide.subTitle}</h2>
+            <h1>{slide.pointTitle}</h1>
           </div>
         </div>
-        <div css={imageContainer}>
-          <div css={sliderDescript(currentSlide)}>
-            <h2>어느 순간 까마득히 잊어버렸던</h2>
-            <h1>우주 여행을 떠나요</h1>
-          </div>
-          <img src={sliderImage2} css={imageBox} />
-        </div>
-        <div css={imageContainer}>
-          <img src={sliderImage3} css={imageBox} />
-          <div css={sliderDescript(currentSlide)}>
-            <h2>일상에서 일상을 벗어나는</h2>
-            <h1>새로운 경험의 창구</h1>
-          </div>
-        </div>
-        <div css={imageContainer}>
-          <div css={sliderDescript(currentSlide)}>
-            <h2>오늘의 새로운 친구들은</h2>
-            <h1>어떤 이야기들을 준비했을까요?</h1>
-          </div>
-          <img src={sliderImage4} css={imageBox} />
-        </div>
-        <div css={imageContainer}>
-          <img src={sliderImage1} css={imageBox} />
-          <div css={sliderDescript(currentSlide)}>
-            <h2>잠이 안 오는 늦은 새벽에는</h2>
-            <h1>감성 에세이 한 편 어떠세요?</h1>
-          </div>
-        </div>
-      </div>
-      {/* <div css={sliderControllerContainer}>
-        <span class="material-symbols-outlined">
-          <span css={iconSize} onClick={prevSlide}>
-            arrow_back_ios
-          </span>
-        </span>
-        <span class="material-symbols-outlined">
-          <span css={iconSize} onClick={nextSlide}>
-            arrow_forward_ios
-          </span>
-        </span>
-        
-      </div> */}
-    </>
+      ))}
+    </div>
   );
 }
 

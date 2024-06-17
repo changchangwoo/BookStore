@@ -48,6 +48,7 @@ export const darkModeButton = css`
   background-color: var(--reverseMainBG);
   border: 1px solid var(--outLine);
   margin-left: 10px;
+  margin-right: 20px;
   transition: all 0.2s;
   cursor: pointer;
   &:hover {

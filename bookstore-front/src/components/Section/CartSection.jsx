@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import ItemCheck from "../Cart/ItemCheck";
+
 const cartPageContainer = css`
   width: 100%;
   height: auto;

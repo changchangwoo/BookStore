@@ -1,11 +1,10 @@
-import { cartCheck, selectedBox, confirmBox, itemPrice, finalPrice } from "./Cart_styles";
+import { cartCheck, selectedBox, confirmBox, itemPrice, finalPrice } from "./Cart.styles";
 import Button from "../Button/Button";
 import { css } from "@emotion/react";
 import { useDispatch, useSelector } from "react-redux";
 import { act, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { openMessage } from "../../reduces/messageSlice";
-import { setOrderInfo } from "../../reduces/orderSlice";
 import API from "../../utils/api";
 
 const finalCheck = css`
