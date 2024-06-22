@@ -8,6 +8,7 @@ const ensureAuthorization = require("../auth.js");
 const addLike = (req, res) => {
   let sql = `INSERT INTO likes (user_id, liked_book_id) VALUES (?, ?)`;
   const { id } = req.body;
+  console.log(id)
   let authorization = ensureAuthorization(req);
 
   if (authorization instanceof jwt.TokenExpiredError) {
@@ -33,6 +34,8 @@ const addLike = (req, res) => {
 const removeLike = (req, res) => {
   let sql = `DELETE FROM likes WHERE user_id =? AND liked_book_id =?`;
   const { id } = req.params
+  console.log(id)
+
   let authorization = ensureAuthorization(req);
   if (authorization instanceof jwt.TokenExpiredError) {
     return res.status(StatusCodes.UNAUTHORIZED).json({
@@ -75,7 +78,6 @@ const checkLike = async (req, res) => {
       if (results.length > 0) {
         return res.status(StatusCodes.OK).json({ liked: true });
       } else {
-        console.log(false)
         return res.status(StatusCodes.OK).json({ liked: false });
       }
     } catch (err) {

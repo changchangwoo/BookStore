@@ -24,13 +24,7 @@ function NewBookContents () {
             {newBooks.map((book)=> (
                 <SmallCard
                     key={book.id}
-                    id={book.id}
-                    category_id={book.category_id}
-                    title={book.title}
-                    author={book.author}
-                    summary={book.summary}
-                    price={book.price}
-                    img={book.img}
+                    book={book}
                 />
             ))}
         </>

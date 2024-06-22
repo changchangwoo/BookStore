@@ -2,6 +2,12 @@ import { css } from '@emotion/react';
 import React from 'react'
 import parse from 'html-react-parser'
 
+const ListCard = ({contents}) => {
+  return (
+    <div css={sectionContainer}>{(typeof contents === 'string') ? parse(contents) : contents}</div>
+  )
+}
+
 const sectionContainer = css`
   width: 480px;
   height: 438px;
@@ -21,11 +27,4 @@ const sectionContainer = css`
   width: 0;
   }
 `;
-
-const ListCard = ({contents}) => {
-  return (
-    <div css={sectionContainer}>{(typeof contents === 'string') ? parse(contents) : contents}</div>
-  )
-}
-
 export default ListCard

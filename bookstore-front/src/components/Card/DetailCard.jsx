@@ -6,130 +6,28 @@ import API from "../../utils/api";
 import { openMessage } from "../../reduces/messageSlice";
 import parse from 'html-react-parser';
 import { addLikes, removeLikes } from "../../reduces/detailBookSlice";
+import { buttonContainer, calculButton, calculPrice, quantitiyBox, quantitiyController, sectionContainer } from "./DetailCard.styles";
 
-
-const sectionContainer = css`
-  width: 611px;
-  height: 526px;
-  background-color: var(--subBG);
-  border: 1px solid var(--outLine);
-  color : var(--fontColor);
-  padding: 50px 0px 50px 0px;
-  box-sizing: border-box;
-  border-radius: 8px;
-  margin-right: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  h1 {
-    font-size: 26px;
-    margin: 0;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  h2 {
-    font-size: 20px;
-    margin-top: 10px;
-    font-weight: 600;
-    color: #8f8d8d;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  h3 {
-    width: 400px;
-    height: 103px;
-    font-size: 13px;
-    font-weight: 300;
-    margin-top: 45px;
-    margin-bottom: 45px;
-    overflow-x: auto;
-    ::-webkit-scrollbar {
-  width: 0;
-  }
-    
-  }
-
-  @media (max-width: 768px) {
-    width: 500px;
-    margin-bottom: 40px;
-    flex-direction: column;
-  }
-`;
-
-const quantitiyBox = css`
-  width: 100%;
-  height: 90px;   
-  background-color: var(--mainBG);;
-  border: 1px solid var(--outLine);
-  border-left: none;
-  border-right: none;
-  display: flex;
-  padding: 20px 20px 20px 50px;
-  box-sizing: border-box;
-`;
-const buttonContainer = css`
-  width: 100%;
-  display: flex;
-  justify-content: right;
-  margin-top: 20px;
-`;
-const quantitiyController = css`
-  flex: 0.5;
-  display: flex;
-  align-items: center;
-  font-size: 24px;
-  font-weight: bold;
-`;
-const calculPrice = css`
-  flex: 0.5;
-  font-size: 24px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: right;
-`;
-const calculButton = css`
-  margin: 20px;
-  cursor: pointer;
-  &:hover {
-    scale: 1.2;
-  }
-`;
-
-function DetailCard({ id, title, author, detail, price, likes, liked }) {
+function DetailCard({ book, loginCheck }) {
+  const { id, title, author, detail, price, likes, liked } = book;
   const [count, setCount] = useState(1);
-  const [likesCheck, setLikesCheck] = useState(liked === 1 ? true : false);
-  const loginCheck = useSelector((state) => state.user.loginCheck);
   const dispatch = useDispatch();
 
   const likeHandler = () => {
-    if (likesCheck) {
+    if (liked) {
       dispatch(removeLikes({bookId: id}))
-      setLikesCheck(!likesCheck)
-      console.log(likesCheck)
     } else {
       dispatch(addLikes({bookId: id}))
-      setLikesCheck(!likesCheck)
-      console.log(likesCheck)
-
-
     }
   };
+  
   const upCount = useCallback(() => {
-    setbuttonActive(true);
     setCount(count + 1);
   });
   const downCount = useCallback(() => {
     if (count <= 1) {
       if (count === 0) return;
       setCount(count - 1);
-      setbuttonActive(false);
     } else {
       setCount(count - 1);
     }
@@ -175,12 +73,12 @@ function DetailCard({ id, title, author, detail, price, likes, liked }) {
         </div>
         <div css={buttonContainer}>
           <Button
-            title={likesCheck ? "♥ "+likes:"♡ "+likes}
+            title={liked ? "♥ "+likes:"♡ "+likes}
             width="90px"
             marginRight="20px"
             active={loginCheck}
             onClick={likeHandler}
-            color={likesCheck ? "red" : "blue"}
+            color={liked ? "red" : "blue"}
           />
           <Button
             onClick={addToCart}

@@ -1,5 +1,22 @@
 import { css } from "@emotion/react";
 
+function Button({width, marginRight, color, marginTop, onClick, active, title}) {
+  return (
+    <>
+      {active ? (
+        <div css={buttonContainer(width, marginRight, color, marginTop)} onClick={onClick}>
+          {title}
+        </div>
+      ) : (
+        <div css={buttonInactiveContainer(width, marginRight, marginTop)}>
+          {title}
+        </div>
+      )}
+    </>
+  );
+}
+
+
 const getBackgroundColor = (color) => {
   switch (color) {
     case 'red':
@@ -62,20 +79,5 @@ const buttonInactiveContainer = (width, marginRight, marginTop) => css`
 
 `;
 
-function Button({width, marginRight, color, marginTop, onClick, active, title}) {
-  return (
-    <>
-      {active ? (
-        <div css={buttonContainer(width, marginRight, color, marginTop)} onClick={onClick}>
-          {title}
-        </div>
-      ) : (
-        <div css={buttonInactiveContainer(width, marginRight, marginTop)}>
-          {title}
-        </div>
-      )}
-    </>
-  );
-}
 
 export default Button;

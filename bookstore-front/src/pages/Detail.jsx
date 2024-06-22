@@ -13,21 +13,15 @@ import useGetDetail from "../hooks/useGetDetail";
 
 
 function Detail() {
-  const [detailBook, categoryName] = useGetDetail();
-  console.log(detailBook)
+  const [detailBook, categoryName, loginCheck] = useGetDetail();
   return (
     <>
       <SearchEngine />
       <DetailSection title={categoryName} backgroundColor="white">
         <DetailImageCard img={detailBook.img} />
         <DetailCard
-          id={detailBook.id}
-          title={detailBook.title}
-          author={detailBook.author}
-          detail={detailBook.detail}
-          price={detailBook.price}
-          likes={detailBook.likes}
-          liked={detailBook.liked}
+          book={detailBook}
+          loginCheck={loginCheck}
         />
       </DetailSection>
 

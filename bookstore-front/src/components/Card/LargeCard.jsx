@@ -2,6 +2,36 @@ import { css } from "@emotion/react";
 import { Link } from "react-router-dom";
 import parse from "html-react-parser";
 
+function LargeCard({ book = {
+  id : 0,
+  title : '임시',
+  author : '임시',
+  bookPrice : 0,
+  detail : '임시',
+  img : '임시',
+  category_id : 0
+} }) {
+  const { id, title, author, bookPrice, detail, img, category_id } = book;
+  return (
+    <>
+      <Link to={`/detail?category_id=${category_id}&book_id=${id}`}>
+        <div css={sectionContainer}>
+          <img src={img} css={imgBox}></img>
+          <div css={descriptionBox}>
+            <h1>{title}</h1>
+            <h2>{author}</h2>
+            <div css={simpleDescript}>
+              {typeof detail === "string" ? parse(detail) : detail}
+            </div>
+            <div css={price}>{bookPrice}</div>
+          </div>
+        </div>
+      </Link>
+    </>
+  );
+}
+
+
 const sectionContainer = css`
   width: 480px;
   height: 438px;
@@ -75,25 +105,5 @@ const price = css`
   margin-top: 30px;
   font-size: 14px;
 `;
-
-function LargeCard({ id, title, author, bookPrice, detail, img, category_id }) {
-  return (
-    <>
-      <Link to={`/detail?category_id=${category_id}&book_id=${id}`}>
-        <div css={sectionContainer}>
-          <img src={img} css={imgBox}></img>
-          <div css={descriptionBox}>
-            <h1>{title}</h1>
-            <h2>{author}</h2>
-            <div css={simpleDescript}>
-              {typeof detail === "string" ? parse(detail) : detail}
-            </div>
-            <div css={price}>{bookPrice}</div>
-          </div>
-        </div>
-      </Link>
-    </>
-  );
-}
 
 export default LargeCard;

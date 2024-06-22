@@ -48,16 +48,7 @@ function CartContents() {
               cartBooks && 
                 cartBooks.map((book)=>(
                   <CartItem 
-                    key={book.id}
-                    id={book.id}
-                    book_id={book.book_id}
-                    title={book.title}
-                    author={book.author}
-                    price={book.price}
-                    quantity={book.quantity}
-                    img={book.img}
-                    checked={book.checked}
-                    cartPage={true}
+                    book={book}
                   />
                 ))
             }

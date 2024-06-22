@@ -7,18 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { openMessage } from "../../reduces/messageSlice";
 import API from "../../utils/api";
 
-const finalCheck = css`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  font-size: 14px;
-  input {
-    width: 14px;
-    height: 14px;
-  }
-`;
 function ItemCheck({
   delivery: deliveryCheck,
   deliveryInfo,
@@ -122,4 +110,16 @@ function ItemCheck({
   );
 }
 
+const finalCheck = css`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 14px;
+  input {
+    width: 14px;
+    height: 14px;
+  }
+`;
 export default ItemCheck;

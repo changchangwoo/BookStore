@@ -7,6 +7,7 @@ import { getDetailBook } from '../reduces/detailBookSlice';
 const useGetDetail = () => {
     const [searchParams] = useSearchParams();
     const dispatch = useDispatch();
+    const loginCheck = useSelector((state) => state.user.loginCheck);
     const detailBook = useSelector((state) => state.detailBook.books);
     const category = useSelector((state)=> state.category.category)
     const [categoryName, setCategoryName] = useState(null)
@@ -23,7 +24,7 @@ const useGetDetail = () => {
     }, [searchParams]);
 
 
-  return [detailBook, categoryName]
+  return [detailBook, categoryName, loginCheck]
 }
 
 export default useGetDetail

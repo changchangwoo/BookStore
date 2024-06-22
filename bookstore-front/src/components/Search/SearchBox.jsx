@@ -1,7 +1,5 @@
 import { css } from "@emotion/react";
 import { useLocation, useNavigate } from "react-router-dom";
-import API from "../../utils/api";
-import useInput from "../../hooks/useInput";
 import { useDispatch } from "react-redux";
 import { getSearchBooks } from "../../reduces/searchBookSlice";
 import { useEffect, useRef, useState } from "react";

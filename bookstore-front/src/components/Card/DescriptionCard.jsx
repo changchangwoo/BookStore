@@ -2,6 +2,10 @@ import { css } from "@emotion/react";
 import React from "react";
 import parse from 'html-react-parser'
 
+const DescriptionCard = ({ detail }) => {
+  return <div css={sectionContainer}>{typeof detail === 'string' ? parse(detail) : detail}</div>;
+};
+
 const sectionContainer = css`
   width: 480px;
   height: 438px;
@@ -20,9 +24,5 @@ const sectionContainer = css`
   width: 0;
   }
 `;
-
-const DescriptionCard = ({ detail }) => {
-  return <div css={sectionContainer}>{typeof detail === 'string' ? parse(detail) : detail}</div>;
-};
 
 export default DescriptionCard;

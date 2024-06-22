@@ -6,7 +6,7 @@ import SmallCard from "../Card/SmallCard";
 const RecentContents = ({ hold, type }) => {
   const relateBooks = useSelector((state) => state.recentBook.books.books);
   const [recentBook, setRecentBook] = useState(null);
-  const [randNum, setRandNum] = useState(Math.floor(Math.random() * 10))
+  const [randNum, setRandNum] = useState(Math.floor(Math.random() * 10));
 
   useEffect(() => {
     const storedRecentBook = localStorage.getItem("recentBook");
@@ -18,36 +18,12 @@ const RecentContents = ({ hold, type }) => {
   if (type === "big") {
     return (
       <>
-        {hold && recentBook && (
+        {hold && recentBook && <LargeCard book={recentBook} />}
+        {!hold && relateBooks && <LargeCard book={relateBooks[randNum]} />}
+        {!hold && !relateBooks && (
           <LargeCard
-            id={recentBook.id}
-            category_id={recentBook.category_id}
-            title={recentBook.title}
-            author={recentBook.author}
-            detail={recentBook.detail}
-            img={recentBook.img}
           />
         )}
-        {!hold && relateBooks &&
-          <LargeCard
-          id={relateBooks[randNum].id}
-          category_id={relateBooks[randNum].category_id}
-          title={relateBooks[randNum].title}
-          author={relateBooks[randNum].author}
-          detail={relateBooks[randNum].detail}
-          img={relateBooks[randNum].img}
-        />
-        }
-                {!hold && !relateBooks &&
-          <LargeCard
-          id={0}
-          category_id={0}
-          title={0}
-          author={0}
-          detail={0}
-          img={0}
-        />
-        }
       </>
     );
   } else if (type === "small" && relateBooks) {
@@ -56,12 +32,7 @@ const RecentContents = ({ hold, type }) => {
         {relateBooks.map((book) => (
           <SmallCard
             key={book.id}
-            id={book.id}
-            category_id={book.category_id}
-            title={book.title}
-            author={book.author}
-            detail={book.detail}
-            img={book.img}
+            book={book}
           />
         ))}
       </>

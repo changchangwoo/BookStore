@@ -15,13 +15,7 @@ const BestBookContents = () => {
         BestBooks.map((book)=> (
                 <li key={book.id}>
                     <LargeCard
-                    id={book.id}
-                    category_id={book.category_id}
-                    title={book.title}
-                    author={book.author}
-                    bookPrice={book.price}
-                    detail={book.detail}
-                    img={book.img}
+                    book={book}
                     /></li>
         ))
     }
